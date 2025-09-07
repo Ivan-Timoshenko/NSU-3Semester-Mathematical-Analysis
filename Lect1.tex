@@ -1,0 +1,116 @@
+\section{Дифференциирование функций}
+
+    
+\begin{definition}
+    Функция $f(x)$ дифференциируема в точке $p \in U$, если:
+    \begin{enumerate}
+        \item $f$  определена в некоторой окрестности точки $p$ ($p \in Int(U)$)
+        \item $\exists \lim_{\Delta h \to 0} \frac{f(p + \Delta h) - f(p)}{\Delta h} \in \mathbb{R} $ (и этот предел равен $f'(p)$)
+    \end{enumerate}
+\end{definition}
+
+\subsection{Экстремумы}
+\medskip
+\textbf{Необходимое условие экстремума:}\\
+Пусть $f \in D(p)$ (дифференциируема в p). Если p - экстремум, то $f'(p) = 0$.
+
+\begin{note}
+    НО например для $f(x) = x^{3} \quad f'(0) = 0$, но $f(x)$ не дифференциируема в 0.
+\end{note}
+\begin{note}
+Необходимое условие экстремума выполнено лишь для точек во внутренности области определения,
+точки на границе необходимо проверять отдельно.
+\end{note}
+
+
+\textbf{Достаточное условие экстремума:}\\
+Пусть $f \in D^{2}(p)$ (дважды дифференциируема в $p$) и $f'(p) = 0$.В таком случае если
+\begin{itemize}
+    \item $f''(p) < 0$ - точка $p$ является локальным максимумом и экстремумом.
+    \item $f''(p) > 0$ - точка $p$ является локальным минимумом и экстремумом.
+\end{itemize} 
+
+\medskip
+Пусть $f:U \in \mathbb{R}^{n} \to \mathbb{R}^{k}$, $p \in U$. 
+Функция $f$ дифференциируема в $p$, если:
+\begin{enumerate}
+    \item $p \in Int(U) \quad
+        (\exists \epsilon > 0 \quad B_\epsilon(p) \subset U)$
+    \item $\exists$ дифференциал функции (линейное отображение)
+    $f$ в точке $p$ \quad $df(p): \mathbb{R}^{n} \to \mathbb{R}^{k}$
+    такое, что    \[f(x) = f(p) + df(p)<x-p> + \alpha(x) \quad (\alpha(x) \underset{x \to p}{=} o(x-p)) \]
+    При сдвиге точки $p$ на вектор $h$: \[f(p+h) = f(p) + df(p)<h> + o(|h|)\]
+\end{enumerate}
+
+\subsection{Частные производные}
+\medskip
+Стандартный контекст в котором работаем:
+\[f:U \subset \mathbb{R}^{n} \to \mathbb{R}^{k}, \quad p \in U, \quad p = (p_1, p_2, \dots, p_n) \]
+
+\begin{definition}
+    Частная производная по координате $x_i$ это:
+    \[\frac{\partial f}{\partial x_i}(p) = \lim_{t \to 0} \frac{f(p_1,.., p_i + t,.., p_n) - f(p_1,\ldots,p_n)}{t}\]
+\end{definition}
+
+Пример для $f(x, y) = x^y$:
+\[\frac{\partial f}{\partial x}(x, y) = yx^{y-1}; \quad \frac{\partial f}{\partial y}(x, y) = x^y\ln(x)\]
+
+\begin{definition}
+    Прозводная вдоль вектора $v$:
+    \[\frac{\partial f}{\partial v}(p) := \lim_{t \to 0} \frac{f(p + tv) - f(p)}{t}\]
+    Если $v = e_i = (0, \ldots, 0, \underset{i}{1}, 0, \ldots, 0)$, то $\frac{\partial f}{\partial v} = \frac{\partial f}{\partial x_i} = f'_{x_i}$
+\end{definition}
+
+Пример:
+\[f(x) = \begin{cases}
+    \frac{x^2y}{x^4 + y^2} \quad $при$(x, y) \neq (0, 0) \\
+    0 \quad $при$ (x, y) = (0,0)
+\end{cases}\]
+По любому вектору $v = (v_1, v_2)$ у функции есть производная в $(0, 0)$:
+\[\lim_{t \to 0} \frac{f(tv) - f(0, 0)}{t} = \frac{t^3v_1^2v^2}{t^5v_1^4 + t^3v_2^2} = \frac{v_1^2v_2}{t^2v_1^2 v_2^2} 
+    \underset{t \to 0}{=} 
+    \begin{cases}
+        0 \quad v_2 = 0\\
+        \frac{v_1^2}{v_2} \quad v_2 \neq 0
+    \end{cases}\]
+
+\begin{statement}
+    Если $f$ дифференциируема в $p$, то $f$ - непрерына в $p$.
+\end{statement}
+
+\begin{proof}
+    \[f(p+h) - f(p) \underset{h \to 0}{=} df(p)<h>\] 
+    Линейное отображение df(p)<> непрерывно, $o(h) \underset{h \to 0}{\to} 0$,
+    т.е. $f(p+h) \underset{h \to 0}{\to} f(p)$.
+\end{proof}
+
+\textbf{Достаточный признак дифференциируемости:}\\
+Все частные производные непрерырвны в $p$ ($f \in D(p)$).
+
+Пример:
+$f(x, y) = x^y$ дифференциируема во всех точках $(x_0, y_0)$, где $x_0 > 0$.
+\[\frac{\partial f}{\partial x} = yx^{y-1} \qquad \frac{\partial f}{\partial y} = x^y\ln(x)\]
+Частные производные непрерывны, значит и функция непрерывна.
+
+\subsection{Матрица Якоби и градиент функции}
+Контекст в котором работаем:
+\[f:U \subset \mathbb{R}^{n} \to \mathbb{R}^{k}, \quad p \in U\]
+\begin{definition}
+Матрицей Якоби называют матрицу
+\[D_f(p) = 
+\begin{pmatrix}
+    \frac{\partial f_1}{\partial x_1} & \ldots & \frac{\partial f_1}{\partial x_n}\\
+    \vdots & \ddots & \vdots \\
+    \frac{\partial f_k}{\partial x_1} & \dots & \frac{\partial f_k}{\partial x_n}
+\end{pmatrix}\]
+\end{definition}
+
+В случае, если функция $f$ отображает $\mathbb{R}^n \to \mathbb{R}$, то матрица Якоби принимает вид $1 \times n$ и называется \textbf{градиентом функции}.
+\begin{definition}
+    Градиентом функции называется вектор 
+    \[D_f = 
+    \begin{pmatrix}
+        \frac{\partial f}{\partial x_1}, & \dots, & \frac{\partial f}{\partial x_n}
+    \end{pmatrix}
+    \]
+\end{definition}
