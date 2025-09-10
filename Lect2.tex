@@ -183,6 +183,22 @@
         Итого: $f(s,s) - f(0,0) = \text{I} + \text{II} = s^2 \left( a_{21} + \frac{a_{11}}{2} + \frac{a_{22}}{2}+ \frac{\varepsilon_1(s) + \varepsilon_2(s)}{s^2}\right)$, что на самом деле равно $\text{III} + \text{IV} = 
         \\ = s^2\left(a_{12} + \frac{a_{11}}{2} + \frac{a_{22}}{2} + \frac{\varepsilon_3(s) + \varepsilon_4(s)}{s^2}\right)$
         
-    
+        \begin{equation}
+            \label{eq}
+            a_{21} + \frac{a_{11} + a_{22}}{2} + \frac{\varepsilon_1(s) + \varepsilon_2(s)}{s^2} = a_{12} + \frac{a_{22} + a{11}}{2} + \frac{\varepsilon_3(s) + \varepsilon_4(s)}{s^2}
+        \end{equation}
+        При малых $s$:
+        \[\varepsilon_3(s) = \int_{t=0}^{s}\alpha_2(0, t)dt, \quad \varepsilon_3(s) = \int_{t=0}^{s}\alpha_1(t,s)dt\]
+        Осталось показать, что $\varepsilon_{1,2,3,4} \underset{s \to 0}{=} o(s^2)$.
+        Пусть $\varepsilon > 0$. Вспомним, что 
+        \[\varepsilon_1(s) = \int_{t = 0}^{}\alpha_2(s,t)dt, \quad \alpha_2(x,y) \underset{x,y \to 0}{=} o(x,y)\]
+        То есть, в некотором круге $V$ точки $(0,0)$ выполнено $\forall (x,y) \in V \quad \alpha_2(x,y) \leq \varepsilon \cdot \sqrt{x^2 + y^2}$.
+        Для $s$ таких, что $(s,s) \in V \quad \alpha_2(x,y) \leq \varepsilon \cdot \sqrt{2} \cdot s$, при $\left| x \right| \leq s, \ \left| y \right| \leq s$.
+        Тогда 
+        \[\left| \varepsilon_1(s)\right| = \left| \int_{t=0}^{s}\alpha_2(s,t)dt \right| \leq \int_{t=0}^{s} \left|\alpha_2(s,t)\right|dt 
+        \leq \int_{t=0}^{s}\varepsilon\cdot s\sqrt{2}\cdot dt = \varepsilon s^2\sqrt{2}\].
+        Итак, мы доказали, что $\varepsilon_1(s) \underset{s \to 0}{=} o(s^2)$, аналогичным образом показываем для $\varepsilon_{2,3,4}$
+        Тогда в равенстве \ref{eq} $\frac{\varepsilon_1(s) + \varepsilon_2(s)}{s^2} \to 0$ и $\frac{\varepsilon_3(s) + \varepsilon_4(s)}{s^2} \to 0$, а значит $a_{21} = a_{12}$,
+        то есть $f_{xy}(0) = f_{yx}(0)$.
     \end{proof}
 \end{theorem}
