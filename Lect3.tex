@@ -1,0 +1,13 @@
+\textbf{Правило дифференциирования монома:\\}
+\bigskip
+Пусть $f(x)  = x_1^{i_1} \cdot x_2^{i_2} \cdot \dots \cdot x_m^{i_m}, \ x = (x_1, \dots, x_m)$. Тогда 
+\[\frac{\partial^{i_1+i_2+ \dots + i_m} f}{\partial x_1^{i_1} \dots \partial x_m^{i_m}}(0) = i_1! \cdot \hdots \cdot i_m!\]
+Любая другая производная любого порядка в точке $0$ равна $0$.
+
+\subsection{Мульти-индексы}
+Придумаем $\mu = (i_1, \hdots, i_m)$ - численный вектор, в котором $\forall j = \overline{1 \hdots m} \ i_j \geq 0$ и назовем его \textbf{мультииндексом}.
+\par
+Для мультииндексов определены операции:
+\[\mu! := i_1! \cdot \hdots \cdot  i_m! \qquad \left| \mu \right| = \sum_{j = 1}^{m} i_j \text{ - порядок мультииндекса}\]
+\[x \in \mathbb{R}^m, x = (x_1, \hdots, x_m), \quad x^{\mu} = x_1^{i_1} \cdot \hdots \cdot x_m^{i_m}\]
+\[C^{\mu}_k = \frac{k!}{\mu!} = \frac{k!}{i_1!\cdot \hdots \cdot i_m!} \text{, где } k = \left|\mu\right|\]
