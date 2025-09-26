@@ -1,0 +1,51 @@
+\section{Основы гладкого анализа}
+Символ $\open$ обозначает "открыто в". Контекст:
+\[U \open \mathbb{R}^m, \ f:U \to \mathbb{R}^k, \ f \in C^r(U), \ r \geq 0\]
+
+\begin{definition}
+    Отображение $f$ называется $r$-гладким, если все ее частные производные до порядка $r$ непрерывны на $U$.
+\end{definition}
+
+Пусть $X$ - не обязательно открыто в $\mathbb{R}^m$.
+\begin{definition}
+    $f \in C^r(X)$, если $f = \tilde{f}$ - сужение на $\tilde{X}$, $\tilde{f}: \tilde{X} \open \mathbb{R}^m \to \mathbb{R}^k$ - $C^r$-гладкая на $tilde{X}$. \textbf{НАДО УТОЧНИТЬ:} $X \subset \tilde{X}$ или наоборот.
+\end{definition}
+
+\begin{statement}
+    Пусть $f:X \subset \mathbb{R}^m \to \mathbb{R}^k, \ g:X \to \mathbb{R}^k$ - $C^r$ отображения. Тогда $f+g \in C^r(X)$
+    \begin{proof}
+        Пусть $f = \tilde{f}, \ g = \tilde{g}$ и т.д. по определению $r$-гладкости:
+        \[\tilde{f}:U \to \mathbb{R}^m, \tilde{g}: V \to \mathbb{R}^m, \ U, V \open \mathbb{R}^m, \ X \subset U, X \subset V\]
+        Введем $U \cap V = W \open \mathbb{R}^m$. На $W$ заданы оба отображения и ясно, что $f+g = \tilde{f} + \tilde{g}$.
+    \end{proof}
+\end{statement}
+
+\begin{statement}
+    Композиция:
+    \[X \overset{f}{\to} \mathbb{R}^k \supset Y \overset{g}{\to} \mathbb{R}^m\]
+    Если $f \in C^r$ и $g \in C^r$, то $g \circ f \in C^r$.
+    \begin{proof}
+        Область определения $\mathrm{dom}(g \circ f) = \{x \in X | \ f(x) \in Y\} = X \cap f^{-1}(\mathrm{dom}(g))$
+        \[\begin{cases}
+            f \in C^r \implies f = \tilde{f}, \ \tilde{f}:\mathbb{R}^m \underset{op}{\supset}\tilde{X} \to \mathbb{R}^k -  C^r\text{-гладкое.} \\
+            g \in C^r \implies g = \tilde{g}, \ \tilde{g}:\mathbb{R}^k \underset{op}{\supset}\tilde{Y} \to \mathbb{R}^m -  C^r\text{-гладкое.} \\
+        \end{cases}\]
+        \[\mathrm{dom(\tilde{g}\circ \tilde{f})} = \mathrm{dom}(\tilde{f}) \cap \tilde{f}^{-1}(\mathrm{dom}(\tilde{g})) = \tilde{X} \cap \tilde{f}^{-1}(\tilde{Y})\]
+        $\tilde{X}$ - открытое, $\tilde{f}^{-1}(\tilde{Y})$ - открытое, как прообраз открытого множества $\tilde{Y}$ при непрерывном отображении.
+        \newline
+        Ясно, что $g \circ f = \tilde{g} \circ \tilde{f}$ - сужение $\mathrm{dom}(g \circ f)$.
+    \end{proof}
+\end{statement}
+
+\begin{theorem}[Лемма о классе гладкости обратного отображения]
+    Пусть $U, V \open \mathbb{R}^m$. \\
+    $U \overunderset{f}{g}{\rightleftarrows} V$, $f, g$ - непрерывны и взаимно обратны. Если $f \in C^r(U)$ и $\forall x \in U \ df(x)$ - невырожден: $det(Df(x)) \neq 0$, то $g \in C^r(U)$.
+    \begin{proof}
+        При $r > 0$  $g$ дифференциируема в $\forall y \in V$ по правилу дифференциирования обратного отображения. В матрицах Якоби:
+        \[Dg(f(x)) = (Df(x))^{-1}, \forall x \in U \text{, причем } f(x) = y, \ x = g(y)\]
+        \[Dg(y) = (Df(g(y)))^{-1}, \quad \text{цепочка преобразований} y \to g(y) \to Df(g(y)) \to (Df(g(y)))^{-1}\]
+        \[Dg(y) = w \circ Df \circ g(y), \ w \text{- отображение обращения матрицы.}\]
+        \[Dg(y) = w \circ Df \circ g(y), \text{ причем } w - C^{\infty}, Df - C^{r-1}, g(y) - \text{дифференциируема}\]
+        $g$ дифференциируема $\implies Dg$ тоже дифференциируема как композиция $\implies$ все производные $g$ дифференциируемы $\implies Dg \in C^1 \implies g \in C^2 \implies \hdots \implies g \in C^{r-1} \implies Dg \in C^{r-1} \implies g \in C^r$.
+    \end{proof} 
+\end{theorem}
