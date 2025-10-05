@@ -39,7 +39,7 @@
 
 \begin{theorem}[Лемма о классе гладкости обратного отображения]
     Пусть $U, V \open \mathbb{R}^m$. \\
-    $U \overunderset{f}{g}{\rightleftarrows} V$, $f, g$ - непрерывны и взаимно обратны. Если $f \in C^r(U)$ и $\forall x \in U \ df(x)$ - невырожден: $det(Df(x)) \neq 0$, то $g \in C^r(U)$.
+    $U \overunderset{f}{g}{\rightleftarrows} V$, $f, g$ - непрерывны и взаимно обратны. Если $f \in C^r(U)$ и $\forall x \in U \ df(x)$ - невырожден: $\det(Df(x)) \neq 0$, то $g \in C^r(U)$.
     \begin{proof}
         При $r > 0$  $g$ дифференциируема в $\forall y \in V$ по правилу дифференциирования обратного отображения. В матрицах Якоби:
         \[Dg(f(x)) = (Df(x))^{-1}, \forall x \in U \text{, причем } f(x) = y, \ x = g(y)\]
@@ -123,9 +123,40 @@
         у точки $p$ имеется некоторый шарик $U$ с центром в $p$ такой, что $\forall x \in U$ все эти производные ограничены, например, $\frac{1}{2} < 1$.
         \[\forall x_1, x_2 \in U_1 \ \left|h(x_1) - h(x_2) \right| \leq \frac{1}{2} \]
         По предыдущей лемме $f(U_1)$ открыто в $\mathbb{R}^m$ и $f|_{U_1} \to f(U_1)$ обратимо, обратное отображение непрерывно.
-        По теореме о классе гладкости обратного отображения оно ($f^{-1}$) имеет нужный класс. Заметим, что в той лемме необходимо, чтобы $\forall x \in U_1 \ det(Df(x)) \neq 0$, 
+        По теореме о классе гладкости обратного отображения оно ($f^{-1}$) имеет нужный класс. Заметим, что в той лемме необходимо, чтобы $\forall x \in U_1 \ \det(Df(x)) \neq 0$, 
         поэтому когда мы выбираем окрестность $U_1$ надо это тоже потребовать:
-        \[Df(p) = E, \ det(E) = 1 \neq 0 \text{и в некоторой окрестности  точки $p$} det(Df(x)) = 0\]
+        \[Df(p) = E, \ \det(E) = 1 \neq 0 \text{ и в некоторой окрестности  точки $p$ } \det(Df(x)) = 0\]
+        \newline
+        Мы доказали теорему для $Df(p) = E$. Пусть теперь $Df(p) = A, \ \det(A) \neq 0 \implies$ значит существует обратная матрица $A^{-1}$, тоже невырожденная. Пусть $\tilde{f} = A^{-1}f(x)$ - композиция линейного отображения и отображения $f$.
+        Для $\tilde{f}$ выполнена теорема, ведь $D\tilde{f}(p) = A^{-1}Df(p) = A^{-1}A = E$.
+        Значит $\exists \tilde{U} \ni p \mid \tilde{f}:\tilde{U} \to \tilde{f}(\tilde{U})$ - $C^r$-изоморфизм и $\tilde{f}(\tilde{U}) \open \mathbb{R}^k$.
+        \newline
+        $f(x) = A \tilde{f}(x)$ - композиция двух "хороших" отображений и $f(\tilde{U}) = A\cdot\tilde{f}(\tilde{U})$ - образ открытого множества под действием линейного изоморфизма $A$ - тоже открыт в $\mathbb{R}^k$.
     \end{proof}
 \end{theorem}
 
+
+\begin{theorem}[о неявной функции]
+    Пусть $U \open \mathbb{R}^{k+l} = \mathbb{R}^k \times \mathbb{R}^l$ и $f: U \to \mathbb{R}^l$ - $C^r$-отображение, $r \geq 1$.
+
+    Функция $f$ представляет собой набор:
+    \[f = \begin{pmatrix}{}
+        f_1(x_1, \hdots, x_k, y_1, \hdots, y_l) \\
+        \vdots \\
+        f_l(x_1, \hdots, x_k, y_1, \hdots, y_l)
+    \end{pmatrix}\]
+    Пусть некоторая точка $(\overrightarrow{x_0}, \overrightarrow{y_0}) \in U$ и $\det(\frac{\partial f}{\partial y}(\overrightarrow{x_o}, \overrightarrow{y_0})) \neq 0, \ f(\overrightarrow{x_0}, \overrightarrow{y_0}) = 0$.
+    \[\frac{\partial f}{\partial y} = \begin{pmatrix}
+        \frac{\partial f_1}{\partial y_1} & \hdots & \frac{\partial f_1}{\partial y_l} \\
+        \vdots & & \vdots \\
+        \frac{\partial f_l}{\partial y_1} & \hdots & \frac{\partial f_l}{\partial y_l}
+    \end{pmatrix}\]
+    Множество $M = \{(\overrightarrow{x},\overrightarrow{y}) \in \Omega \mid f(\overrightarrow{x}, \overrightarrow{y}) = 0\}$, где $\Omega$ - окрестность точки $(\overrightarrow{x_0}, \overrightarrow{y_0})$.
+    Точка $(\overrightarrow{x_0}, \overrightarrow{y_0}) \in M, \ \det(\frac{\partial f}{\partial y}(\overrightarrow{x_0}, \overrightarrow{y_0})) \neq 0$
+    \newline
+    Тогда у $(\overrightarrow{x_0}, \overrightarrow{y_0})$ имеется такая окрестность $\Omega$, что $\Omega \cap M$ - график некоторой $C^r$-функции $\alpha$, такой, что $\alpha: \Omega_x \to \mathbb{R}^l$ и 
+    \[D\alpha(x) = (\frac{\partial f}{\partial y}(x, \alpha(x)))^{-1} \cdot \frac{\partial f}{\partial x}(x, \alpha(x))\]
+    \begin{proof}
+        \textbf{А ПРУФ БУДЕТ ПОТОМ ПОКА НА СЛОВО ВЕРЬТЕ}
+    \end{proof}
+\end{theorem}
