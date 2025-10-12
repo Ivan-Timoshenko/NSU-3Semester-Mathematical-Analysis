@@ -1,0 +1,28 @@
+\section{Многообразия в $\mathbb{R}^n$}
+
+\begin{definition}
+    Пусть $M$ - метрическое пространство (необязательно подмножество в $\mathbb{R}^n$). $M$ является $k$-мерным мноогобразием без края,
+    если $\forall p \in M$ у точки $p \ \exists $ окрестность $U_p \open M$ гомеоморфная открытому шару в $\mathbb{R}^k$.
+\end{definition}
+
+\begin{definition}
+    Гомеоморфизм - непрерывное отображение, обратное к которому тоже непрерывно.
+\end{definition}
+
+\begin{theorem}[Брауэра об инвариантности области (без док-ва).]
+    \par Пусть $U \open \mathbb{R}^k$ и $f:U \to \mathbb{R}^k$ - непрерывна и инъективна. \newline
+    Тогда $f(U) \open \mathbb{R}^k$ и $f^{-1}: f(U) \to U$ - тоже непрерывна.
+\end{theorem}
+
+\begin{definition}
+    $M$ - $k$-мерное $C^r$-мноогобразие в $R^n$, если:
+    \[\forall p \in M \ \exists U \in \mathcal{N}(p), \ U \open M \text{ такая, что } U \overset{C^r}{\cong} \text{ открытому шару в } \mathbb{R}^k\]
+\end{definition}
+
+\begin{statement*}
+    Предыдущее утверждение эквивалентно требованиям:
+    \begin{enumerate}
+        \item \[ \exists U \in \mathcal{N}(p) \ U \open M \text{ такая, что } U \cong \text{ открытому подмножеству } \omega \in \mathbb{R}^k\]
+        \item \[ \exists U \in \mathcal{N}(p) \ U \open M \text{ такая, что } U \cong \mathbb{R}^k\]
+    \end{enumerate}
+\end{statement*}
