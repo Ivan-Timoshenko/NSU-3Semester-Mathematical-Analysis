@@ -1,7 +1,7 @@
 \section{Многообразия в $\mathbb{R}^n$}
-
+\subsection{Многообразия}
 \begin{definition}
-    Пусть $M$ - метрическое пространство (необязательно подмножество в $\mathbb{R}^n$). $M$ является $k$-мерным мноогобразием без края,
+    Пусть $M$ - метрическое пространство (необязательно подмножество в $\mathbb{R}^n$). $M$ является $k$-мерным многообразием без края,
     если $\forall p \in M$ у точки $p \ \exists $ окрестность $U_p \open M$ гомеоморфная открытому шару в $\mathbb{R}^k$.
 \end{definition}
 
@@ -15,7 +15,7 @@
 \end{theorem}
 
 \begin{definition}
-    $M$ - $k$-мерное $C^r$-мноогобразие в $R^n$, если:
+    $M$ - $k$-мерное $C^r$-многобразие в $R^n$, если:
     \[\forall p \in M \ \exists U \in \mathcal{N}(p), \ U \open M \text{ такая, что } U \overset{C^r}{\cong} \text{ открытому шару в } \mathbb{R}^k\]
 \end{definition}
 
@@ -37,15 +37,15 @@
         f_k(x) = 0
     \end{array}\}, \text{ где $\overline{x}$ - регулярная точка}\]
     То есть $\mathrm{rank} \frac{\partial f_{1 \hdots k}}{\partial x_{1 \hdots n}} = k$
-    Тогда $M$ - $n-k$-мерное $C^r$-мноогобразие без края.
+    Тогда $M$ - $n-k$-мерное $C^r$-многобразие без края.
 
     \begin{proof}
         Пусть $p \in M$. Можно считать, что последние $k$ столбцов линейно независимы, то есть $\left| \frac{\partial f_{1\hdots k}}{\partial x_{n-k+1 \hdots n}}\right| \neq 0$ - определитель матрицы Якоби.  
         По теореме о неявной функции существует такая окрестность $\tilde{U}$ точки $p$, $\tilde{U} \open \mathbb{R}^n$, такая, что $\tilde{U} \cap M$ - график некоторой функции:
         \[x_{n-k+1 \hdots n} = g(x_{1 \hdots n-k})\]
-        Осталось показать, что график функции является мноогобразием $U \subset \mathbb{R}^k$.
+        Осталось показать, что график функции является многобразием $U \subset \mathbb{R}^k$.
         \begin{lemma*}
-            График любого $C^r$ отображения $g$, определенного на открытом подмножестве - это мноогобразие, гомеоморфное $U$.
+            График любого $C^r$ отображения $g$, определенного на открытом подмножестве - это многобразие, гомеоморфное $U$.
             \begin{proof}
                 \[X \overset{g}{\to} Y\]
                 График $\Gamma_g = \{(x, g(x)) \mid x \in X\}$
@@ -102,6 +102,282 @@
         \end{array}\]
         Причем $f_1, \hdots, f_k = (x_1, \hdots, x_k)$. 
         \[f_{\text{остальные}}(\tilde{x_1}, \hdots, \tilde{x_k}) = f_{\text{остальные}}\circ \psi(x_1, \hdots, x_k)\]
-        $f(\tilde{U})= \{(\overline{x}, \psi(\overline{x})) \mid \overline{x} \in \tilde{U}\}$ - график отображения $\psi$, то есть по соответствующей лемме о графике это мноогобразие.
+        $f(\tilde{U})= \{(\overline{x}, \psi(\overline{x})) \mid \overline{x} \in \tilde{U}\}$ - график отображения $\psi$, то есть по соответствующей лемме о графике это многобразие.
     \end{proof}
 \end{lemma*}
+
+\newpage
+\begin{definition}
+    $M$ - многобразие (с краем, а может и без), если $\forall p \in M \ \exists U \open M \ C^r$-изоморфно 
+    \begin{enumerate}
+        \item $\tilde{U} \open \mathbb{R}^k$
+        \item $\mathbb{R}^k_+ = \{x_1, \hdots, x_k \mid x_1 \geq 0\}$ 
+    \end{enumerate}
+\end{definition}
+
+\begin{definition}
+    Точка $p \in \partial M$ (принадлежит краю), если у точки $p$ $\nexists$ окрестности первого типа.
+\end{definition}
+
+\begin{lemma*}[о крае полупространства]
+    $\mathbb{R}^k_+$ - многообразие с краем, $\partial \mathbb{R}^k_+ = \{(x_1, \hdots, x_k) \mid x_1 = 0\}$. При этом $\mathbb{R}^k_+$ называется полупространством.
+    \begin{proof}
+        $\mathbb{R}^k_+$ является многобразием по опрделению, ведь любая ее точка гарантированно имеет окрестность, открытую в $\mathbb{R}^k_+$, например, в качестве такой окрестности можно взять само $\mathbb{R}^k_+$.
+        \par
+        Пусть $x_1 > 0$, тогда очевидно, что множество $\mathbb{R}^k_+ \cap \{(x_1, \hdots, x_k) \mid x_1 > 0\}$ открытое в $\mathbb{R}^k_+$ является окрестностью точки $p$ и поэтому $p \in M \backslash \partial M$
+        \par
+        Пусть $x_1 = 0$. Ясно, что никакая окрестность точки $p$ в $\mathbb{R}^k_+$ не является открытым множеством в $\mathbb{R}^k_+$.
+        Однако, нам было необходимо более сложное утверждение, а именно - нужно было показать, что $U$ не может быть $C^r$-изоморфно открытому подмножеству $\Omega \in \mathbb{R}^k_+$. 
+        Пусть $r > 0$ в $C^r$, по теореме о локальной обратимости если $\Omega \open \mathbb{R}^k$ и $\psi: \Omega \to \psi(\Omega) \subset \mathbb{R}^k$ $C^r$-изоморфизм, то $\psi(\Omega) \open \mbox{R}^k$.
+        \par
+        И наконец, $r \neq 0$ по теореме Брауэра об инвариантности области.
+    \end{proof}
+\end{lemma*}
+
+\begin{lemma*}[об изоморфизме многообразий]
+    Пусть $X \subset \mathbb{R}^n$ - $C^r$-многобразие. Отображение $\varphi: X \overset{C^r}{\cong} Y \subset \mathbb{R}^n$ такое, что $\varphi(\partial X) = \partial Y$. Тогда $Y$ - тоже $C^r$-многообразие. 
+    \par
+    Более "стильная" \copyright \ формулировка: $\varphi(\partial X) = \partial(\varphi(X))$
+    \begin{proof}
+        Пусть $q \in Y$. Пусть $p = \varphi^{-1}(q) \in X$. Если $p \in X \backslash \partial X$, то $\exists U \open X \mid p \in U \overset{\psi}{\cong} W \open \mathbb{R}^k$, 
+        тогда $\varphi(U) = \varphi \circ \psi^{-1}$ - $C^r$-изоморфизм как композиция. Т.е. мы нашли окрестность точки $q \in Y$, которая $C^r$-изоморфна открытому в $\mathbb{R}^k$ множеству.
+        \par
+        Пусть $p \in \partial X$, тогда \underline{не существует} окрестности $U \open X$, $C^r$-изоморфной подмножеству $W$, открытому в $\mathbb{R}^k$.\\
+        Если предположить, что $q \in \partial Y$, то $\exists V \open \mathbb{R}^k$ и $\psi: V \underset{\cong}{\to} W \open \mathbb{R}^k$. Тогда $\varphi^{-1}\circ\psi^{-1}(W)\open X$ - открытая окрестность точки $p \in X$, а композиция - это $C^r$-изоморфизм $W$, чего не может быть по условию. Получаем противоречие.
+    \end{proof}
+\end{lemma*}
+
+\begin{lemma*}[об открытых частях многообразия]
+    $X$ - $C^r$-многообразие в $\mathbb{R}^n$, $U \open X$, тогда $U$ - тоже $C^r$-многообразие той же размерности, а $\partial U = U \cap \partial X$
+
+    \begin{proof}
+        Пусть $p \in X$, тогда у $p$ существует окрестность $V \open X$, такая, что $V \overset{\varphi}{\cong}$ открытому подмножеству $W$ в $\mathbb{R}^k$ или $\mathbb{R}^k_+$. \\
+        Если $p \in U$, то множество $V \cap U \open U$ как пересечение открытых (лемма из 2 семестра 1 курса о пересечении открытых метрических пространств). 
+        \[\varphi(U \cap V) \open W \open \mathbb{R}^k \text{ или } \mathbb{R}^k_+ \implies \varphi(V \cap U) \open \mathbb{R}^k \text{ или } \mathbb{R}^k_+\]
+        Пусть $p \in U$. Если $p \notin \partial X$, то $W$ в предыдущих строчках можно выбрать первого типа ($W \in \mathbb{R}^k$). Значит $p \notin \partial U$. 
+        \par
+        Если $p \notin \partial U$, тогда (поскольку мы уже доказали, что $U$ - многообразие) $\exists \Omega \open U \mid p \in \Omega \overset{\psi}{\cong} A \open \mathbb{R}^k$. Но посольку $U \open X$, выполнено утверждение $\Omega \open X \implies p \notin \partial X$.
+    \end{proof}
+\end{lemma*}
+
+\begin{theorem}[о крае многообразия]
+    Пусть $X$ - $C^r$-многообразие размерности $k$. Тогда если его край $\partial X$ непуст, то он является $C^r$-многообразием без края размерности $k-1$ ($\partial \partial X = \varnothing$)
+    \begin{proof}
+        Пусть $p \in \partial X$. Надо показать, что $\exists U \open \partial X$, такое, что $U \cong $ открытому подмножеству $W$ в $\mathbb{R}^{k-1}$.
+        \par
+        По условию у точки $p$ существует открытая в $X$ окрестность $\tilde{U} \open X$, такая, что $\tilde{U} \overset{\varphi}{\cong} W \open \mathbb{R}^k_+$. 
+        
+        \begin{multline*}
+                p \in \partial X \implies p \in \partial \tilde{U} (\text{ по предыдущей лемме}) \implies \\
+                \implies \varphi(p) \in \partial \tilde{W} \implies \text{первая координата точки $\varphi(p)$ равна $0$}
+            \end{multline*}
+
+            \[\tilde{W} \open \mathbb{R}^k_+ \implies \tilde{W} \cap \{x_1, \hdots, x_k \mid x_1 = 0\} \open \mathbb{R}^k \text{ - по лемме об открытых частях подпространства}\]
+            Заметим, что пересечение этих множест это $W$, а $\{x_1, \hdots, x_k \mid x_1 = 0\} = \mathbb{R}^{k-1}$
+            $\varphi^{-1}(W) \open \partial X$ (как прообраз открытого), значит $\varphi^{-1}(W)$ - искомая окрестность $U$.
+    \end{proof}
+\end{theorem}
+
+
+\begin{theorem}[2 о регулярных решениях]
+    Пусть $\Omega \open \mathbb{R}^n, \ h, f_1, \hdots, f_k: \Omega \to \mathbb{R}$. 
+    \par
+    Множество $M$ регулярных решений системы 
+    \begin{equation} 
+        \begin{cases}
+            \label{regular_solutions_system}  
+            h(x) \geq 0 \\
+            f_1(x) = 0 \\
+            \vdots \\
+            f_k(x) = 0
+        \end{cases}
+    \end{equation}
+    является $n-k$-мерным $C^r$-гладким многообразием, край которого задается уравнением $\begin{cases*}
+        h(x) = 0\\ f_i(x) = 0
+    \end{cases*}$
+
+    \begin{definition}
+        Пусть $p$ - решение системы \eqref{regular_solutions_system}. 
+        \begin{itemize}
+            \item Если $h(p) > 0$ и $\nabla f_i(p)$ линейно независимы, то $p$ - регулярна 
+            \item Если $h(p) = 0$ и $\nabla h, \nabla f_1, \hdots, \nabla f_k$ линейно независимы, то $p$ - регулярна 
+        \end{itemize} 
+    \end{definition}
+
+    \begin{proof}
+        Пусть $p \in M$
+        \begin{enumerate}
+            \item Если $h(p) > 0$, то у точки $p$ существует окрестность $W \open \mathbb{R}^n$, в которой $h(W) > 0$.
+            Множество 
+            \begin{equation}
+                \begin{cases}
+                    h(x) > 0\\
+                    f_1(x) = 0 \\
+                    \vdots \\
+                    f_k(x) = 0
+                \end{cases} = M \cap W \open M
+            \end{equation}
+            Итак, множество $M \cap W$ совпадает с множеством тех точек из $\Omega \cap W \open \mathbb{R}^n$, где $\begin{cases}
+                f_1 = 0 \\ \vdots \\ f_k = 0
+            \end{cases}$ - многообразие размерности $n-k$
+
+            \item Если $h(p) = 0$,\\ то продолжим наш набор отображений и получим набор 
+            $\varphi = (h, f_1, \hdots, f_k, f_{k+1}, \hdots, f_{n-1})$ так, чтобы $n$ штук функций 
+            были регулярными в окрестности $U$ точки $p$ (это разрешается сделать в силу леммы о регулярном дополнении). 
+            \[M \cap U = \{x \in M \mid x \in U\}, \text{ причем } x \in M \equiv \begin{cases}
+                h(x) \geq = 0 \\ f_1(x) = 0 \\ \vdots \\ f_k(x) = 0
+            \end{cases}\]
+            \[\text{Отображение }\varphi = \begin{array}{c} 
+                h \\ f_1 \\ \vdots \\ f_k \\ f_{k+1} \\ \vdots \\ f_{n-1}
+            \end{array}: U \to \varphi(U) \text{$C^r$-изоморфизм}\]
+            $\varphi(U) \open \mathbb{R}^n$ по лемме о локальной обратимости и 
+            \begin{multline*}
+                \varphi(M \cap U) = (y_1, \hdots, y_n) = \overline{y} \in \varphi(U) = \left(\begin{array}{c}
+                y_1 \geq 0 \\ y_2 = 0 \\ \vdots \\ y_{k+1} \\ \vdots \\ y_{n-1}
+            \end{array}\right) \text{, где на $y_{k+1} \hdots y_{n-1}$ не ограничений} \\ - \text{ это некоторое $n-k$ мерное подпространство $Q$, пересеченное с $\varphi(U) \open \mathbb{R}^n$}
+            \end{multline*}
+            Тогда $Q \cap \varphi(U) \open Q$
+        \end{enumerate}
+    \end{proof}
+\end{theorem}
+
+\subsection{Касательные пространства}
+
+\begin{definition}
+    Пусть $p \in X \subset \mathbb{R}^n$. Вектор $v$ называется касательным вектором в точке $p$ к множеству $X$ ($v \in T_p(X)$), если существует $ T \subset \left[ 0, \varepsilon\right]$, содержащая $0$, такая, что $0$ - предельная точка множества $T$
+    и $\exists$ отображение $\gamma: T \to X$ такое, что $\gamma(0) = p, \gamma'_T(0) = v$. При этом $\gamma'_T = \lim_{t \to 0|_T}\frac{\gamma(t) - \gamma(0)}{t}$
+    \par
+    На бытовом уровне (человеческий перевод): \\
+    $v$ - касательный вектор к в $p$ к $X$, если из точки $p$ возможно двигаться по $X$ с начальной скоростью $v$
+    \par
+    В таком случае $T_p(X)$ называется касательным пространством к $X$ в $p$ и \textbf{обязательно} проходит через нулевую точку пространства. А чтобы $T_p(X)$ проходило через точку $p$ - придумали специальное множество $K_p(X) = p + T_p(X)$, называемую контингенцией (чтобы сложение точки и пространства не смущало читателя - считайте $p$ вектором из нулевой точки пространства в $p$).
+\end{definition}
+
+\newpage
+\begin{theorem}
+    \underline{Свойства} $T_p(X)$:
+    \begin{enumerate}
+        \item Пусть $p \in X \subset \mathbb{R}^n, 0 \neq v \in \mathbb{R}^n$. $v$ - касательный вектор $\iff$ $\exists$ последовательность точек $x_n \to p$, такая, что $\frac{x_n - p}{\left| x_n - p \right|} \to \frac{v}{\left| v \right|}$ (угол между векторами $x_n - p$ и $v$ стремится к $0$).
+        \item Ноль всегда $\in T_p(X)$
+        \item $T_p(X)$ - замкнутое пространство
+        \item $T_p(X)$ - конус с вершиной в 0, т.е. $v \in T_p(X) \implies \forall \lambda \geq 0 \ \lambda v \in T_p(X)$
+        \item $p \in A \subset B \implies T_p(A) \subset T_p(B)$
+        \item Локальность:
+        \[p \in X, U - \text{ окрестность } p \text{ в } X \implies T_p(X) = T_p(X)\]
+    \end{enumerate}
+\end{theorem}
+
+\begin{statement*}
+    $v \in T_p(X) \iff \exists x_n \in X, \ x_n \to p$ и $t_n > 0, t_n \to 0$ так, что 
+    \[\frac{x_n - p}{t_n} \underset{n \to \infty}{\to} v\]
+    \begin{proof}
+        Слева направо ($\implies$):
+        \par
+        Пусть $v \in T_p(X)$. Выберем $T$ и $\varphi$ как в определении. Т.к. $0$ - предельная точка $T$ (из определения), то $\exists t_n \in T, t_n \to 0$, положим $x_n = \varphi(t_n)$. Вот так вот раз-раз и готово.
+        Справа налево ($\impliedby$):
+        \par
+        Пусть есть $x_n \in X, t_n \to 0$ и $\frac{x_n - p}{t_n} \to v$. Положим $T = \{0, t_1, t_2, \hdots\}, \varphi(t_n)$ приравняем к $x_n$.
+    \end{proof}
+\end{statement*}
+
+\begin{definition}
+    $K \subset \mathbb{R}^n$ называется полупространством размерности $k \leq n$, если $\exists e_1, \hdots, e_k$ - линейно независимый набор из $\mathbb{R}^n$, такой, что $K = \{(t_1e_1 + \hdots + t_ke_k) \mid t_1 \geq 0, t_{>1} - \text{любые}\}$
+    \par
+    Любое векторное полупространство в $\mathbb{R}^n$ - замкнутый конус с вершиной в любой точке границы.
+\end{definition}
+
+\subsection{Дифференциал гладкого отображения}
+Дифференциал - отображение касательных пространств. Пусть $\mathbb{R}^n \supset X \overset{\varphi}{\to} Y \subset \mathbb{R}^n$.
+
+\begin{definition}
+    $p \in T_p(X), \varphi - C^r$-гладкое отображение. 
+    \[d\varphi(p): T_p(X) \to T_{\varphi(p)}(Y) \text{ определим следующим образом:}\]
+    \[d\varphi(p)\langle v \rangle = d\tilde{\varphi}(p) \langle v \rangle, \text{ где }\tilde{\varphi} - C^r\text{-продолжение отображения $\varphi$ на окрестность множества }\] 
+    \par
+    Покажем корректность определения:
+    \par
+    \begin{proof}
+        
+        Почему значение дифференциала не зависит от выбора $\varphi$, почему образ лежит в $T_q(Y), q = \varphi(p)$? \par
+        
+        Пусть $v \in T_p(X), v = \lim_{n \to \infty} \frac{x_n - p}{t_n}$. Покажем, что $d\varphi(p)\langle v \rangle = \lim_{n \to \infty} \frac{\varphi(x_n) - \varphi(p)}{t_n}$. Пусть $\tilde{\varphi}$ - некоторое $C^r$-продолжение отображения $\varphi$. 
+        \[p, x_n \in X \implies \varphi(x_n) = \tilde{\varphi}(x_n), \tilde(\varphi)(p) = \varphi(p)\]    
+        \[\varphi(x_n) = \tilde{\varphi}(x_n) = \tilde{\varphi}(p) + d\tilde{\varphi}(p)\langle x_n - p \rangle + o(\left| x_n - p \right|) \text{ - из определения } d\tilde{\varphi}\]
+        \[\frac{\varphi(x_n) - \varphi(p)}{t_n} = \frac{\tilde{\varphi}(x_n) - \tilde{\varphi}(p)}{t_n} = \frac{d\tilde{\varphi}(p)\langle x_n - p \rangle}{t_n} + o(\frac{x_n - p}{t_n})\]
+        Отображене $d\tilde{\varphi}(p):\mathbb{R}^n \to \mathbb{R}^m$ линейно, поэтому $\frac{d\tilde{\varphi}(p)\langle x_n - p \rangle}{t_n} = d\tilde{\varphi}(p)\langle \frac{x_n - p}{t_n} \rangle$
+        \par
+        Итак, $\frac{\varphi(x_n) - q}{t_n} \underset{n \to \infty}{=} d\tilde{\varphi}(p)\langle \frac{x_n - p}{t_n} \rangle + o(\frac{x_n - p}{t_n})$. Поскольку $\frac{x_n - p}{t_n} \underset{n \to \infty}{\to} v$, то 
+        \[\lim_{n \to \infty} \frac{\varphi(x_n) - q}{t_n} = d\tilde{\varphi}(p)\langle v \rangle + o(\hdots)\]
+    \end{proof}
+\end{definition}
+
+\textbf{Свойства дифференциала:}
+\[p \in X \overset{\varphi}{\to} Y \overset{\psi}{\to} Z\]
+\begin{enumerate}
+    \item Композиция: \[d(\psi \circ \varphi)(p): T_p(X) \to T_{\psi \circ \varphi(p)}(Z)\]
+    \[d(\psi \circ \varphi)(p) = d\psi(\varphi(p))\circ d\varphi(p), \underset{\forall v \in T_p(X)}{=} \forall v \in T_p(X) \ d\psi(\varphi(p))\langle d\varphi(p)\langle v \rangle \rangle\]
+    \item Если $\varphi: X \to Y - C^r$-изоморфизм, то $T_p(X)$ и $T_q(Y)$ линейно изоморфны ($\exists$ линейный изоморфизм этих пространств).
+\end{enumerate}
+
+\begin{statement*}
+    Пусть $M$ - $k$-мерное гладкое множество в $\mathbb{R}^n$. 
+    \begin{enumerate}
+        \item Если $p \in M\backslash \partial M$, то $T_p(M)$ - $k$-мерное векторное пространство.
+        \item Если $p \in \partial M$, то $T_p(M)$ - $k$-мерное полупространство.
+    \end{enumerate}
+
+    \begin{proof}
+        Было утверждение: $\varphi: (p \in) A \cong B$, тогда $T_p(A) \overset{d\varphi(p)}{\cong} T_{\varphi(p)}(B)$ - линейно изоморфны.
+
+        \begin{enumerate}
+            \item Пусть $\exists U \open M, p \in U$ и $\exists \varphi: U \cong \mathbb{R}^k$. Тогда $d\varphi(p):T_p(U) \to T_{\varphi(p)}(\mathbb{R}^k) = \mathbb{R}^k$. А по свойству локальности касательных пространств $T_p(U) = T_p(M)$.
+            \item Пусть $\exists U \open M, p \in U$ и $\varphi: U \cong \mathbb{R}^k_+, \varphi(p) \in \partial \mathbb{R}^k_+$
+            \[d\varphi(p): T_p(M) \overset{\text{линейно}}{\cong} T_{\varphi(p)}(\mathbb{R}^k_+) = \mathbb{R}^k_+\]
+        \end{enumerate}
+    \end{proof}
+\end{statement*}
+
+\begin{theorem}[о касательном пространстве к регулярному решению систему уравнений]
+    \par
+    Пусть $p$ - регулярное решение системы уравнений $\begin{array}{c} f_1(\overline{x}) = 0 \\ \vdots \\ f_k(\overline{x}) = 0 \end{array}, \ f_i$ - $C^r$-отображение $\Omega \open \mathbb{R}^n \to R$.
+    Точка $p$ - регулярная $\iff$ $rank(df_1, \hdots, df_k) = k$ - матрица Якоби, в которой дифференциал - это вектор столбец матрицы.
+    \par
+    Тогда $T_p(M)$ ($M$ - множество всех регулярных решений) - это ортогональное дополнение к $\nabla f_1(p) \oplus \hdots \oplus \nabla f_k(p)$ = множеству решений линейной системы уравнений $\begin{array}{c} df_1(p)\langle v \rangle = 0 \\ \vdots \\ df_k(p)\langle v \rangle = 0
+    \end{array}$
+    
+    Напоминание:
+    Пусть $V \subseteq \mathbb{R}^n$ (не обязательно векторное пространство). $V^{\bot} \text{(орт. дополнение)} = \{ u \in \mathbb{R}^n \mid \forall v \in V \ u \bot v \}$
+    
+    \begin{statement*}
+        $V^{\bot}$ - всегда векторное подпространство.
+    \end{statement*}
+    
+    \begin{statement*}
+        $V$ - векторно пространство $\implies V^{\bot}$ имеет дополнительную размерность (в смысле дополнения к пространству):
+        \[\dim V = k \implies \dim V^{\bot} = n - k\]
+    \end{statement*}
+
+    \begin{proof}
+        У точки $p$ имеется окрестность $U \open M$, в которой все решения регулярны $\implies$ $U$ - $(n-k)$-мерное многообразие по теореме о регулярных решениях. Тогда $T_p(M) = T_p(U)$ - $(n-k)$-мерное векторное подпространство в $\mathbb{R}^n$
+        \par
+
+        \begin{lemma*}
+            Пусть $p \in X$ - произвольное множество $\subset \mathbb{R}^n, \ g|_X = const$ - постоянная на множестве гладкая функция. Тогда $dg(p):T_p(X) \to \mathbb{R}$ - нулевое (зануляющее) отображение.
+
+            \begin{proof}
+                Пусть $v \neq 0$ из $T_p(X)$. $\exists x_n \to p, \ t_n \searrow 0, \ \frac{x_n - p}{t_n} \to v$
+                \[dg(p)\langle v \rangle = \lim_{n \to \infty} \frac{g(x_n) - g(p)}{t_n} = \frac{0}{t_n} = 0\]
+            \end{proof}
+        \end{lemma*}
+
+        \[f_i|_u \equiv 0 \implies df_i(p)\langle v \rangle = 0 \ \forall v \in T_p(U) = T_p(M)\]
+        Помним: $df(p)\langle v \rangle = (\nabla f, v) = 0$. Тогда ясно, что $\nabla f_i(p) \bot v \ \forall v \in T_p(U) = T_p(M)$.
+        \par
+        Осталось доказать, что если $v \bot$ всем градиентам $f_i$, то $v \in T_p(M)$: \\
+        $\nabla f_1, \hdots, \nabla f_k(p)$ - линейно независимы как строки матрицы Якоби ранга $k$. $v$ - решене линеаризованной системы $(\nabla f, v) = 0$ (помним, что градиент $f$ это матрица из градиентов $f_i$)
+        Эта система имеет ранг $k$ - значит множество ее решений это $(n-k)$-мерное векторное пространство $W$. Но мы знаем, что множество
+        $T_p(M)$ - тоже $(n-k)$-мерное векторное подпространство и уже доказали, что $T_p(M) \subset W$. 
+        \[\dim T_p(M) = \dim W \text{ и } T_p(M) \subset W \implies T_p(M) = W\]
+    \end{proof}
+
+\end{theorem}

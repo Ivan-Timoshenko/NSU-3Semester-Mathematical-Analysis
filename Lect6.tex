@@ -1,0 +1,31 @@
+\subsection{Условные экстремумы}
+
+\begin{lemma*}[о не-максимуме]
+    Пусть $p \in X \subset \mathbb{R}^n, \ g:X \to \mathbb{R}$ - гладкая функция.\\
+    Если $\exists v \in T_p(X)$ такое, что $df(p)\langle v \rangle > 0$, то $p$ - не локальный максимум.
+
+    \begin{proof}
+        Пусть $v$ - вектор из условия. Тогда $\exists x_n \in X,\ t_n \searrow 0,\ \frac{x_n - p}{t_n} \to v$\\
+        Знаем, что $dg(p)\langle v \rangle = \lim_{n \to \infty }\frac{g(x_n) - g(p)}{t_n} > 0 \implies$ числитель больше $0$ при $n \to \infty$, значит $g(x_n) > g(p) \implies$ $p$ - не локальный максимум.
+    \end{proof}
+\end{lemma*}
+
+\begin{statement*}[Следствие]
+    Если $X$ - многообразие и $p \in X \backslash \partial X$, то $p$ - экстремум $g \implies$ $dg(P)|_{T_p(X)} \equiv 0$
+
+    \begin{proof}
+        Если $dg(p)|_{T_p(X)} \neq 0$, то $\exists v \in T_p(X) \ dg(p)\langle v \rangle \neq 0$, 
+        при этом $-v \in T_p(X)$ и $dg(p)\langle v \rangle$ будет другого знака. Тогда по лемме о не-экстремуме $p$ - не экстремум.
+    \end{proof}
+\end{statement*}
+
+
+\begin{theorem}[о градиентах]
+    Пусть $p$ - регулярное решение гладкой системы $\begin{array}{c} f_1(\overline{x}) = 0 \\ \vdots \\ f_k(\overline{x}) = 0 \end{array}$. Пусть $g: M \to \mathbb{R}$ - гладкая функция.  \par
+    Если $p$ - экстремум $g$ на $M$, то $\exists \lambda_1, \hdots, \lambda_k \in \mathbb{R}$, такие, что
+    \[\nabla g(p) = \lambda_1\nabla f_1(p) + \hdots + \lambda_k \nabla f_k(p)\]
+    \begin{proof}
+        Мы уже знаем, что если $p$ - экстремум, то $\nabla g(p) \bot T_p(M)$ или, что то же самое: $\nabla g(p) \in T_p(M)^{\bot}$. \par
+        Пространство $T_p(M)^{\bot}$ - линейная оболочка градиентов функций $f_1, \hdots, f_k$ в точке $p$  ($T_p(M)^{\bot}$ имеет размерность $k \implies \nabla f_1(p), \hdots, \nabla f_k(p)$ - его базис). 
+    \end{proof}
+\end{theorem}
