@@ -1,0 +1,114 @@
+\section{Поточечная и равномерная сходимость}
+
+
+Пусть $X$ - некое множество, $Y$ - $\mathbb{R}$ или $\mathbb{R}^n$ или вообще любое метрическое пространство.
+Даны последовательность функций $f_n: X \to Y, n = 1, 2, \hdots$, и функция $f:X \to Y$.
+
+\begin{definition}
+    Последовательность функций сходится на $X$ к функции $f$, поточечно, если $\forall x \in X$ последовательность значений $f_n(x)$ сходится к $f$ при $n \to \infty$.
+    \[\forall x \in X \quad f_n(x) \underset{n \to \infty}{\to} f(x)\]
+\end{definition}
+
+\begin{statement}
+    Из непрерывной функций $f_n$ не всегда следует непрерывность функции $f$
+    \begin{proof}
+        Пусть $X = \left[0, 1\right]$, $f_n(x) = x^n$. Тогда $f_1(x) = x, f_2(x) = x^2, f_3(x) = x^3$ и так далее.
+        В это случае    
+        \[\underset{x \in \left[0, 1\right]}{\lim_{n \to \infty}} = \begin{cases}
+            0 \ x < 1 \\ 
+            1 \ x = 1
+        \end{cases}\]
+        Видно, что $f(x)$ разрывна, хотя все $f_n$ непрерывны.
+    \end{proof}
+\end{statement}
+
+\begin{definition}
+    Пусть $f_n: X \to \mathbb{R}$, $f:X \to \mathbb{R}$.\\
+    Последовательность $f_n$ сходится к $f$ \textbf{равномерно} на множестве $X$, если 
+    \begin{equation}
+        \label{uniform_convergence}
+        \underset{x \in X}{\sup} \left|f_n(x) - f(x)\right| \underset{n \to \infty}{\to} 0
+    \end{equation}
+
+    \par
+    "Оригинальное"  определение равномерной сходимости:
+    
+    \begin{equation}
+        \label{original_uniform_convergence}
+        \forall \varepsilon > 0 \ \exists n_0 \mid \forall x \in X \ \forall n \geq n_0 \quad \left| f_n(x) - f(x) \right| \leq \varepsilon
+    \end{equation}
+
+    \begin{proof}
+        Докажем эквивалентность двух определений:\par
+        \eqref{uniform_convergence} $\implies$ \eqref{original_uniform_convergence}:\\
+        Пусть $\varepsilon > 0$, надо подобрать $n_0$. По условию \eqref{uniform_convergence}:
+        \[\exists n_0 \mid \forall n \geq n_0 \quad \underset{x \in X}{\sup} \left| f_n(x) - f(x) \right| \leq \varepsilon\]
+        Но $\forall x \in X \ \sup \geq \left| f_n(x) - f(x) \right|$, значит 
+        \[\forall x \in X \ \left|f_n(x) - f(x) \right| \leq \sup \left| f_n(x) - f(x) \right| \leq \varepsilon\]
+    \end{proof}
+\end{definition}
+
+\begin{definition}
+    Последовательность $f_n(x)$ поточечно сходится к $f(x)$ при любых $x$, если 
+    \[\forall \varepsilon > 0 \ \forall x \in X \ \exists n_0 \in \mathbb{N} \ \forall n \geq n_0 \ \left| f_n(x) - f(x)\right| \leq \varepsilon\]
+
+    \par
+    \eqref{original_uniform_convergence} $\implies$ \eqref{uniform_convergence}: Надо доказать, что $\forall \varepsilon \ \exists n_0 \mid \forall n \geq n_0 \ \underset{x \in X}{\sup} \left| f_n(x) - f(x) \right| \leq \varepsilon$.
+    
+    По условию \eqref{original_uniform_convergence}:
+    \[\exists n_0 \mid \forall n \geq n_0 \ \forall x \in X \ \left| f_n(x) - f(x) \right| \leq \varepsilon \implies sup \left| f_n(x) - f(x) \right| \leq \varepsilon\]
+\end{definition}
+
+Равномерную сходимость $f_n(x)$ к $f(x)$ будем обозначать $f_n \underset{n \to \infty}{\rightrightarrows} f$
+
+
+\begin{theorem}[Критерий отсутствия равномерной сходимости]
+    $f_n$ не сходится равномерно к $f$ $\iff$ $\exists x_n \in X$ такая, что $f_n(x_n) - f(x_n) \nrightarrow 0$
+\end{theorem}
+
+\begin{theorem}[о пределе пределов]
+    Пусть $X \subseteq \mathbb{R}$ (или $\forall$ метрического пространства). \\ Пусть $\begin{cases} f: X \to \mathbb{R} \\ f_n: X \to \mathbb{R} \end{cases}$, $p$ - предельная точка $X$.
+
+    Предположим, что $f_n(x) \underset{x \to p}{\to} y_n$ и $y_n \underset{n \to \infty}{\to} y$. 
+    Если $f_n$ \textbf{равномерно} сходится к $f$ ($f_n \rightrightarrows f$) на $X$, то $f(x) \to y$ при $x \to p$.
+    \[\lim_{n \to \infty} (\lim_{x \to p} f_n(x)) = \lim_{x \to p}(\lim_{n \to \infty} f_n(x))\] 
+
+    \begin{proof}
+        Пусть $\varepsilon > 0$, надо доказать, что у точки $p$ имеется окрестность $U$, такая, что $\forall x \in X \cap U \ \left| f(x) - y \right| \leq \varepsilon$.
+        \[\left| f(x) - y \right| = \left| f(x) - f_n(x) + f_n(x) - y_n + y_n - y \right| \leq \left| f(x) - f_n(x) \right| + \left| f_n(x) - y_n \right| + \left| y_n - y \right|\] 
+        Рассмотрим каждое слагаемое в отдельности:\\
+        1:
+         \[\exists n_0 \mid \forall n \geq n_0 \quad \left| f(x) - f_n(x) \right| \leq \frac{\varepsilon}{3}\]
+        
+        3:
+            \item \[\exists n_1 \mid \forall n \geq n_1 \quad \left| y_n - y \right| \leq \frac{\varepsilon}{3}\]
+            Пусть $n_2 = \max{n_0, n_1}$. Тогда $\forall n \geq n_2$ выполнено и 1, и 3.\\
+        2:
+            \[f_{n_2}(x) \underset{x \to p}{\to} y_{n_2} \implies \exists U \text{ - окрестность точки $p$, такая, что } \forall x \in U \cap X \ \left| f_{n_2}(x) - y_{n_2} \right| \leq \frac{\varepsilon}{3}\]
+        
+        Для таких $x$ из $U \cap X$ выполнено:
+        \[\left| f(x) - y\right| \leq \left| f(x) - f_{n_2}(x) \right| + \left| f_{n_2}(x) - y_{n_2} \right| + \left| y_{n_2} - y \right| \leq \frac{\varepsilon}{3} + \frac{\varepsilon}{3} + \frac{\varepsilon}{3} = \varepsilon\]
+    \end{proof}
+\end{theorem}
+
+\begin{theorem*}[Следствие]
+    Если все $f_n$ непрерывны в $p \in X$ и $f_n \rightrightarrows f$ на $X$, то $f$ тоже непрерывна в точке $p$.\\
+    Нет, тот контрпример показывал, что просто непрерывности $f_n$ недостаточно, а следствие утверждает, что непрерывности + равномерной сходимости уже достаточно.
+    \begin{proof}
+        Надо показать, что $f(x) \underset{x \to p}{\to}f(p)$. Заметим, что $f_n(x) \to f(x)$ при $n \to \infty$ в силу обычной поточечной сходимости. Теперь по теореме:
+        \[f(x) = \lim_{n \to \infty} f_n(x) \implies \lim_{x \to p} f(x) = \lim_{x \to p} (\lim_{n \to \infty} f_n(x)) \overset{\text{по теореме}}{=} \lim_{n \to \infty} (\lim_{x \to p} f_n(x)) = \lim_{n \to \infty} f_n(p) = f(p)\]
+    \end{proof}
+
+\end{theorem*}
+
+\begin{theorem*}[Еще одно следствие]
+    Если все $f_n$ непрерывны \textbf{на $X$} и $f_n \rightrightarrows$, то $f$ тоже непрерывна на $X$.
+    \begin{proof}
+        Нечего тут доказывать: определение непрерывности в точке расширяем до определения непрерывности на множестве.
+    \end{proof}
+\end{theorem*}
+
+\begin{theorem*}[Критерий Коши равномерной сходимости последовательности функций]
+    Пусть $X$ - множество, $f_n: X \to \mathbb{R}$. 
+    \[\exists \text{функция } f: X \to \mathbb{R} \text{ такая, что } f_n \rightrightarrows f \text{ на $X$} \implies \forall \varepsilon \ \exists n_0 \mid \begin{array}{c} \forall x \in X \\ \forall k, l \geq n_0\end{array} \ \left| f_k(x) - f_l(x) \right| \leq \varepsilon\]
+\end{theorem*}

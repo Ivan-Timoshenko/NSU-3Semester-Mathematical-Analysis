@@ -29,3 +29,63 @@
         Пространство $T_p(M)^{\bot}$ - линейная оболочка градиентов функций $f_1, \hdots, f_k$ в точке $p$  ($T_p(M)^{\bot}$ имеет размерность $k \implies \nabla f_1(p), \hdots, \nabla f_k(p)$ - его базис). 
     \end{proof}
 \end{theorem}
+
+\subsection{Достаточное условие экстремума}
+\begin{theorem}
+    Пусть $f_1, \hdots, f_k$ - $C^r$-дифференцируемы и точка $p$ - регулярное решение, $p \in M = \{\overline{x} \mid f_1(\overline{x}) = 0, \hdots, f_k(\overline{x}) = 0\}$.
+    Пусть $g$ - $C^2$-гладкая функция, определенная в окрестности точки $p$.
+
+    \par
+    Необходимое условие:\\
+    Если $p$ - экстремум, то $\exists \lambda_1, \hdots, \lambda_k$, а в $p$ $L(p)$ равна $0$:
+    \[L(x) = g(x) - (\lambda_1 f_1(x) + \hdots + \lambda_k f_k(x))\]
+
+
+    \par
+    Достаточное условие:\\
+    Если в такой точке матрица Гессе $\Gamma = \frac{\partial^2 L}{\partial x_i \partial x_j}(p)$ положительно определена на 
+    $T_p(M)$, то $p$ - строгий локальный минимум, если $\frac{\partial^2 L}{\partial x_i \partial x_j}(p) < 0$ - локальный максимум, если же
+    $\exists u, v \in T_p(M)$, такие, что $\Gamma\langle v \rangle > 0, \Gamma\langle u \rangle < 0$, то $p$ - не экстремум.
+
+    \begin{proof}
+        Если $p$ - экстремум, то необходимое условие выполнено по теореме о градиентах:
+        \[\exists \lambda_i: \ \nabla g(p) = \sum \lambda_i\nabla f_i(p)\]
+        Это на самом деле то же самое, что и $\frac{\partial L}{\partial x_1}(\overline{\lambda}, p) = 0, \hdots, \frac{\partial L}{\partial x_k}(\overline{\lambda}, p) = 0$, где $\frac{\partial L}{\partial x_i}(\overline{\lambda}, p) = \frac{\partial g}{\partial x_i} - (\lambda_1 \cdot \frac{\partial f_1}{\partial x_i} + \hdots + \lambda_k \cdot \frac{\partial f_k}{\partial x_i}) = 0$.
+
+        При этом $\frac{\partial L}{\partial \lambda_i}(x) = -f_i(x) = 0$, так как $x \in M$.
+        \par
+        Докажем достаточное условие:\\
+        Пусть $dL(p) = 0, \Gamma = \frac{\partial^2 L}{\partial x_i \partial x_j}(p) > 0$ (т.е. положительно определенная матрица). Покажем, что у точки $p$ существует окрестность в $M$ такая, что в не $g(x) > g(p)$.
+        \\
+        От противного: предположим, что это не так, тогда $\exists x_n \in M, \ x_n \to p, g(x_n) \leq g(p)$. 
+        Можно выбрать такую подпоследовательность $x_{n_k}$ такую, что 
+        \[\frac{x_{n_k} - p}{\left| x_{n_k} - p\right|} \to v \text{- единичный вектор}, v \in T_p(M)\]
+        Считаем, что уже $x_n$ такая, что $\frac{x_n - p}{\left| x_n - p \right|} \to v \in T_p(M), \ g(x_n) = L(x_n)$ - на множестве $M$ функция $g = L$, ведь $x \in M \implies f_i(x) = 0$.\\
+        Значит $L \in C^2$ (в окрестности $p$), мы знаем, что 
+        \[L(x) = L(p) + dL(P)\langle x - p \rangle + \frac{\partial ^2L}{\partial x_i \partial x_j} + o(\left| x - p \right|^2)\]
+        В частности
+        \[L(x_n) - L(p) = dL(p)\langle x_n - p \rangle + \frac{\partial^2 L}{\partial x_i \partial x_j}(p)\langle x_n - p \rangle + o(\left| x_n - p\right|^2), \ dL(p)\langle x_n - p \rangle = 0 \text{ по предположению}\]
+        \[g(x_n) - g(p) = L(x_n) - L(p) = \frac{\partial^2 L}{\partial x_i \partial x_j}(p)\langle x_n - p \rangle + o(\left| x_n - p\right|^2)\]
+        По "противному" предположению это $\leq 0$, но с другой стороны, поскольку $\Gamma = \frac{\partial^2 L}{\partial x_i \partial x_j}(p) > 0$ для $p \in T_p(M)$, то $\exists \varepsilon > 0$ такой, что $\Gamma\langle v \rangle \geq \varepsilon \cdot \left| v\right|^2 \ \forall v \in T_p(M)$. Это самое сложное место доказательства, вот почему это так:
+        \par
+        $\Gamma: T_p(M) \to \mathbb{R}$ - 2-однородная функция, непрерывная на $T_p(M)$ (поскольку это многочлен).
+        Значит на множестве $W$, составленном из множества единичных векторов из $T_p(M)$ эта функция имеет минимум, больший 0, поскольку множество $W$ - компакт. \\
+        Итак, $\forall v \in T_p(M)$ если $\left| v \right| = 1 \implies \Gamma \langle v \rangle \geq \varepsilon$, тогда $\forall v \in T_p(M)$ при любой длине $v$ $\Gamma \langle v \rangle \geq \left| v \right|^2$ (вместо единичного $v$ взяли $v$ не единичной длины, вторая степень вылезла в силу 2-го порядка однородности).
+
+        \par
+        Итак, $0 \geq g(x_n) - g(p) = L(x_n) - L(P) = \Gamma\langle x_n - p \rangle + o(\left| x_n - p\right|^2)$. Поделим это равенство на $\left| x_n - p \right|^2$:
+        \[0 \geq \frac{g(x_n) - g(p)}{\left| x_n - p\right|^2} = \frac{\Gamma(p) \langle x_n - p \rangle}{\left| x_n - p \right|^2} + o(1)\]
+        Поскольку $o(1) \underset{x_n \to p}{\to} 0$, то:
+        \[\frac{\Gamma\langle x_n - p \rangle}{\left| x_n - p\right|^2} = \Gamma\langle \frac{x_n - p}{\left| x_n - p\right|} \rangle \to \Gamma\langle v \rangle \geq \varepsilon\]
+        Значит $0 \geq \frac{g(x_n)-g(p)}{\left| x_n - p \right|^2} \underset{n \to \infty}{>} \frac{\varepsilon}{2}$ - пополам для уверенности. Получаем противоречие, таким образом доказали достаточность.
+        \par
+        Пусть теперь $\exists u, v \in T_p(M), \ \Gamma\langle u \rangle > 0, \Gamma\langle v \rangle < 0$\\
+        Заметим, что $u \in T_p(M) \implies \exists x_n \in M$ такая, что $\frac{x_n - p}{\left| x_n - p\right|} \to \frac{u}{\left| u \right|}$.
+        \[g(x_n) - g(p) = \Gamma \langle x_n - p \rangle + o(\left| x_n - p\right|^2) \text{ - поделим уравнение на $\left| x_n - p\right|^2$}\]
+        \[\frac{g(x_n) - g(p)}{\left| x_n - p \right|^2} = \Gamma \langle \frac{x_n - p}{\left| x_n - p\right|} \rangle + o(1)\]
+        Первое слагаемое стремится к $\Gamma \langle \frac{u}{\left| u \right|} \rangle > 0$, а второе - к нулю. Значит при $n \to \infty \ \frac{g(x_n) - g(p)}{\left| x_n - p \right|^2} > 0$. \\
+        Значит, $p$ - не максимум функции $g$ на множестве $M$. Аналогично расписав для вектора $v$ получаем, что $p$ - не минимум.
+
+
+    \end{proof}
+\end{theorem}
