@@ -111,4 +111,98 @@
 \begin{theorem*}[Критерий Коши равномерной сходимости последовательности функций]
     Пусть $X$ - множество, $f_n: X \to \mathbb{R}$. 
     \[\exists \text{функция } f: X \to \mathbb{R} \text{ такая, что } f_n \rightrightarrows f \text{ на $X$} \implies \forall \varepsilon \ \exists n_0 \mid \begin{array}{c} \forall x \in X \\ \forall k, l \geq n_0\end{array} \ \left| f_k(x) - f_l(x) \right| \leq \varepsilon\]
+
+    \begin{proof}
+        "$\impliedby$":\par
+        Пусть $x \in X$. Тогда для числовой последовательности $f_n(x)$ выполнен обычный критерий Коши сходимости последовательности, поэтому $\exists \lim_{n \to \infty}f_n(x) =:f(x)$ (обозначим $f(x)$ равной этому пределу).
+        \\
+        Осталось показать, что $f_n$ сходится к $f$ равномерно. Пусть $\varepsilon > 0$. По условию Коши выполнено:
+        \[\exists n_0 \mid \forall k, l \geq n_0 \ \left| f_k(x) - f_l(x) \right| \leq \varepsilon\]
+        С помощью поточечной сходимости $f_l$ к $f_x$ можем перейти к пределу по $l \to \infty$:
+        \[\forall x \in X \ \forall k \geq n_0 \ \left| f_k(x) - f(x) \right| \leq \varepsilon\]
+        "$\impliedby$" доказано.
+
+        "$\implies$": \par
+        Пусть $\varepsilon > 0$. По условию \[\exists k \geq n_0 \ \forall x \in X \left| f_k(x) - f(x) \right| \leq \frac{\varepsilon}{2}\]
+        Имеем: если $k, l \geq n_0$, то $\forall x$ выполнено:
+        \[\left| f_k(x) - f_l(x) \right| \leq \left| f_k(x) - f(x) \right| + \left| f(x) - f_l(x) \right| \leq \frac{\varepsilon}{2} + \frac{\varepsilon}{2} = \varepsilon\]
+
+    \end{proof}
 \end{theorem*}
+
+\begin{statement*}[Следствие]
+    Пространство непрерывных функций на множестве $\left[a, b\right] \subset \mathbb{R}$ полно в $\sup$-норме. $C(x)$ - множество непрерывных функций на $x = \left[a, b\right] \to \mathbb{R}$, $\parallel f  \parallel_c  = \underset{x \in X}{\sup}$
+    \begin{proof}
+        Полнота: если последовательность функций удовлетворяет критерию Коши, то есть предел $f_n \to f$ в $\sup$-норме $\implies \underset{x \in X}{\sup} \left| f_n(x) - f(x) \right| \underset{n \to \infty}{\to} 0$.\\
+        Условие Коши для последовательностей $f_n \in C\left[a, b\right]$ как раз и означает, что $f_n \rightrightarrows f$ - какой-то функции. Функции $f_n$ непрерывны и $\rightrightarrows f \implies f \in C\left[a, b\right]$
+
+    \end{proof}
+\end{statement*}
+
+\begin{theorem*}[Дини]
+    Пусть $X$ - компакт, $f_n: X \to \mathbb{R}, f:X \to \mathbb{R}, \ f_n, f \in C(X)$. \\
+    Если $f_n$ сходится к $f$ на $X$ поточечно, то сходимость равномерна.
+
+    \begin{proof}
+        Ключ к доказательству: $\forall x$ последовательность $\left| f_n(x) - f(x) \right|$ монотонно убывет к $0$. \\
+        Пусть $\varepsilon > 0$. Надо понять, что:
+        \[\exists n_0 \mid \forall n \geq n_0 \ \forall x \in X \ \left| f_n(x) - f(x) \right| \leq \varepsilon\]
+        Положим $U_n \subset X$, $U_n = \left\{ x \in X \mid \left| f_n(x) - f(x) \right| \right\} < \varepsilon$.
+        \begin{enumerate}
+            \item $\bigcup_{n=1}^{\infty} U_n = X$. В самом деле, $\forall x \forall n$ начиная с какого-то $n_0$ выполнено $\left| f_n(x) - f(x) \right|\leq \varepsilon$ (поточечная сходимость из условия) и $x \in U_n \ \forall n \geq n_0$.
+            \item Все $U_n$ открыты в $X$ (по функциональному признаку - $\left| f_n(x) - f(x) \right|$ непрерывна и у нас есть неравенство).
+            \item $X$ компактно $\implies$ существует конечное подпокрытие $U_{n_1} \cup \hdots \cup U_{n_k} = X$.
+        \end{enumerate}
+        Заметим, $U_n \subset U_{n+1}$, так как $\left| f_{n+1} - f(x) \right| \leq \left| f_n(x) - f(x) \right|$ в силу ключа.
+        \[x \in U_n \implies \left| f_n(x) - f(x) \right| < \varepsilon\]
+        Так как \[\left| f_n(x) - f(x) \right| \geq \left| f_{n+1}(x) - f(x) \right| \implies \text{ тоже $<\varepsilon$} \implies x \in U_{n+1}, U_{n+1} \supset U_n\]
+        Значит, $\exists$ какое-то $n_0 \mid U_{n_0} = X$. Итак, $\forall x \left| f_{n_0}(x) - f(x) \right| < \varepsilon$ и для всех $n \geq n_0$ тоже.
+    \end{proof}
+\end{theorem*}
+
+
+\subsection{Функциональные ряды}
+
+\begin{definition}
+    Функциональный ряд $\label{stand_func_series} \sum_{n = 1}^{\infty} f_n(x)$ сходится поточечно, если последовательность функций $S_n(x) = \sum_{k=1}^n f_k(x)$ сходится поточечно (т.е. сходится при $\forall x$).
+    \par
+    Ряд функций сходится на множестве $X$ равномерно к функции $f$, если $S_n \underset{n \to \infty}{\rightrightarrows} f$ на множестве $X$.
+\end{definition}
+
+\begin{theorem*}[Критерий Коши равномерной сходимости функционального ряда]
+    Ряд $\eqref{stand_func_series}$ сходится равномерно тогда и только тогда, когда:
+    \[\forall \varepsilon \ \exists n_0 \mid \forall k, l: l > k \geq n_0 \ \forall x\in X \ \left| \sum_{i=k}^{l} f_n(x) \right| < \varepsilon\]
+
+    \begin{proof}
+        Сумма $\sum_{k}^{l} f_k(x) = S_l(x) - S_{k-1}(x)$ - задача сведена к критерию Коши для последовательности фукнций частичных сумм (числовой последовательности).
+    \end{proof}
+\end{theorem*}
+
+\begin{theorem*}[Признак сравнения]
+    Пусть числовой ряд $\sum a_n$, где $a_n \geq 0$ сходится, если функции $f_n: X \to \mathbb{R}$ таковы, что $\underset{x \in X}{\sup} f_n(x) \leq a_n$ (эквивалентно $\forall x \in X \mid f_n(x) \leq a_n$).
+    Тогда функциональный ряд $\sum f_n$ сходится на $X$ равномерно.
+
+    \begin{proof}
+        Покажем, что для ряда $\sum f_n$ выполнено условие Коши:\\
+        Пусть $\varepsilon > 0$. Ряд $\sum a_n$ сходится $\implies$ для этого числового ряда выполнено условие Коши числовых рядов:
+        \[\exists n_0 \forall k > l \geq n_0 \ \left| \sum_{m=k}^{l} a_m\right| \leq \varepsilon\]
+        Тогда $\forall x \in X$ имеем:
+        \[\left| \sum_{m=k}^{l} f_m(x)\right| \leq \sum_{m=k}^{l} \left| f_m(x) \right| \leq \sum_{m=k}^{l}a_m \leq \varepsilon\]
+        Значит условие Коши выполнено для функционального ряда $\implies$ он сходится равномерно.
+    \end{proof}      
+\end{theorem*}
+
+\begin{theorem*}[Необходимое условие равномерной сходимости функционального ряда]
+    Ряд $\sum f_n$ сходится на множестве $X$ равномерно $\implies$ $\underset{x \in X}{\sup} \left| f_n(x) \right| \underset{n \to \infty}{\to} 0$
+    \begin{proof}
+        \[\underset{x \in X}{\sup} \left| f_n(x) \right| = \underset{x \in X}{\sup} \left| \sum_{m=n}^{n} f_n(x) \right|\]
+        По условию Коши это стремится к $0$ при $n \to \infty$.
+    \end{proof}
+\end{theorem*}
+
+\begin{statement*}
+    Пусть ряд $S(x) = \sum f_n(x)$ равномерно сходится на $X$. Если все $f_n$ непрерывны, то $f$ - непрерывна.
+    \begin{proof}
+        Все $S_n(x) = (f_1(x) + \hdots + f_n(x))$ - непрерывные функции. $S_n \rightrightarrows f$ и применяем теорему о непрерывности предельной функции для последовательности (теорема о пределе пределов).
+    \end{proof}
+\end{statement*}
