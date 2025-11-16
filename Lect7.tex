@@ -206,3 +206,103 @@
         Все $S_n(x) = (f_1(x) + \hdots + f_n(x))$ - непрерывные функции. $S_n \rightrightarrows f$ и применяем теорему о непрерывности предельной функции для последовательности (теорема о пределе пределов).
     \end{proof}
 \end{statement*}
+
+\begin{theorem*}[об интеграле]
+    Пусть $(a, b)$ - ограниченный промежуток, $f_n$ - интегрируемые на $(a,b)$ функции.\\
+    Если последовательность $f_n$ равномерно сходится на $(a,b)$, то последовательность $\int_{a}^{b} f_n$ сходится. Если при этом предельная функция $f$ ($f_n \rightrightarrows f$) интегрируема, то $\int_{a}^{b} f_n \underset{n \to \infty}{\to} \int_{a}^{b} f$.
+    \begin{proof}
+        Используем критерий Коши:\\
+        Пусть $\varepsilon > 0$, тогда $\exists n_0 \mid \forall k,l \geq n_0$ выполнено:
+        \[\underset{x \in (a,b)}{\sup} \left| f_k(x) - f_l(x) \right| \leq \frac{\varepsilon}{\left| a- b \right|}\]
+        Для таких $k$ и $l$ выполнено:
+        \[\left| \int_{a}^{b} f_k(x) - \int_{a}^{b} f_l(x) \right| = \left| \int_{a}^{b} f_k(x) - f_l(x) \right| \leq \int_{a}^{b} \left| f_k(x) - f_l(x) \right| \leq \int_{a}^{b} \frac{\varepsilon}{b-a} = \varepsilon\]
+        То есть для числовой последовательности $\int_{a}^{b} f_n(x)$ выполнено условие Коши и она имеет предел.
+
+        \par
+        Если $f_n \rightrightarrows f$ интегрируема, то ясно, что $\int_{a}^{b} f_n - \int_{a}^{b} f \underset{n \to \infty}{\to} 0$. Важно, что $(a, b)$ ограничен.
+    \end{proof}
+\end{theorem*}
+
+\subsection{Дифференциирование}
+\begin{theorem}
+    Пусть ограниченный отрезок $(a,b) \subset \mathbb{R}$ и $f_n$ дифференцируемы на $(a,b)$ и таковы, что 
+    \begin{enumerate}
+        \item $f'_n \underset{n \to \infty}{\rightrightarrows} h$ на $(a,b)$.
+        \item $\exists p \in (a,b)$ такая, что последовательность $f_n(p)$ сходится.
+    \end{enumerate}
+    Тогда $\exists$ функция $f$ (дифференцируема на $(a,b)$) и такая, что $f_n \rightrightarrows f$ и $f' = h$.
+    \par
+    Теорема утверждает, что предел производных последовательности функций равен производной предела.
+
+    \begin{proof}
+        Положим $g_n(x) = \frac{f_n(x) - f_n(p)}{x-p}$, область определения $g_n$ это промежуток $(a,b) \backslash \{p\}$.\\
+        Покажем, что последовательность $g_n$ равномерно сходится на своей области определения:\\
+        Применим критерий Коши:
+        \[g_k(x) - g_l(x) = \frac{(f_k(x) - f_l(x)) - (f_k(p) - f_l(p))}{x-p}, \text{ обозначим } f_{kl}(x) = f_k(x) - f_l(x), f_{kl}(p) = f_k(p) - f_l(p)\]
+        Пусть $\varepsilon > 0$, имеем: 
+        \[\exists n_0 \mid \forall k,l \geq n_0 \ \underset{x \in (a,b)}{\sup} \left| f'_k(x) - f'_l(x) \right| \leq \varepsilon, \text{ то есть, } \left| f'_{kl}(x) \right| \leq \varepsilon\]
+        Тогда по теореме о среднем (теорема о приращениях):
+        \[\forall x \left| f_{kl}(x) - f_{kl}(p) \right| \leq \varepsilon \cdot \left| x - p \right|\]
+        Значит 
+        \[g_k(x) - g_l(x) \leq \varepsilon \ \forall x \in (a,b)\{p\} \ \forall k,l \geq n_0\]
+        Согласно критерию Коши последовательность функций $g_n$ сходится равномерно к $g$. Покажем, что $f_n(x)$ равномерно сходится.
+        \[f_n(x) = g_n(x)(x-p) + f_n(p) \ \forall x \neq p\]
+        Так как $g_n \rightrightarrows g$ и $f_n(x) \rightrightarrows f(x)$, то можем определить $f(x):=g(x)(x-p) + f_n(p)$.
+        \textbf{УТОЧНИТЬ ДЕЙСТВИТЕЛЬНО ЛИ МЫ ВЫЧИТАЕМ $f(x)$}
+        \[f_n(x) - f(x) = \left[g_n(x) - g(x)\right](x-p) + f_n(p) - f(x)\]
+        Применим условие Коши к обоим слагаемым: пусть $\varepsilon > 0$, тогда
+        \[\exists n_0 \mid \forall k,l \geq n_0 \ \left| g_k(x) -g_l(x) \right| \leq \frac{\varepsilon}{2(a-b)}\]
+        и 
+        \[(f_l(x) - f_l(p)) - (f_k(x) - f_k(p)) \leq \frac{\varepsilon}{2}\]
+        Тогда 
+        \[\left| f_l(x) - f_k(x) \right| \leq \frac{\varepsilon(x-p)}{2(b-a)} + \frac{\varepsilon}{2} \leq \varepsilon\]
+        Итак, $f_n \rightrightarrows f$ на области определения.
+        \par
+        \[\lim_{n \to \infty} \lim_{x \to p}g_n(x) = \lim_{x \to p}\lim_{n \to \infty} g_n(x) \text{ по теореме о пределе пределов}\]
+        Заметим, что 
+        \[g_n(x) = \frac{f_n(x) - f_n(p)}{x-p} \implies \lim_{n \to \infty} \lim_{x \to p}g_n(x) = \lim_{n\to \infty} f'_n(p)\] 
+        \[\lim_{x \to p}\lim_{n \to \infty}g_n(x) = \lim_{x \to p}\frac{f(x) - f(p)}{x-p} = f'(p)\]
+        Эти пределы равны по теореме о пределе пределов, значит $\lim_{n \to \infty}f'_n(p) = f'(p)$.
+    \end{proof}
+\end{theorem}
+
+\begin{statement*}[Следствие 1]
+    Пусть ряд $\sum f_n$ сходится равномерно на ограниченном промежутке $(a,b)$.\\
+    Если $f_n$ интегрируема и $f$ ($f = \sum f_n$) интгерируема, то 
+    \[\int_{a}^{b} f = \int_{a}^{b} \sum f_n = \sum \int_{a}^{b} f_n\]
+    \begin{proof}
+        Сумма $\sum f_n$ - это предел частичных сумм $S_n(x) = \sum_{k = 1}^{n}f_k(x)$, $S_n(x) \rightrightarrows f$ и применяем теорему об интеграле.
+    \end{proof}
+\end{statement*}
+
+\begin{statement*}[Следствие 2]
+    Пусть ряд $\sum f_n(x)$ сходится хотя бы в одной точке $p \in (a,b)$ и ряд производных $\sum_{n=1}^{\infty} f'_n(x)$ сходится равномерно на $(a,b)$.\\
+    Тогда исходный ряд сходится равномерно на всем $(a,b)$, а его сумма дифференцируема на $(a,b)$, и $(\sum f_n)' = \sum (f'_n)$.
+    \begin{proof}
+        Теорема о дифференцируемости, примененная к частичным суммам.
+    \end{proof}
+\end{statement*}
+
+Далее будем рассматривать степенной ряд $f(x) = \sum_{n=1}^{\infty} C_n x^n$.
+
+\begin{theorem}[Формула Коши-Адамара]
+    Радиус сходимости степенного ряда можно вычислить по формуле Коши-Адамара:
+    \[R = \frac{1}{{\overline{\lim}}_{n\to \infty} \sqrt[n]{\left| C_n \right|}}\]
+    \begin{itemize}
+        \item При $\left| x \right| < R$ - сходится.
+        \item При $\left| x \right| > R$ - расходится.
+        \item При $\left| x \right| = R$ - нужно более тонкое исследование.        
+    \end{itemize}
+
+    \begin{proof}
+        Доказывается признаком Коши (в лекциях по ТФКП должно быть).
+    \end{proof}
+\end{theorem}
+
+\begin{theorem*}
+    Степенной ряд на внутренности круга сходимости можно интегрировать и дифференциировать почленно, при этом его сумма бесконечно дифференциируема в этой внутренности.
+
+    \begin{proof}
+        На подлете.
+    \end{proof}
+\end{theorem*}
