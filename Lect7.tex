@@ -248,7 +248,6 @@
         Согласно критерию Коши последовательность функций $g_n$ сходится равномерно к $g$. Покажем, что $f_n(x)$ равномерно сходится.
         \[f_n(x) = g_n(x)(x-p) + f_n(p) \ \forall x \neq p\]
         Так как $g_n \rightrightarrows g$ и $f_n(x) \rightrightarrows f(x)$, то можем определить $f(x):=g(x)(x-p) + f_n(p)$.
-        \textbf{УТОЧНИТЬ ДЕЙСТВИТЕЛЬНО ЛИ МЫ ВЫЧИТАЕМ $f(x)$}
         \[f_n(x) - f(x) = \left[g_n(x) - g(x)\right](x-p) + f_n(p) - f(x)\]
         Применим условие Коши к обоим слагаемым: пусть $\varepsilon > 0$, тогда
         \[\exists n_0 \mid \forall k,l \geq n_0 \ \left| g_k(x) -g_l(x) \right| \leq \frac{\varepsilon}{2(a-b)}\]
@@ -316,6 +315,86 @@
         Пусть $\left| z \right| < r$. Выберем $r_0 > z$, но $r_0 < r$. В круге радиуса $r_1$ сходимость ряда $\sum C_n z^n$ равномерна, более того (именно это нам и надо):\\
         ряд $\sum nC_n z^{n-1}$, полученный дифференцированием, тоже сходится равномерно (для доказательства этой фразы надо посчитать радиус сходимости нового ряда, он будет такой же, как у исходного).
         По теореме о дифференцировании функционального ряда выполнено $\left( \sum C_n x^n \right)' = \sum (nC_n z^{n-1})$ в точке $X$.
+    \end{proof}
+\end{theorem*}
+
+\begin{theorem*}[Признак Дирихле равномерной сходимости ряда функций]
+    Пусть ряд $\sum u_n(x)v_n(x)$ таков, что 
+    \begin{enumerate}
+        \item $\forall x \in X$ последовательность $u_n(x)$ монотонна по $n$ и $u_n \rightrightarrows 0$ на $X$.
+        \item Частичные суммы ряда $\sum v_n(x)$ равномерно ограничены (единая константа для всех частичных сумм):
+        \[\exists C < \infty \mid \forall k \in \mathbb{N} \forall x \in X \left| \sum_{n=1}^{k} v_n(x) \right| \leq C\]
+    \end{enumerate}
+    Тогда $\sum u_n(x) v_n(x)$ сходится равномерно на $X$.
+    \\
+    Справка (большая):\par
+    В курсе матанализа был признак Абеля-Дирихле (А-Д) для числового ряда $\sum u_n v_n$ сходится, если 
+    \begin{enumerate}
+        \item Частичные суммы ряда $\sum v_n$ ограничены
+        \item $u_n \to 0$ монотонно
+    \end{enumerate}
+    В основе доказательства признака Абеля-Дирихле для числовых рядов - неравенство Абеля:\\
+    Пусть $b_1 \geq b_2 \geq \hdots \geq b_m \geq 0$ и числа $a_1, \hdots, a_m$ - какие-то. Тогда:
+    \[\left| a_1b_1 + a_2b_2 + \hdots + a_mb_m \right| \leq b_1\cdot \left( \underset{k=1}{\overset{m}{\max}} \left| S_k \right| \right), \text{ где }S_k = a_1 + \hdots + a_k\]
+    \begin{proof}
+        Докажем неравенство Абеля (для прикола):
+        \[a_1 = S_1, \ a_2 = S_2 - S_1, \ a_k = S_k - S_{k-1}\]
+        \begin{align*}
+            &\left| a_1b_1 + \dots + a_mb_m \right| = \\
+            &\quad = \left| S_1b_1 + (S_2 - S_1)b_2 + \dots + (S_m - S_{m-1})b_m \right| = \\
+            &\quad = \left| S_1(b_1-b_2) + S_2(b_2 - b_3) + \dots + S_{m-1}(b_{m-1} - b_m) + S_m b_m \right| \leq \\
+            &\quad \le \sum_{k=1}^{m-1} \left| S_k \right| (b_k - b_{k+1}) + \left| S_m \right| b_m  \le\\
+            &\quad \le \max_{1 \le k \le m} \left| S_k \right| \Bigl( (b_1 - b_2) + (b_2 - b_3) + \dots + (b_{m-1} - b_m) + b_m \Bigr) =\\
+            &\quad = \max_{1 \le k \le m} \left| S_k \right| \cdot b_1
+        \end{align*}
+    \end{proof}
+    
+    \begin{proof}
+        Докажем признак Дирихле для рядов функций:\\
+        Воспользуемся критерием Коши: \par
+        Пусть $\varepsilon > 0$, $u_n$ сходится равномерно к $0$ на $X$, значит $\exists n_0 \mid \forall n \ge n_0 \ \forall x \in X \left| u_n(x) \right| \le \frac{\varepsilon}{2C}$ ($C$ - ограничивающая константа для $v_n$).
+        Пусть $X_- = \{ x \mid u_n \searrow \}, X_+ = \{ x \mid u_n \nearrow\}$. \par
+        По неравенству Абеля:\\
+        $\forall x \in X_- \ \forall l \ge k > n_0$ выполнено 
+        \[\left| \sum_{k}^{l} u_n(x) v_n(x) \right| \le u_k\cdot S, \text{ где } S = max \sum_{n=k}^{\tilde{l}} v_n(x), \ \tilde{l} \le l\]
+        \[\left| \sum_{k}^{\tilde{l}} \right| = \left| \sum_{1}^{\tilde{l}} - \sum_{1}^{\tilde{l} - 1} \right| \le \left| \sum_{1}^{\tilde{l}} \right| + \left| \sum_{1}^{k} \right| \le C + C \text{ (по второму условию из признака)}\]
+        Итак, $\sum_{k}^{l} u_n(x) v_n(x) \le u_k\cdot 2C \le \frac{\varepsilon}{2C} \cdot 2C = \varepsilon$. Условие Коши выполнено и ряд сходится равномерно на $X_-$. Для $X_+$ аналогично, значит на $X$ тоже равномерно.
+    \end{proof}   
+\end{theorem*} 
+
+\begin{statement*}
+    Ряд $\sum \frac{sin(nx)}{n}$ сходится равномерно на $x \in \left[ \delta, 2\pi - \delta \right], \ \delta > 0$.
+    
+    \begin{proof}
+        Для таких $X$ выполнено $\left| \sum_{n=0}^{k} \frac{\sin(nx)}{n} \right| \le \frac{2}{\left| 1 - e^{i\delta} \right|}$, то есть для ряда $\sum \frac{\sin(nx)}{n}$ выполнено условие (2) из признака А-Д. 
+        Поскольку $u_n(x) \rightrightarrows 0$ и монотонна по $n$, значит условие (1) тоже выполнено. Тогда по признаку А-Д ряд $\sum \frac{sin(nx)}{n}$ сходится равномерно.
+    \end{proof}
+\end{statement*}
+
+\begin{theorem*}[Признак Абеля]
+    Пусть ряд $\sum u_n(x)v_n(x)$ таков, что 
+    \begin{enumerate}
+        \item Любая последовательность $u_n(x)$ для каждого $x$ монотонна и все $u_n(x)$ равномерно ограничены:
+        \[\exists M < \infty \mid \forall n \ \forall x \in X \ \left| u_n(x) \right| \le M\]
+        \item Ряд $\sum v_n(x)$ \textbf{равномерно} сходится 
+    \end{enumerate}
+    Тогда $\sum u_n(x)v_n(x)$ сходится равномерно. 
+    \begin{proof}
+        Этот признак не следует напрямую из признака Дирихле. \\
+        Воспользуемся тем же Критерием Коши: \par
+        Пусть $\varepsilon > 0, X_-, X_+$ такие же, как раньше. Применим К.К. к ряду $\sum v_n(x)$ и получим:
+        \[\exists n_0 \mid \forall k, l \ge n_0 \ \forall x \in X \ \left| \sum_{n=k}^{l} v_n(x)\right| \le \frac{\varepsilon}{C}\]
+        Константа $C$ такая, что ограничивает все $u_n(x) \ \forall n \forall x$.
+        \begin{align*}
+            &\forall k, l \ge n_0 \ \forall x \in X_- \quad \left| \sum_{k}^{l} u_n(x)v_n(x) \right| \overset{\text{нер-во Абеля}}{\le} \\
+            & \le u_k \cdot \left| \text{самое большое из чисел }v_k(x), (v_k(x) + v_{k+1}), \hdots, (v_k(x) + \hdots + v_l(x)) \right| \le C \cdot \frac{\varepsilon}{C} \le \varepsilon
+        \end{align*}
+        Выполнено условие Коши, значит ряд $\sum u_nv_n$ сходится равномерно на $X_-$. Для $X_+$ аналогично.
+        \par
+        В рассуждении использовалось то, чего не было в условии: мы предполагали (применяя неравенство Абеля), что $u_n \ge 0$. Этого может не быть, как спасти ситуацию?\\
+        Пусть $\tilde{u_n}(x) = u_n(x) + C \in \left[0, 2C \right] \ \forall n \ \forall x \in X$
+        \[\sum u_n(x) v_n(x) = \sum (\tilde{u_n}(x) - C) v_n(x) \le \sum \tilde{u_n}(x)v_n(x) - C \cdot \sum v_n(x)\]
+        Для первого слагаемого доказательство, приведенное выше работает, а второе ряд сходится равномерно. Осталось показать, что $\sum \lambda a_n(x) + \gamma b_n(x)$ равномерно сходится (упражнение, но кажется достаточно расписать через определение).
 
     \end{proof}
 \end{theorem*}
