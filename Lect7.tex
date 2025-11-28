@@ -398,3 +398,64 @@
 
     \end{proof}
 \end{theorem*}
+
+\begin{theorem*}[Теорема Абеля о степенных рядах]
+    Пусть числовой ряд $\sum_{n=1}^{\infty} a_n$ сходится, $a_n \in \Compl$. 
+    Тогда на $\left[ 0, 1 \right]$ степенной ряд $f(t) = \sum a_n t^n$ сходится равномерно и, значит, $f(t)$ непрерывна как функция от $t$ на отрезке $\left[0, 1\right]$.
+
+    \begin{proof}
+        Согласно признаку Абеля $\sum u_n(t)v_n(t)$ сходится равномерно, если ряд $\sum v_n(t)$ сходится равномерно, последовательность функций $u_n(t)$ равномерно ограничена константой $C$ и для любого $t$ последовательность $u_n(t)$ монотонна по $n$.\par
+
+        Положим $v_n(t) = a_n; \ u_n(t) = t^n$.Тогда у нас выполнено условие признака Абеля:
+        \begin{itemize}
+            \item $\left| u_n(t) \right| \le 1 \ \forall n \ \forall t \in \left[ 0, 1 \right]$
+            \item если $t \in [ 0, 1 )$, то $t^n \underset{\text{монотонно}}{\searrow} 0$
+            \item если $t = 1$, то $t^n \equiv 1$ тоже монотонна!
+        \end{itemize}
+
+        Значит $f(t)$ сходится на $t \in \left[ 0, 1\right]$ равномерно, а сумма равномерно сходящегося ряда из непрерывных функций тоже непрерывна.
+    \end{proof}
+\end{theorem*}
+
+\begin{definition}[\textbf{Метод суммирования Абеля}]
+    Пусть есть ряд $\sum a_n$ (неважно, сходящийся или нет). Он сходится методом суммирования Абеля, если 
+    \[\exists \lim_{t \to 1 \mid_{\left[ 0, 1 \right]}} (\sum_{n=1}^{\infty} a_n t^n) \text{ (конечный)}\]
+\end{definition}
+
+\begin{theorem*}
+    Пусть ряды $\sum a_n, \sum b_n$ сходятся и ряд $\sum c_n$ получен из них произведением Коши:
+    \[c_n = \sum_{i+j=n} a_i b_j; \ c_0 = a_0 b_0; \ c_1 = a_1 b_0 + a_0 b_1; c_2 = a_2 b_0 + a_1 b_1 + a_0 b_2\]
+    Если ряд $\sum c_n$ сходится, то его сумма равна $(\sum a_n) \cdot (\sum b_n)$.
+
+    \begin{proof}
+        Пусть $A(t) = \sum_{n=0}^{\infty} a_n t^n, \ B(t) = \sum_{n=0}^{\infty} b_n t^n$. Перемножим эти ряды по Коши:
+        \[c_n(t) =  \sum_{i+j=n} a_i t^i \cdot b_j t^j = \sum_{i+j=n} a_i b_j t^{i+j = n} = c_n t^n\]
+        По условию все три ряда сходятся: $\sum a_n = A,\ \sum b_n = B,\ \sum c_n = C$. 
+        Значит при $\left| t \right| < 1$ ряды $\sum a_n t^n, \ \sum b_n t^n,\ \sum c_n t^n$ сходятся абсолютно (потому что мажорируются убывающей геометрической прогрессией).
+        По теореме из прошлого, произведение $A(t)\cdot B(t) = C(t)$. \\
+        При $t \nearrow 1$ по теореме Абеля:
+        \begin{itemize}
+            \item $A(t) \to A(1) = A$
+            \item $B(t) \to B(1) = B$
+            \item $C(t) \to C(1) = C$
+        \end{itemize}
+        Значит, при переходе к пределу $A\cdot B = C$.
+
+    \end{proof}
+\end{theorem*}
+
+Долг из прошлого:
+\begin{theorem*}[Теорема Мертенса (упрощенная, но достаточная для нас)]
+    Пусть ряд $A = \sum a_i, \ B = \sum b_i$ сходятся абсолютно, тогда ряд 
+    $\sum c_n$ сходится ($c_n = \sum_{i+j=n} a_i b_j$) и его сумма равна $A\cdot B$.
+    
+    \begin{proof}
+        Применим критерий Коши к ряду $\sum c_n$ и покажем, что $\sum_{n=k}^{l} \left| c_n \right| \underset{k, l \to 0}{\to} 0$.
+        \[\sum_{k}^{l} \left| c_n \right| = \left| \sum a_i b_j \right|, \ i+j \in \left[ k,l \right]\]
+        \[\left|\sum_{n=k}^{l} c_n \right| = \left| \sum_{n=k}^{l} \sum_{i+j=n} a_i b_j \right| \le \sum_{n=k}^{l} \sum_{i+j=n} \left| a_i \right|\cdot \left| b_j \right| \le \sum_{i, j = 0}^{l} - \sum_{i, j = 0}^{\left[\frac{k}{2}\right] - 1} \left| a_i \right|\cdot \left| b_j \right|\]
+        \[\sum_{i,j = 0}^{l} \left|a_i \right| \cdot \left| b_j \right| = \sum_{i=0}^{l} \sum_{j=0}^{l} \left| a_i \right|\cdot \left| b_j \right| = S_1(l) \cdot S_2(l)\]
+        В этой записи $S_1(l)$ - частичная сумма ряда $\sum \left| a_i \right|$, $S_2(l)$ - частичная сумма ряда $\sum \left| b_i \right|$, $S_1(l) \to \sum \left| a_n \right|, \ S_2(l) \to \sum \left| b_n \right|$.
+        В квадрате на рисунке, который я не могу сюда приложить, но его можно посмотреть в ваших лекциях, площадь квадрата с квадратным вырезом в левом верхнем углу равна 
+        \[= S_1(l) \cdot S_2(l) - S_1(\left[ \frac{k}{2} \right] - 1) \cdot S_2(\left[ \frac{k}{2} \right] - 1) \underset{k, l \to \infty}{\to} 0\]
+    \end{proof}
+\end{theorem*}
