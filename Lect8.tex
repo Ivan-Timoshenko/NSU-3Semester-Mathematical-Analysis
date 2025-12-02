@@ -1,0 +1,61 @@
+\section{Ряды Фурье}
+
+Пусть $E$ - евклидово пространство (векторное пространство со скалярным произведением).\\
+Скалярное произведение $\scalar{a}{b}$ - бинарная операция, удовлетворяющая аксиомам:
+\begin{enumerate}
+    \item $\scalar{a}{b} = \scalar{b}{a} \iff a, b \in \Real; \ \scalar{a}{b} = \overline{\scalar{b}{a}} \iff a, b \in \Compl$
+    \item $\scalar{a}{a} \ge 0, \ \scalar{a}{a} = 0 \iff a = 0$
+    \item $\scalar{\lambda u + \mu v}{w} = \lambda \scalar{u}{w} + \mu \scalar{v}{w}$
+\end{enumerate}
+Модуль вектора вычисляется с помощью $\left| v \right| = \sqrt{\scalar{v}{v}}$.
+
+\begin{statement*}
+    Пусть $\vec{e_1}, \hdots, \vec{e_n}$ - попарно ортогональные векторы ($\scalar{\vec{e_i}}{\vec{e_j}} = 0$). Пусть $\vec{v} = x_1\vec{e_1} + \hdots + x_n \vec{e_n}$, тогда
+    \[x_i = \frac{\scalar{v}{e_i}}{\scalar{e_i}{e_i}} \ \forall i = 1, \hdots, n\]
+    \begin{proof}
+        \[k \neq i \implies \scalar{e_k}{e_i} = 0 \implies \scalar{v}{e_i} = \scalar{\sum_{k=1}^{n} x_k e_k}{e_i} = \sum_{k=1}^{n}x_k \scalar{e_k}{e_i} = x_i \scalar{e_i}{e_i}\]
+    \end{proof}
+\end{statement*}
+
+Если $\{\vec{e_i}\}$ - попарно ортогональые ненулевые вектора, то они образуют линейно независимый набор.
+\[\left| v \right|^2 = \scalar{v}{v} = \scalar{\sum x_i e_i}{\sum x_j e_j} = \sum x_i x_j \scalar{e_j}{e_i} =  \sum x_i^2 \left|e_i \right|^2\]
+В частности, если все длины векторов $\vec{e_i}$ равны $1$, то $\left| v \right|^2 = \sum x_i^2$.
+
+\par
+Пусть $f, g$ - хорошие функции на отрезке $\left[0, 2\pi\right]$, то их скалярное произведение определено следующим образом:
+\[\scalar{f}{g} := \int_{0}^{2\pi} f(t)g(t) \diff t\]
+
+\begin{statement*}
+    Функции $\sin(nx)$ и $\cos(mx)$ ортогональны при $\forall n, m \in \Nat$. А также:
+    \begin{itemize}
+        \item $\sin(nx) \bot \sin(mx) \ \forall n \neq m \ge 0$
+        \item $\cos(nx) \bot \cos(mx) \ \forall n \neq m \ge 0$
+        \item $|| \sin(nx) || = \pi \ n > 0$
+        \item $|| \cos(nx) || = \pi \ n > 0$
+    \end{itemize}
+    \begin{proof}
+        \[\cos(mx) = \frac{e^{imx}+e^{-imx}}{2}; \ \sin(nx) = \frac{e^{inx}-e^{-inx}}{2i}\]
+        \[\int_{0}^{2\pi} e^{inx}\cdot e^{imx} \diff x,\  n, m \in \Nat = \int_{0}^{2\pi} e^{i(n+m)x} \diff x = \begin{cases*}
+            \int_{0}^{2\pi} 1 \diff x = 2\pi \ n+m = 0\\
+            \frac{e^{i(n+m)x}}{i(n+m)} \big|_{0}^{2\pi} = 0 \ n+m \neq 0
+        \end{cases*}\]
+
+        \[\int_{0}^{2\pi} \cos(nx)\sin(mx)\diff x = \int_{0}^{2\pi} \frac{e^{i(n+m)x} - e^{i(n-m)x} + e^{i(m-n)x} - e^{-i(n+m)x}}{2\cdot 2i} \diff x = 0 \ \forall n,m \in \Nat\]
+        Аналогично остальные 
+        \[\int_{0}^{2\pi} \sin(nx)^2 \diff x = \int_{0}^{2\pi} \frac{e^{2inx} - e^{-2inx}-2}{-4} \diff x = \int_{0}^{2\pi} \frac{-2}{-4} \diff x = \pi\]
+    \end{proof}
+\end{statement*}
+
+\begin{statement*}[Следствие]
+    Пусть $f(t)$ - линейная комбинация вида
+    \[f(t) = \lambda + b_1\sin(t) + \hdots + b_n\sin(nt) + a_1\sin(t) + \hdots + a_n\cos(nt)\]
+    Тогда 
+    \[b_k = \frac{\int_{0}^{2\pi}f(t)\sin(kt)\diff t}{\pi}, \quad a_k = \frac{\int_{0}^{2\pi}f(t)\cos(kt)\diff t}{\pi}, \quad \lambda = \frac{\int_{0}^{2\pi} f(t)\cdot 1 \diff t}{2\pi}\]
+
+\end{statement*}
+
+\begin{definition}
+    Ряд Фурье функции $f(t)$ (разложение обозначается знаком $\leftrightharpoons$)
+    \[f(t) \leftrightharpoons \frac{a_0}{2} + \sum_{k=1}^{\infty} \left[a_k\sin(kt) + b_k\cos(kt)\right]\]
+    \[a_k = \frac{1}{\pi} \int_{0}^{2\pi} f(t)\cos(kt)\diff t \quad b_k = \frac{1}{\pi}\int_{0}^{2\pi}f(t)\sin(kt) \diff t, \ k \ge 0\]
+\end{definition}
