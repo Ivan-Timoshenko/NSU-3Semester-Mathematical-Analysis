@@ -59,3 +59,108 @@
     \[f(t) \leftrightharpoons \frac{a_0}{2} + \sum_{k=1}^{\infty} \left[a_k\sin(kt) + b_k\cos(kt)\right]\]
     \[a_k = \frac{1}{\pi} \int_{0}^{2\pi} f(t)\cos(kt)\diff t \quad b_k = \frac{1}{\pi}\int_{0}^{2\pi}f(t)\sin(kt) \diff t, \ k \ge 0\]
 \end{definition}
+
+Введем контекст:\par
+Пусть $f$ - функция, интегрируемая на отрезке $[0, 2\pi]$. Разложим ее в ряд Фурье в соответствии с определением:
+\[f(x) \leftrightharpoons \frac{a_0}{2} + \sum_{n=1}^{\infty} \left[ a_n\cos(nx) + b_n\sin(nx) \right]\]
+\[a_n = \frac{1}{\pi} \int_{0}^{2\pi}f(t)\cos(nt)\diff t \quad b_n = \frac{1}{\pi} \int_{0}^{2\pi} f(t)\sin(nt)\diff t\]
+
+\begin{theorem*}[Лемма об интеграле периодичной функции]
+    Пусть $f$ - $T$-периодична, если $f$ интегрируема на $[0, T]$, то $f$ интегрируема на любом отрезке $[a, b]$, причем 
+    \[\int_{0}^{T}f(x)\diff x = \int_{a}^{T+a}f(x) \diff x  \]
+    \begin{proof}
+        Функция $f$ интегрируема на любом отрезке $[T, (n+1)T]$, отсюда следует интегрируемость на любом $[a, b]$. Пусть $a \in [0, T]$, тогда 
+        \[\int_{0}^{T+a} f(x)\diff x = \int_{0}^{T}f(x)\diff x + \int_{T}^{T+a}f(x)\diff x = \int_{0}^{a}f(x)\diff x + \int_{a}^{T+a}f(x)\diff x\]
+        Разложим интеграл от $0$ до $T+a$ двумя способами, в силу периодичности $\int_{T}^{T+a} = \int_{0}^{a}$, значит другие два интеграла тоже равны.
+        В общем случае $a>T$, тогда $\exists n \mid a \in [nT, (n+1)T]$ и $\int_{0}^{T} = \int_{nT}^{(n+1)T} = \int_{a}^{a+T}$.
+    \end{proof}
+
+    \textbf{Следствие}:\par
+    Если $f$ - $2\pi$-периодична, то пределы интегрирования для коэффициентов $a_n, b_n$ будем брать $[-\pi, \pi]$.
+\end{theorem*}
+
+\subsection{Комплексная форма ряда Фурье}
+\[f(x) \leftrightharpoons \sum_{k= -\infty}^{\infty} c_k e^{ikx}, \ c_k = \frac{1}{2\pi}\int_{-\pi}^{\pi} f(t)e^{-ikt}\diff t\]
+Такая форма получается из $2\pi$-перодичной функции $f$, при $k \ge 0$, тогда
+\[a_k + ib_k = \frac{1}{\pi} \int_{-\pi}^{\pi} f(t)(\cos(kt) + i\sin(kt)) \diff t = \frac{1}{\pi} \int_{-\pi}^{\pi}f(t)e^{ikt} \diff t = 2c_k\]
+
+\textbf{Теорема Пифагора:}\par
+Пусть $f = \sum x_n\vec{e_n}$. $e_n \bot e_n (n \neq k)$, $f$ - хорошая, тогда $\langle f, f, \rangle = \sum \left| x \right|^2 \langle e_n, e_n \rangle$. При этом $\langle e_n, e_n \rangle = \int_{-\pi}^{\pi} \sin^2(nx) \diff x = \pi$. 
+\[\langle e_0, e_0 \rangle = \int_{-\pi}^{\pi} 1^2 \diff x = 2\pi\]
+Если $f$ - хорошая и $f = \leftrightharpoons \frac{a_0}{2} + \sum_{n=1}^{\infty} (a_n\cos(nx) + b_n\sin(nx))$, то 
+\[\frac{a_0^2}{2} + \sum_{n=1}^{\infty} \left| a_n \right|^2 + \left| b_n \right|^2 = \frac{1}{\pi} \int_{-\pi}^{\pi} \left| f(x) \right|^2 \diff x\]
+Это равенство называется равенством Парсеваля.
+
+
+\begin{definition}
+    Формула Дирихле.
+    \[D_n(t) \leftrightharpoons \sum_{k=-n}^{n}e^{ikt} = 1 + 2(\cos(t) + \cos(2t) + \hdots + \cos(nt)) = \frac{\sin((n+\frac{1}{2})t)}{\sin(\frac{t}{2})}\]
+\end{definition}
+
+\begin{definition}
+    Если функция $f$ $2\pi$-периодична, кусочно дифференциируемая и ее первая производная ограничена, то $f$ - функция класса Фурье.
+\end{definition}
+
+\begin{statement*}
+    Функция класса Фурье может иметь разрывы только 1-го рода, то есть существует конечные пределы:
+    \[\forall x \ \exists f(x+0) := \lim_{n \to 0} f(x+h), \ \exists f(x-0):= \lim_{h \to 0} f(x-h)\]
+
+    \begin{proof}
+        Пусть $x_0$ - точка разрыва функции $f$. Выберем $a < x_0$ так, что на $[a, x_0)$ $f$ - дифференциируема. Тогда $\forall x \in [a, x_0)$:
+        \[f(x) = f(a) + \int_{a}^{x}f'(t) \diff t\]
+        Этот интеграл сходится, значит утверждение доказано.
+    \end{proof}
+\end{statement*}
+
+\begin{statement*}
+    Обозначим разложение функции $f$ в ряд Фурье через $S_n f$. Тогда
+    \[S_n f(x) = \frac{1}{2\pi} \int_{-\pi}^{\pi} f(x+t) D_n(t) \diff t\]
+    Функция Дирихле четна, $2\pi$-периодична.
+
+    \begin{proof}
+        \begin{align*}
+            \int_{-\pi}^{\pi} f(x+t) D_n(t)\,dt 
+            &= \int_{-\pi}^{\pi} f(x+t) D_n(-t)\,dt 
+            \qquad (\text{т.к. } D_n(t) = D_n(-t)) \\[4pt]
+            &= \int_{-\pi}^{\pi} f(x+t) \sum_{k=-n}^{n} e^{-ikt}\,dt
+            = \sum_{k=-n}^{n} \int_{-\pi}^{\pi} f(x+t) e^{-ikt}\,dt \\[4pt]
+            &= \sum_{k=-n}^{n} \int_{x-\pi}^{x+\pi} f(\tau) e^{-ik(\tau - x)}\,d\tau
+            \qquad (\tau = x + t) \\[4pt]
+            &= \sum_{k=-n}^{n} \int_{-\pi}^{\pi} f(\tau) e^{-ik\tau} e^{ikx}\,d\tau
+            \qquad \text{(периодичность)} \\[4pt]
+            &= \sum_{k=-n}^{n} e^{ikx} \int_{-\pi}^{\pi} f(\tau) e^{-ik\tau}\,d\tau
+            = \sum_{k=-n}^{n} e^{ikx} \cdot 2\pi c_k.
+        \end{align*}
+    \end{proof}
+
+    \textbf{Следствие:}\par
+    Если функция класса Фурье, то
+    \begin{align*}
+    & 2\pi \left(S_n f(x) - \frac{f(x-0) + f(x+0)}{2}\right) = \\
+    &= \int_{-\pi}^{0} \left( f(x+t) - f(x-0) D_n(t) \right) \diff t + \int_{0}^{\pi} \left(f(x+t) - f(x+0)D_n(t)\right) \diff t
+    \end{align*}
+
+    \begin{proof}
+        
+        \begin{align*}
+            & 2\pi \left[ S_n f(x) - \frac{f(x-0)+f(x+0)}{2}\right] = \\
+            &= \int_{-\pi}^{\pi} f(x+t)D_n(t) \diff t - \int_{-\pi}^{\pi} \frac{f(x-0) + f(x+0)}{2}\cdot D_n(t) \diff t = \\
+            &= \int_{-\pi}^{\pi} \left[ f(x+t) - \frac{f(x-0)+f(x+0)}{2} \right] D_n(t) \diff t = \\
+            &= \int_{-\pi}^{0} \left[ f(x+t) - f(x-0) \right]D_n(t) \diff t + \int_{0}^{\pi} \left[ f(x+t) - f(x+0) \right]D_n(t) \diff t
+        \end{align*}
+    \end{proof}
+\end{statement*}
+
+
+\begin{theorem*}[Теорема Фурье]
+    Пусть $f$ - функция класса Фурье. Тогда
+    \begin{enumerate}
+        \item $\forall x \ S_n f(x) \underset{n \to \infty}{\to} \frac{f(x-0) - f(x+0)}{2}$.
+        \item Если $a_0, \hdots, a_n$ - точки разрыва из отрезка $[-\pi, \pi]$, то для любого отрезка $I$, не содержащего ни одной точки разрыва $a_i$, сходимость на $I$ будет равномерной.
+        
+    \end{enumerate}
+
+    \begin{proof}
+        БУДЕТ ПОЗЖЕ
+    \end{proof}
+\end{theorem*}
