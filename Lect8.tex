@@ -161,6 +161,165 @@
     \end{enumerate}
 
     \begin{proof}
-        БУДЕТ ПОЗЖЕ
+        Надо доказать, что 
+        \[\int_{0}^{\pi} \left[f(x+t) - f(x+0)\right]D_n(t) \diff t \underset{n \to \infty}{\to} 0\]
+        Пусть $\varepsilon > 0$, выберем такое $h$, что $\int_{0}^{h} < \frac{\varepsilon}{2}$.
+
+        \[
+            \abs{ (f(x+t) - f(x+0))D_n(t)} = \abs{(f(x+t) - f(x+0)\frac{\sin(t(n+\frac{1}{2}))}{\sin(\frac{t}{2})})}
+        \]
+        Поскольку при $t \in [0, \pi]$ $\sin(\frac{t}{2}) \ge \frac{t}{\pi}$, то
+        \[\abs{(f(x+t) - f(x+0)\frac{\sin(t(n+\frac{1}{2}))}{\sin(\frac{t}{2})})} \le \underbrace{\frac{\abs{f(x+t) - f(x+0)}\cdot \abs{\sin(t(n + \frac{1}{2}))}}{\abs{\frac{t}{\pi}}}}_{\star} \le \frac{\pi\abs{f(x+t) - f(x+0)}}{t}\]
+        Если выбрать $h$ такое, чтобы на $(x, x+h)$ у функции $f(x)$ не было разрывов, то $\forall t \in (x, x+h)$ выполнена оценка 
+        \[\abs{f(x+t) - f(x+0)} \le t\cdot \underbrace{\sup(\abs{f'(x)})}_{\le C \text{ по условию}}\]
+        Продолжая цепочку неравенств $\star$ получим $\le  \pi \cdot \frac{C}{t} = \pi C$. Итак, если $h$ такое, что на $(x, x+h)$ нет точек разрыва, то 
+        \begin{align*}
+            \abs{\int_{0}^{h} \left[f(x+t) - f(x+0)\right] D_n(t) \diff t} \le \int_{0}^{h} \abs{\left[f(x+t) - f(x+0)\right]D_n(t)} \diff t \le \\
+            \le \int_{0}^{h} \pi\cdot C \diff t = \pi \cdot Ch
+        \end{align*}
+        А если взять $h < \frac{\varepsilon}{2\pi c}$, то $\abs{ \int_{0}^{h}} \le \frac{\varepsilon}{2}$.
+
+
+        \begin{statement*}[Лемма]
+            Пусть $h \in (0, \pi)$. Тогда $\exists K < \infty$ такая, что 
+            \[\abs{\int_{h}^{\pi}\left[f(x+t) - f(x+0)\right]D_n(t)\diff t} \le \frac{K}{h}\]
+            \begin{proof}[Доказательство леммы]
+                \[\left[f(x+t) - f(x+0)\right]D_n(t) = \underbrace{\frac{f(x+t)-f(x+0)}{\sin(\frac{t}{2})}}_{g(t)}\cdot \sin(t(n+\frac{1}{2}))\]
+                Пусть $(a, b)$ - один из промежутков в $(h, \pi)$, на котором $f$ дифференциируема. Пусть всего таких промежутков $m$ штук.
+                \begin{equation}
+                    \label{lemma_fourier_eq}
+                \abs{g'(t)} = \abs{\frac{f'(x+t)\cdot \sin(\frac{t}{2}) - \left[ f(x+t) - f(x+0) \right]\cdot \frac{1}{2}\cos(t)}{\sin^2(\frac{t}{2})}}
+                \end{equation}
+                Заметим, что $\sin^2(\frac{t}{2}) \ge \left(\frac{t}{\pi}\right)^2 \ge \left(\frac{h}{\pi}\right)^2$. Тогда продолжим \eqref{lemma_fourier_eq}:
+                \[\eqref{lemma_fourier_eq} \le \frac{\abs{\text{числитель}}\pi^2}{h^2} \le \frac{C+M}{h^2} =: \xi\]
+                где $M = \underset{x \in \left[-\pi, \pi\right]}{\sup}(\abs{f(x)}), \ C = \underset{x \in \left[-\pi, \pi\right]}{\sup}(\abs{f'(x)})$.
+                \begin{align*}
+                    I:= \abs{\int_{a}^{b} \left[f(x+t)-f(x+0)\right]D_n(t)\diff t} = \abs{\int_{a}^{b}g(t)\sin(t(n+\frac{1}{2}))\diff t} \overset{\text{ФИЧ}}{=} \underbrace{\abs{g(t)\cdot\frac{\cos(t(n+\frac{1}{2}))}{n + \frac{1}{2}}}^b_a}_{I_1} - \\
+                    - \underbrace{\int_{a}^{b}g'(t)\frac{\cos(t(n+\frac{1}{2}))}{n+\frac{1}{2}}t \diff t}_{I_2} \le \frac{2\max(g(t))}{n+\frac{1}{2}} + \underbrace{\abs{b - a}}_{\le \pi}\cdot \xi \cdot 1 \cdot \frac{1}{n+\frac{1}{2}} = \frac{1}{n+\frac{1}{2}}\left[K\right], \\ K = 2\max(g(t)) + \pi \cdot \xi
+                \end{align*}
+                Итого $\abs{g(t)} \le M_1$, $\abs{g'(t)} \le M_2$. Тогда
+                \[\abs{I_1} \le \frac{2M_1}{n + \frac{1}{2}}, \quad \abs{I_2} \le \frac{\abs{b-a}M_2}{n+\frac{1}{2}} \le \frac{\pi \cdot M_2}{n+\frac{1}{2}}\]
+                \[\abs{I} = \abs{I_1 - I_2} \le \abs{I_1} + \abs{I_2} \le \frac{1}{n+\frac{1}{2}}\cdot const, \ const:= 2M_1 + \pi M_2 \cdot \text{[кол-во промежутков (a,b)]}\]
+            \end{proof}
+        \end{statement*}
+        Продолжаем доказывать теорему Фурье:\\
+        Получили, что $\exists n_0 \mid \forall n \ge n_0 \abs{\int_{h}^{\pi}\hdots} \le \frac{\varepsilon}{2}$. Таким образом:
+        \begin{enumerate}
+            \item Выбрали $h \in [0, \pi]$ такое, что у функции $f(x+t) - f(x+0)$ нет разрывов на $t \in (0, h)$ (то есть у $f$ нет разрывов на $(x, x+h)$) и при этом $h$ такое хитрое, что $\abs{\int_{0}^{h}\hdots} \le \frac{\varepsilon}{2}$. Это мы уже сделали.
+            \item Вторая часть доказательства:
+            \par Пусть теперь на $(a,b) \subset \left[-\pi, pi\right]$ нет точек разрыва функции $f: \Real \to \Real$. Покажем, что $S_n(f) \rightrightarrows f$ на этом $(a, b)$.\\
+            $\exists h_0 > 0$ такое, что на $[a-h_0, b+h_0]$ функция $f$ непрерывна. Тогда в части 1 доказательства того, что уже было, можно выбрать $h = h(\varepsilon)$, а не $h = h(x, \varepsilon)$ (выбрать $h$ независимо от $x$). Таким образом выбор $h_0$ можно сделать независимым от выбора $x_0$.
+
+        \end{enumerate}
+
+    \end{proof}
+\end{theorem*}
+
+\begin{statement*}[Равенство Парсеваля]
+    Пусть $f,g$ - непрерывные функции класса Фурье, $f,g: \Real \to \Compl$. Тогда
+    \[\int_{-\pi}^{\pi}f(x)\overline{g(x)}\diff x = 2\pi \sum_{k=-\infty}^{\infty}C_k(f)\overline{C_k(g)}\]
+    где 
+    \[C_k(f) = \frac{1}{2\pi}\int_{-\pi}^{\pi}f(x)e^{-ikx}\diff x\]
+    Сумма от минус бесконечности до бесконечности подразумевается в следующем смысле:
+    \[f(x)\leftrightharpoons \sum_{-\infty}^{\infty}C_k(f)e^{ikx} = \lim_{n \to \infty} S_n(f), \quad S_n(f) = \sum_{k=-n}^{n}C_k(f)e^{ikx}\]
+
+    \begin{proof}\par
+        \begin{itemize}
+            \item $S_n(f) \rightrightarrows f$ на $[-\pi, \pi]$
+            \item $S_n(g) \rightrightarrows g$ на $[-\pi, \pi]$
+        \end{itemize}
+        $S_n(f) \cdot \overline{S_n(g)} \rightrightarrows f \cdot \overline{g}$, так как $f$ и $g$ ограничены (было оставлено как упражнение). 
+
+        \begin{align*}
+            \int_{-\pi}^{\pi} f \cdot \overline{g} &= \lim_{n \to \infty} \int_{-\pi}^{\pi} S_n(f(x)) \cdot \overline{S_n(g(x))} \, dx \\
+            &= \lim_{n \to \infty} \int_{-\pi}^{\pi} \left( \sum_{k=-n}^{n} C_k(f) e^{ikx} \right) \left( \sum_{m=-n}^{n} \overline{C_m(g)} e^{-imx} \right) dx \\
+            &= \lim_{n \to \infty} \sum_{k=-n}^{n} \sum_{m=-n}^{n} C_k(f) \overline{C_m(g)} \int_{-\pi}^{\pi} e^{i(k-m)x} \, dx \\
+            &= \lim_{n \to \infty} \sum_{k=-n}^{n} C_k(f) \overline{C_k(g)} \int_{-\pi}^{\pi} e^{0} \, dx \\
+            &= \sum_{k=-\infty}^{\infty} 2\pi C_k(f) \overline{C_k(g)}
+\end{align*}
+    \end{proof}
+
+    Если $f=g$, то 
+    \[\int f\cdot \overline{f} = \int_{-\pi}^{\pi} \abs{f(x)}^2 \diff x = 2\pi \sum_{n=-\infty}^{\infty}C_k \cdot \overline{C_k} = 2\pi\sum_{n=-\infty}^{\infty} \abs{C_k}^2\]
+\end{statement*}
+
+\begin{statement*}
+    Равенство Парсеваля верно для всех $f,g\in L_2[-\pi, \pi]$, где $L_2[-\pi, \pi]$ - это множество всех функций, таких, что $\int_{-\pi}^{\pi}\abs{f(x)}^2 \diff x < \infty$.
+\end{statement*}
+
+\begin{theorem*}[Лемма о натуральной параметризации]
+    Пусть $\Gamma$ - гладкая кривая в $\Real^n$ длины $L$. Тогда существует натуральная параметризация (т.е. модуль скорости) вида 
+    \[\gamma(s):[0, L] \to \Gamma \mid \abs{\dot{\gamma}(s)} = 1\]
+
+    \begin{proof}
+        Возьмем какое-то отображение (путь) $f:[a, b] \to \Gamma$, $f \in C^1, f'(t) \neq 0 \ \forall t \in [a,b]$. Длина $L$ будет выражаться как $\int_{a}^{b}\abs{f'(t)} \diff t$. 
+        Пройденное расстояние $S:[a,b] \to [0, L]$ представлено в виде $S(t) = \int_{a}^{t}\abs{\dot{f(s)}}\diff s$.
+        \[\dot{S}(t) = \left( \int_{a}^{t} \abs{\dot{f}(s)}\diff s \right)' = \abs{\dot{f}(t)} > 0 \ \forall t\]
+        При этом $S$ возрастает монотонно, а значит обратима, пусть $t(S)$ - обратная функция.
+        \[t(S):[0, L] \to [a. b], \ t'(S) = \frac{1}{s'(t)}\]
+        Значит $\gamma(s):=f(t(s))$ - искомая параметризация. 
+        \[\dot{\gamma}(s) = \dot{f}(t(s))\cdot t'(s) = \dot{f}(t(s))\cdot \frac{1}{s'(t)} = \frac{\dot{f}(t(s))}{\abs{\dot{f}(t(s))}} \text{ и } \abs{\dot{\gamma}(s)} = 1\]
+    \end{proof}
+\end{theorem*}
+
+\begin{theorem*}[Площадь сектора кривой]
+    Пусть кривая $f(t) = \begin{cases*}
+        x(t) \\ y(t) 
+    \end{cases*}$, а $f$ и $\dot{f}$ имеют ориентацию. 
+    Точка на кривой $f = (x, y)$, вектор скорости в точке $\dot{f} = (\dot{x}, \dot{y})$. Заметим, что 
+    \[\forall t \quad  \left| \begin{array}{cc} x & y \\ \dot{x} & \dot{y}
+        
+    \end{array} \right| > 0\]
+    То есть, если эта матрица положительно определена, то вектора $f$ и $\dot{f}$ положительно определены и точка $t_0$ всегда лежит справа от точки $t_1$ ($t_0$ и $t_1$ - точки начала и конца сегмента кривой, ограничивающего наш сектор. Мы показали, что при движении по кривой мы перемещаемся против часовой стрелки).
+    \par    
+    Площадь сектора:
+    \[S = \frac{1}{2}\int_{t_0}^{t_1} \left| \begin{array}{cc} x & y \\ \dot{x} & \dot{y} \end{array} \right| \diff t = \frac{1}{2}\int_{t_0}^{t_1}(x\dot{y} - \dot{x}y)\diff t\]
+    Пусть $\diff s$ - площадь треугольника, заметаемого за время $(t, t+\diff t)$, из формулы площади параллелограма через определитель:
+    \[\diff s = \frac{1}{2}\left| \begin{array}{cc} x & y \\ \dot{x} & \dot{y} \end{array} \right| \diff t\]
+    Тогда 
+    \[S = \frac{1}{2}\int_{t_0}^{t_1}\diff s = \frac{1}{2}\int_{t_0}^{t_1}\left| \begin{array}{cc} x & y \\ \dot{x} & \dot{y} \end{array} \right| \diff t\]
+\end{theorem*}
+
+\begin{theorem*}[Изопериметрическое неравенство]
+    Пусть $\Gamma $ - кусочно дважды гладкая замкнутая кривая длины $2\pi$. Тогда $S \le \pi$, причем если $S = \pi$, то $\Gamma$ - это окружность.
+    \begin{proof}
+        Пусть $\gamma = (x(s), y(s))$ - натуральная параметризация кривой $\Gamma$, $s \in [0, 2\pi]$.
+        \[S = \frac{1}{2}\int_{0}^{2\pi}(x\dot{y} - \dot{x}y) \diff s\]
+        
+        $\begin{cases*}
+            x:[0, 2\pi] \to \Real\\
+            y:[0, 2\pi] \to \Real
+        \end{cases*}$ - принадлежат классу Фурье и непрерывны.
+
+        \begin{align*}x(s) \leftrightharpoons \frac{a_0}{2} + \sum_{n = 1}^{\infty}a_n\cos(ns) + b_n\sin(ns) \\ 
+         \dot{x}(s) \leftrightharpoons \sum_{n = 1}^{\infty} n(-a_n\sin(ns) + b_n\cos(ns)) 
+        \end{align*}
+        \begin{align*}
+            y(s) \leftrightharpoons \frac{\tilde{a_0}}{2} + \sum_{n=1}^{\infty} (\tilde{a_n}\cos(ns) + \tilde{b_n}\sin(ns)) \\
+            \dot{y}(s) \leftrightharpoons \sum_{n=1}^{\infty} n(-\tilde{a_n}\sin(ns) + \tilde{b_n}\cos(ns))
+        \end{align*}
+        Вспомним равенство Парсеваля:
+        \[\int_{0}^{2\pi} fg = \pi \left( \frac{a_0(f)a_0(g)}{2} + \sum [a_n(f)a_n(g) + b_n(f)b_n(g)] \right)\]
+        Тогда:
+        \[\int_{0}^{2\pi}x\dot{y} = \pi \cdot \sum_{n \ge 1} n\left[a_n \tilde{b_n} - \tilde{a_n} b_n \right]\]
+        Утверждение о том, что $\int_{0}^{2\pi}x\dot{y} = \int_{0}^{2\pi}-\dot{x}y$ было упражнением (либо раньше, либо я это не вписал).
+        Итак: 
+        \[S = \pi\sum_{n \ge 1} n\cdot \left[ a_n\tilde{b_n} - \tilde{a_n}b_n \right] \le \pi \sum n\left[\abs{a_n\tilde{b_n}} + \abs{\tilde{a_n}b_n}\right]\]
+        Из $(a\pm b)^2 \ge 0 \implies \abs{ab} \le \frac{a^2 + b^2}{2}$. Значит:
+        \[S \le \frac{\pi}{2}\sum n(a_n^2 \tilde{b_n}^2 +\tilde{a_n}^2 b_n)\]
+        Длина нашей кривой $\Gamma$:
+        \[L(\Gamma) = 2\pi = \int_{0}^{2\pi}\underbrace{1}_{\abs{\dot{\gamma}(t)}}\diff t = \int_{0}^{2\pi}(\dot{x}^2 + \dot{y}^2)\diff t\]
+        По равенству Парсеваля:
+        \[\int_{0}^{2\pi} \dot{x}^2 + \dot{y}^2 \diff t = \pi \left( \sum_{n \ge 1} n^2(a_n^2 + b_n^2) + \sum_{n \ge 1} n^2 (\tilde{a_n}^2 + \tilde{b_n}^2) \right) \overset{\text{по условию}}{=} 2\pi\]
+        Сократим на $2$:
+        \begin{equation}
+            \label{isoperimetric}
+            \frac{\pi}{2} \sum n (a_n^2 + b_n^2 + \tilde{a_n}^2 + \tilde{b_n}^2) \underbrace{\le}_{\text{тут}}  \frac{\pi}{2}\sum_{n=1}^{\infty} n^2(a_n^2 + b_n^2 + \tilde{a_n}^2 + \tilde{b_n}^2) = \pi \implies S \le \frac{\pi}{2}
+        \end{equation}
+        Итого $S \le \pi$. Осталось доказать, что если $S = \pi$, то $\Gamma$ - окружность. Если $S = \pi$, то $\forall n$ в неравенстве "тут" в \eqref{isoperimetric} $= n^2(\hdots) = n(\hdots) \implies n = 1$.
+        Тогда $\forall n \ge 2$ $a_n = 0, \ b_n = 0, \ \tilde{a_n}  = 0, \ \tilde{b_n} = 0$.
+        \[x(s) = \frac{a_0}{2} + a_1\cos(s) + b_1\sin(s), \ y(S) = \frac{\tilde{a_0}}{2} + \tilde{a_1}\cos(s) + \tilde{b_1}\sin(s)\]
+        \[\frac{\pi}{2}(a_1^2 \tilde{b_1}^2 - \tilde{a_1}b_1^2 = \pi), \ S = \pi(a_1^2 \tilde{b_1}^2 - \tilde{a_1^2}\tilde{b_1}^2)\]
+        Из $\abs{ab} = \frac{a^2 + b^2}{2} \implies a_1 = \pm b_1$ и доказываем, что это окружность.
     \end{proof}
 \end{theorem*}

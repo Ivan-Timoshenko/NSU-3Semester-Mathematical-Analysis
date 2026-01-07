@@ -1,0 +1,56 @@
+\begin{theorem*}[Теорема о тригонометрической аппроксимации]
+    Пусть $f$ - непрерывная функция на $[0, 2\pi]$, $f(0) = f(2\pi)$. Тогда $\forall \varepsilon$ $\exists$ тригонометрический многочлен $P(x)$, такой, что 
+    \\ $\forall x \in [0, 2\pi] \ \abs{f(x) - P(x)} \le \varepsilon$.
+    \begin{proof}
+        \begin{enumerate}
+            \item Заменим $f$ кусочно гладкой линейной функцией $\tilde{f}$, так, что \\ $\forall x \ \abs{f(x) - \tilde{f}(x)} \le \frac{\varepsilon}{2}$.\par
+            По теореме Кантора-Гейне (функция, непрерывная на компакте, равномерно непрерывна на нем) непрерывная функция $f$ на отрезке $[0, 2\pi]$ равномерно непрерывна, то есть
+            \[\forall \varepsilon > 0 \ \exists \delta > 0 \ \forall x_1, x_2 \in [0, 2\pi] \quad \abs{x_1 - x_2} < \delta \implies \abs{f(x_1) - f(x_2)} \le \varepsilon\]
+            Пользуясь этим разобьем $[0, 2\pi]$ на конечное число кусочков $[a_k, a_{k+1}]$, настолько коротких, что $\forall x_1, x_2  \in [a_k, a_{k+1}] \ \abs{f(x_1) - f(x_2)} \le \frac{\varepsilon}{4}$.
+            \par
+            Пусть $\tilde{f}(a_i) = f(a_i) \ \forall i$. На промежутках $[a_i, a_{i+1}]$ $\tilde{f}$ - прямая между точками $(a_i, f(a_i))$ и $(a_{i+1}, f(a_{i+1}))$.
+            \begin{align*}
+                \forall x \in [a_i, a_{i+1}] \\
+                \abs{\tilde{f}(x) - f(x)} = \abs{\tilde{f}(x) - \tilde{f}(a_i) + \tilde{f}(a_i) - f(x)} \le \\
+                \le \abs{\tilde{f}(x) - \tilde{f}(a_i)} + \abs{\tilde{f}(a_i) - f(x)}
+            \end{align*}
+            \begin{align*}
+                \abs{\tilde{f}(x) - \tilde{f}(a_i)} \le \abs{\tilde{f}(a_{i+1}) - f(a_i)} = \abs{f(a_{i+1}) - f(a_i)} \le \frac{\varepsilon}{4}
+            \end{align*}
+            \[\abs{\tilde{f}(a_i) - f(x)} = \abs{f(a_i) - f(a_i)} \le \frac{\varepsilon}{4}\]
+
+            \item Функция $\tilde{f}$ принадлежит классу Фурье, $\tilde{f}(0) = f(2\pi)$. По теореме Фурье $S_n(\tilde{f}) \rightrightarrows \tilde{f}$ на $[0, 2\pi]$. Тогда $\exists n_0 \ \underset{x \in [0, 2\pi]}{\sup}\abs{S_{n_0}(\tilde{f}(x)) - \tilde{f}(x)} \le \frac{\varepsilon}{2}$. А значит $\abs{S_{n_0}(\tilde{f}(x)) - f(x)} \le \frac{\varepsilon}{2} + \frac{\varepsilon}{2}$ (доказывается хитрым движением $\pm \tilde{f}(x)$ под модуль).
+        \end{enumerate}
+    \end{proof}
+\end{theorem*}
+
+\begin{theorem*}[Теорема Стоуна-Вейерштрасса]
+    Непрерывную на отрезке функцию можно равномерно приблизить многочленом:
+    \[f:[a,b] \to \Compl(\Real) \implies \forall \varepsilon \ \exists \text{многочлен } P(x) \ \forall x \in [a,b] \ \abs{U(x) - f(x)} \le \varepsilon\]
+
+    \begin{proof}
+        \begin{enumerate}
+            \item Пусть $\lambda(x):[a,b] \underset{\text{линейное}}{\to} [0, 2\pi]$. 
+            \[g(t) = f(\lambda^{-1}(t)):[0, 2\pi] \to \Compl\]
+            Существует тригонометрический многочлен $Q(t)$ (например, форма Фурье) такой, что $\forall t \in [0, 2\pi] \ \abs{Q(t) - g(t)} \le \varepsilon$. Теперь осталось приблизить $Q(t)$ обычным многочленом.
+            \par
+            \[Q(t) = q_0 + q_1\cos(t) + \hdots + q_N\cos(Nt) + q_1\sin(t) + \hdots + q_N\sin(Nt)\]
+            Для $\forall k_0$ форма $\cos(k_0 t)$ равномерно приближаемая на $[0, 2\pi]$ частичными суммами своего ряда Тейлора. 
+            \[\cos(k_0 t) = 1 - \frac{(k_0 t)^2}{2!} + \frac{(k_0 t)^4}{4!} + \hdots\]
+            Радиус сходимости равен бесконечности, поэтому ряд сходится равномерно на любом отрезке конечной длины.
+            \par
+            Пусть $n_0$ настолько большое, что все частичные суммы для \\ $\cos(t), \hdots, \cos(Nt), \sin(t), \hdots, \sin(Nt)$ были $\delta$-близки к своим функциям. Т.е.
+            \[\delta := \frac{\varepsilon}{
+                2\Bigl(
+                    \sum_{i=1}^k \abs{q_i} + \sum_{i=1}^k \abs{\tilde{q}_i}
+                \Bigr)
+            }\]
+            Соответствующая сумма имеет вид 
+            \[q_0 + \sum_{k=1}^{n_0} q_k \cos(kt) + \sum_{k=1}^{n_0} \tilde{q}_k \sin(kt),\]
+            где первая сумма — это частичная сумма ряда Тейлора (до $n_0$) для $\cos(kt)$, 
+            а вторая — для $\sin(kt)$. Поскольку каждая из функций $\cos(kt)$, $\sin(kt)$
+            аппроксимируется многочленом от $t$, вся сумма является многочленом;
+            следовательно, можно взять $P(t)$ в указанном виде.
+        \end{enumerate}
+    \end{proof}
+\end{theorem*}
