@@ -69,21 +69,20 @@
         \item \sout{Дифференцируемость функции в точке. }
         \item \sout{Достаточный признак дифференцируемости. }
         \item \sout{Необходимые условия экстремума.}
-        \item Пример разрывной в точке функции, имеющей в ней производную по любому направлению. \textbf{TODO: в чате группы}   
+        \item \sout{Пример разрывной в точке функции, имеющей в ней производную по любому направлению.}  
         \item \sout{Дифференцируемость суммы, произведения, композиции. }
         \item \sout{Градиент вещественной функции.} 
-        \item \sout{Векторные поля. }
+        \item \sout{Векторные поля. } \textbf{TODO: Объяснялка что такое векторное поле и его потенциал через ветер или ландшафт}
         \item \sout{Потенциал векторного поля.}
         \item \sout{Многократная дифференцируемость.} 
         \item \sout{Теорема о равенстве смешанных производных, "контрпример".}
-        \item Высшие дифференциалы. \textbf{TODO: в тетрадке есть оказывается}
+        \item \sout{Высшие дифференциалы.}
         \item Пример не коммутирующих дифференциальных операторов.  
         \item \sout{Теорема о разложении Тейлора.} 
-        \item Гессиан вещественной функции. Достаточные условия экстремума. \textbf{TODO: гессиан? что тут про него писать, интересно?}
-        \item Функции класса $C^k$ на открытом множестве (и на множествах, не  
-        обязательно открытых). 
-        \item Теорема об открытости отображения вида $f(x) = x +\varphi(x)$, где $\varphi$ — 
-        сжимающее отображение. 
+        \item \sout{Гессиан вещественной функции. Достаточные условия экстремума.}
+        \item \sout{Функции класса $C^k$ на открытом множестве (и на множествах, не  
+        обязательно открытых). }
+        \item \sout{Теорема об открытости отображения вида $f(x) = x +\varphi(x)$, где $\varphi$ - сжимающее отображение. }
         \item Теорема о локальной обратимости, "контрпримеры". 
         \item Лемма о локальном наложении. 
         \item Теорема о неявной функции. 
@@ -215,23 +214,14 @@
         \end{theorem*}
     
     \subsection{Пример разрывной в точке функции, имеющей в ней производную по любому направлению}
-        Возьмем такую функцию:
-        \[f = \begin{cases*}
-            \frac{xy}{x^2 + y^2} \text{ при } (x, y) \neq (0, 0) \\
-            0 \text{ при } (x, y) = (0,0)
-        \end{cases*}\]
-        Ее частные производные:
-        \[\frac{\partial f}{\partial x}(0, 0) = \lim_{h \to 0} \frac{f(h, 0) - f(0,0)}{h} = \lim_{h \to 0} \frac{0 - 0}{h} = 0\]
-        \[\frac{\partial f}{\partial y}(0,0) = \lim_{h\to 0} \frac{f(0, h) - f(0,0)}{h} = \lim_{h \to 0}\frac{0-0}{h} = 0\]
-        Т.е. существуют и равны 0.
-        Рассмотрим производную по направлению, для этого будем брать производную по вектору $u = (\cos(\alpha), \sin(\alpha))$, который не направлен по осям координат, то есть $\cos(\alpha)\cdot \sin(\alpha) \neq 0$:
-        \begin{align*}
-        \frac{\partial f}{\partial u}(0, 0) = \lim_{t \to 0} \frac{f(t\cos(\alpha), t\sin(\alpha)) - f(0,0)}{t} = \frac{f(t\cos(\alpha)), t\sin(\alpha)}{t} = \\
-        = \lim_{t \to 0} \frac{1}{t}\cdot \frac{t\cos(\alpha)\cdot t\sin(\alpha)}{(t\cos(\alpha))^2 + (t\sin(\alpha))^2} = \lim_{t\to 0} \frac{1}{t} \cdot \frac{t^2 \cdot \cos(\alpha)\sin(\alpha)}{t^2} = \lim_{t\to 0}\frac{1}{t}\cos(\alpha)\sin(\alpha)
-        \end{align*}
-        Ясно видно, что этот предел равен бесконечности.
-        На самом деле, есть теорема, которая гласит "если функция дифференциируема в точке, то она в ней непрерывна и у нее существуют все направленные производные". Условие "существуют производные по любому направлению" на самом деле является
-        достаточным признаком непрерывности функции в точке.
+        Рассмотрим функцию $f = \begin{cases*}
+            \frac{x^2 y}{x^4 + y^2} \ (x, y) \neq 0 \\ 0 \ (x,y) = (0,0)
+        \end{cases*}$. В (0, 0) у нее есть производная по любому направлению:
+        \[v = (v_1, v_2) \quad \lim_{t \to 0} \frac{t^3 v_1^2 v_1}{t^4 v_1^4 + t^2 v_2^2} = \lim_{t \to 0} \frac{tv_1^2 v_2}{t^2 v_1^4 + v_2^2} = \frac{v_1^2}{v_2}\]
+        Если компонента $v_2 = 0$, то производная $= 0$, если же $v_2 \neq 0$, то производная равна $\frac{v_1^2}{v_2}$.
+        Рассмотрим направление $\begin{cases*} x(t) = t \\ y(t) = t^2 \end{cases*}$. Если двигаться по нему к точке $(0,0)$ (т.е. $t\to 0$) функция будет стремиться к:
+        \[f(t, t^2) = \lim_{t \to 0} \frac{t^4}{t^4 + t^4} = \frac{1}{2}\]
+        Совсем не похоже на 0, т.е. функция разрывна в 0. Но мы показали, что у нее есть производная по этому направлению (равна 1 кстати).
 
     \subsection{Дифференцируемость суммы, произведения, композиции.}
         Дифференцируемость суммы, произведения и композиции удовлетворяет классическим правилам дифференциируемости, это несложно доказать, но мне лень.        
@@ -255,7 +245,7 @@
             \end{itemize}
         \end{definition*}
         Если $k = 1$, то лин. отображение $df(p):\mathbb{R}^n \to \mathbb{R}$
-        можно задатьа как $df(p)\langle v \rangle = \langle\nabla f(p);  v \rangle$
+        можно задать как $df(p)\langle v \rangle = \langle\nabla f(p);  v \rangle$
         - скалярное произведение градиента функции на вектор, причем 
         $\nabla f(p) = \left(\frac{\partial f}{\partial x_1}(p), \dots, \frac{\partial f}{\partial x_n}(p)\right)$ - вектор частных производных в точке $p$.
 
@@ -339,12 +329,12 @@
                 \[\frac{\partial f_1}{\partial x}(0, 0) = \frac{\partial f}{\partial x}(0, 0) - f'_x(0,0)\]
                 \[\frac{\partial f_1}{\partial y}(0,0) = \frac{\partial f}{\partial y}(0,0) - f'_y(0,0)\]
                 
-                Дальше считаем, что $f = f_1$ и $f(0,0) = 0$. 
+                Дальше считаем, что $f = f_1$ и $f(0,0) = 0$. Линейно приблизим производную в (0,0), взяв первые два члена ряда Тейлора с учетом $\frac{\partial f}{\partial x}(0,0) = f(0,0) = 0$:
                 \begin{equation*}
                     \frac{\partial f}{\partial x }(x, y) =f(0,0) + a_{11}\cdot x + a_{12}\cdot y + \alpha_1(x, y), \ \text{где }
-                    \alpha_1(x, y) = o(x, y), \ (a_{11}, a_{12}) = df(0,0)\langle x, y \rangle
+                    \alpha_1(x, y) = o(x, y)
                 \end{equation*}
-                По условию $\frac{\partial f}{\partial x}, \frac{\partial f}{\partial y} \in D(0)$, поэтому 
+                По условию $\frac{\partial f}{\partial x}, \frac{\partial f}{\partial y} \in D(0)$, поэтому имеем право сказать
                 $a_{11} = f_{xx}(0), \ a_{12} = f_{xy}(0)$.
                 \[\frac{\partial f}{\partial y}(x, y) = f(0,0) + a_{21}\cdot x + a_{22}\cdot y + \alpha_2(x, y), \ 
                 a_{21} = f_{yx}(0), \ a_{22} = f_{yy}(0)\]
@@ -374,7 +364,7 @@
                 
                 \begin{equation}
                     \label{eq}
-                    a_{21} + \frac{a_{11} + a_{22}}{2} + \frac{\varepsilon_1(s) + \varepsilon_2(s)}{s^2} = a_{12} + \frac{a_{22} + a{11}}{2} + \frac{\varepsilon_3(s) + \varepsilon_4(s)}{s^2}
+                    a_{21} + \frac{a_{11} + a_{22}}{2} + \frac{\varepsilon_1(s) + \varepsilon_2(s)}{s^2} = a_{12} + \frac{a_{22} + a_{11}}{2} + \frac{\varepsilon_3(s) + \varepsilon_4(s)}{s^2}
                 \end{equation}
                 При малых $s$:
                 \[\varepsilon_3(s) = \int_{t=0}^{s}\alpha_2(0, t)dt, \quad \varepsilon_3(s) = \int_{t=0}^{s}\alpha_1(t,s)dt\]
@@ -387,7 +377,7 @@
                 \[\left| \varepsilon_1(s)\right| = \left| \int_{t=0}^{s}\alpha_2(s,t)dt \right| \leq \int_{t=0}^{s} \left|\alpha_2(s,t)\right|dt 
                 \leq \int_{t=0}^{s}\varepsilon\cdot s\sqrt{2}\cdot dt = \varepsilon s^2\sqrt{2}\].
                 Итак, мы доказали, что $\varepsilon_1(s) \underset{s \to 0}{=} o(s^2)$, аналогичным образом показываем для $\varepsilon_{2,3,4}$
-                Тогда в равенстве \ref{eq} $\frac{\varepsilon_1(s) + \varepsilon_2(s)}{s^2} \to 0$ и $\frac{\varepsilon_3(s) + \varepsilon_4(s)}{s^2} \to 0$, а значит $a_{21} = a_{12}$,
+                Тогда в равенстве \eqref{eq} $\frac{\varepsilon_1(s) + \varepsilon_2(s)}{s^2} \to 0$ и $\frac{\varepsilon_3(s) + \varepsilon_4(s)}{s^2} \to 0$, а значит $a_{21} = a_{12}$,
                 то есть $f_{xy}(0) = f_{yx}(0)$.
             \end{proof}
         \end{theorem*}
@@ -405,7 +395,7 @@
             \[\frac{\partial}{\partial y}\left[\frac{\partial f}{\partial x}\right](0,0) = \lim_{y \to 0} \frac{\frac{\partial f}{\partial x}(0, y) - \frac{\partial f}{\partial x}(0,0)}{y} = \lim_{y \to 0} \frac{(-y)^4}{(0^2 + y^2)^2} = -1\]
             В силу симметричности функции (но с минусом) $\frac{\partial f}{\partial y} = - \frac{\partial f}{\partial x} = \frac{-y^4 x - 4y^2 x^3 + x^5}{(x^2+y^2)^2}$.
             \[f_{yy}(0,0) = 0 \ \frac{\partial}{\partial x}\left[\frac{\partial f}{\partial y}\right](0,0) = 1\]
-            Однако функция $g$ не дифференциируема в $0,0$:
+            Однако функция $g$ не дифференциируема в $(0,0)$:
             \[\frac{\partial g}{\partial x}(0,0) = 0 \ \frac{\partial g}{\partial y}(0,0) = -1\]
             Если предположить, что да, то будет выполнена дифференицальная формула:
             \[g(x,y) \underset{(x, y) \to 0}{=} 0\cdot  x - 1\cdot y + o(x, y)\]
@@ -413,9 +403,26 @@
             g(x, y) = \frac{t^5(k+4k^3 - k^5)}{t^4(1+k^2)^2} = \frac{t(k+4k^3 - k^5)}{(1+k^2)^2}\]
             Если, например, $k=1$, то $g(t, t) = t\cdot 1$, а если $g$ дифференциируема, должно быть $g(t, t) = -t + o(t)$.
             Значит, предположение не выполняется и $g$ - не дифференциируема.
+            \par
+            Все дело в условии того, что функция дважды дифференциируема в нуле, в контрпримере как раз при взгляде на наше определение многократной дифференцируемости
+            требуется, чтобы производные были дифференциируемы на один раз меньше, чем функция. А мы только что показали, что одна из производных не дифференциируема в нуле.
+
         \end{example}
 
     \subsection{Высшие дифференциалы.}
+        Пусть $f \open \Real^m \to E$, $f \in D^k(p)$. Тогда $\diff^k f(p)$ - $k$-линейная форма (линейная по каждой из $k$ переменных). 
+        \[\diff^k f(p)\langle v \rangle := \sum_{\abs{\mu} = k} \frac{D^\mu f(p)}{\mu!}\cdot \overline{v}^\mu\]
+        \[k = 1: \quad \diff f(p) \langle v \rangle = \sum_{\abs{\mu} = 1} \frac{1}{\mu!}D^\mu f(p) \cdot v^\mu = \sum_{i=1}^{m} \frac{\partial f}{\partial x_i}(p) v_i \]
+        \[k = 2 \implies \abs{\mu} = 2: \quad \diff^2 f(p) \langle v \rangle = \sum \frac{1}{2!}\left( \frac{\partial^2 f}{\partial x_1^2 } + \hdots + \frac{\partial^2 f}{\partial x_m^2} \right) + \sum_{i < j} \frac{\partial^2 f}{\partial x^i \partial x^j}\]
+
+        \textbf{СПРАВКА:}
+        Численный вектор $\mu = (i_1, \hdots, i_m), i_k \ge 0$ называется мультииндексом длины $m$.
+        Свойства:
+        \begin{itemize}
+            \item $\mu!:= i_1! \cdot \hdots \cdot i_m!$
+            \item $x^\mu:= x_1^{i_1}\cdot x_2^{i_2} \cdot \hdots \cdot x_m^{i_m}$
+            \item $\abs{\mu}:= \sum_{j=1}^{m}i_j$
+        \end{itemize}
 
     \subsection{Пример не коммутирующих дифференциальных операторов.}
 
@@ -471,9 +478,19 @@
             \end{proof}
         \end{theorem*}
 
-
     \subsection{Гессиан вещественной функции. Достаточные условия экстремума.}        
-        \begin{theorem}[Достаточное условие локального экстремума функции многих переменных]    
+        \begin{definition*}
+            Матрица Гессе (обозначается $H$ или $H(f)$, у нас часто $\diff^2 f(x_1, \hdots, x_n)$) - это матрица, у которой элемент на пересечении $i$-й строки и $j$-го столбца равен второй частной производной функции $f$ по переменным $x_i, x_j$:
+            \[H_{ij} = \frac{\partial^2 f}{\partial x_i \partial x_j}\]
+            \[H(f) = \begin{pmatrix}
+                \frac{\partial^2 f}{\partial x_1^2} & \frac{\partial^2 f}{\partial x_1 \partial x_2} & \cdots & \frac{\partial^2 f}{\partial x_1 \partial x_n} \\
+                \frac{\partial^2 f}{\partial x_2 \partial x_1} & \frac{\partial^2 f}{\partial x_2^2} & \cdots & \frac{\partial^2 f}{\partial x_2 \partial x_n} \\
+                \vdots & \vdots & \ddots & \vdots \\
+                \frac{\partial^2 f}{\partial x_n \partial x_1} & \frac{\partial^2 f}{\partial x_n \partial x_2} & \cdots & \frac{\partial^2 f}{\partial x_n^2}
+            \end{pmatrix}\]
+        \end{definition*}
+
+        \begin{theorem*}[Достаточное условие локального экстремума функции многих переменных]    
             Пусть $f \in D^2(p), \ f:\mathbb{R}^m \to R$ и $df(p) > 0$. Тогда:
             \begin{enumerate}
                 \item $d^2f(p) > 0$ - строгий локальный минимум
@@ -514,5 +531,110 @@
                 \end{proof}
                 Пункт 2 доказывается аналогично пункту 1.
             \end{proof}
-        \end{theorem}
+        \end{theorem*}
+
+
+    \subsection{Функции класса $C^k$ на открытом множестве (и на множествах, не обязательно открытых).}
+        Символ $\open$ обозначает "открыто в". Контекст:
+        \[U \open \mathbb{R}^m, \ f:U \to \mathbb{R}^k, \ f \in C^r(U), \ r \geq 0\]
+
+        \begin{definition*}
+            Отображение $f$ называется $r$-гладким, если все ее частные производные до порядка $r$ непрерывны на $U$.
+        \end{definition*}
+
+        Пусть $X$ - не обязательно открыто в $\mathbb{R}^m$.
+        \begin{definition*}
+            $f \in C^r(X)$, если $f = \tilde{f}$ - сужение на $\tilde{X} \supset X$, $\tilde{f}: \tilde{X} \open \mathbb{R}^m \to \mathbb{R}^k$ - $C^r$-гладкая на $\tilde{X}$.
+        \end{definition*}
+
+        \begin{statement*}
+            Пусть $f:X \subset \mathbb{R}^m \to \mathbb{R}^k, \ g:X \to \mathbb{R}^k$ - $C^r$ отображения. Тогда $f+g \in C^r(X)$
+            \begin{proof}
+                Пусть $f = \tilde{f}, \ g = \tilde{g}$ и т.д. по определению $r$-гладкости:
+                \[\tilde{f}:U \to \mathbb{R}^m, \tilde{g}: V \to \mathbb{R}^m, \ U, V \open \mathbb{R}^m, \ X \subset U, X \subset V\]
+                Введем $U \cap V = W \open \mathbb{R}^m$. На $W$ заданы оба отображения и ясно, что $f+g = \tilde{f} + \tilde{g}$.
+            \end{proof}
+        \end{statement*}
+
+        \begin{statement*}
+            Композиция:
+            \[X \overset{f}{\to} \mathbb{R}^k \supset Y \overset{g}{\to} \mathbb{R}^m\]
+            Если $f \in C^r$ и $g \in C^r$, то $g \circ f \in C^r$.
+            \begin{proof}
+                Область определения $\mathrm{dom}(g \circ f) = \{x \in X | \ f(x) \in Y\} = X \cap f^{-1}(\mathrm{dom}(g))$
+                \[\begin{cases}
+                    f \in C^r \implies f = \tilde{f}, \ \tilde{f}:\mathbb{R}^m \underset{op}{\supset}\tilde{X} \to \mathbb{R}^k -  C^r\text{-гладкое.} \\
+                    g \in C^r \implies g = \tilde{g}, \ \tilde{g}:\mathbb{R}^k \underset{op}{\supset}\tilde{Y} \to \mathbb{R}^m -  C^r\text{-гладкое.} \\
+                \end{cases}\]
+                \[\mathrm{dom(\tilde{g}\circ \tilde{f})} = \mathrm{dom}(\tilde{f}) \cap \tilde{f}^{-1}(\mathrm{dom}(\tilde{g})) = \tilde{X} \cap \tilde{f}^{-1}(\tilde{Y})\]
+                $\tilde{X}$ - открытое, $\tilde{f}^{-1}(\tilde{Y})$ - открытое, как прообраз открытого множества $\tilde{Y}$ при непрерывном отображении.
+                \newline
+                Ясно, что $g \circ f = \tilde{g} \circ \tilde{f}$ - сужение $\mathrm{dom}(g \circ f)$.
+            \end{proof}
+        \end{statement*}
+
+
+    \subsection{Теорема об открытости отображения вида $f(x) = x +\varphi(x)$, где $\varphi$ - сжимающее отображение.}
+        \begin{theorem*}
+            Пусть $U \open \mathbb{R}^m$, а $f:U \to \mathbb{R}^m$ такое, что отображение $f(x) - x = \lambda(x)$
+            сжимающее, то есть $\forall x_1, x_2 \in U \left| \lambda(x_1) - \lambda(x_2) \right| \leq \lambda < 1$. Тогда:
+            \begin{enumerate}
+                \item $f(U) \open \mathbb{R}^m$
+                \item Сужение $f: U \to f(U)$ обратимо и обратное отображение - липшицево с константой $\frac{1}{1- \lambda}$.        
+            \end{enumerate}
+
+            \begin{proof}
+                Докажем пункт 2:
+                \newline
+                $f$ инъективно: $x_1 \neq x_2 \implies f(x_1) \neq f(x_2)$
+                \[\begin{cases}
+                    f(x_1) - x_1 = \lambda(x_1) \\
+                    f(x_2) - x_2 = \lambda(x_2) 
+                \end{cases} \implies
+                \begin{cases}
+                    f(x_1) = \lambda(x_1) + x_1 \\
+                    f(x_2) = \lambda(x_2) + x_2
+                \end{cases}\]
+
+                Тогда
+                \begin{align*}
+                    \left| f(x_1) - f(x_2) \right|
+                    &= \left| \lambda(x_1) - \lambda(x_2) + (x_1 - x_2) \right| \\
+                    &\leq \left| \lambda(x_1) - \lambda(x_2) \right| + \left| x_1 - x_2 \right| \\
+                    &\leq \lambda \left| x_1 - x_2 \right| + \left| x_1 - x_2 \right| \\
+                    &= (\lambda + 1) \left| x_1 - x_2 \right|.
+                \end{align*}
+
+                В силу неравенства треугольника:
+                \[(1 - \lambda) \left| x_1 - x_2 \right| \leq \left| f(x_1) - f(x_2) \right| \leq (1 + \lambda)\left| x_1 - x_2\right|\]
+                Инъективность есть, а сужение $f: U \to f(U)$ - биективно, значит обратимо. Поймем, что обратное отображение будет $\frac{1}{1 - \lambda}$ липшицево.
+                Пусть $\begin{cases}
+                    y_1 = f(x_1) \\ \ y_2 = f(x_2) 
+                \end{cases} \in f(U) \quad \begin{cases}
+                    x_1 = g(y_1) \\ 
+                    x_2 = g(y_2)
+                \end{cases}$
+                \[\left| y_1 - y_2 \right| \geq (1 - \lambda)\left|g(y_1) - g(y_2) \right| \quad \implies \quad \frac{1}{1 - \lambda}\left| y_1 - y_2 \right| \geq g(y_1) - g(y_2)\] 
+                Пункт 2 доказан.
+                \newline
+                Пусть теперь $q \in f(U)$. Рассмотрим $p \in U \mid q = f(p)$. $U$ открыто, а значит $\exists \varepsilon > 0 \mid B_\varepsilon(p) \subset U$, \newline 
+                где $B_\varepsilon(p)$ - открытый шар радиуса $\varepsilon$ с центром в точке $p$. Мы покажем, что множество $f(U)$ содержит шар с центром в $q$ радиуса $(1- \lambda)\varepsilon$. \newline
+                Пусть $y \in B_{\varepsilon(1-\lambda)}(q)$, т.е. $\left| q - y \right| < (1 - \lambda)\varepsilon$. 
+                Надо показать, что $\exists x \text{ такой, что } \left| p - x \right| < \varepsilon, \ f(x) = y$.
+                Воспользуемся теоремой о неподвижной точке сжимающего отображения. Перепишем условие:
+                \[f(x) = y \implies y - f(x) = 0 \implies y-f(x) + x = x\]
+                Положим
+                \[\varphi(x) = y - f(x) + x = y - \lambda(x)\]
+                Заметим, что $\varphi(x)$ является сжимающим и покажем, что $\varphi$ переводит $B_\varepsilon(p)$ в себя. 
+                \[x \in B_\varepsilon(p) \implies \left| x - p \right| \leq \varepsilon \implies \left| \varphi(x) - \varphi(p) \right| \leq \lambda\varepsilon\]
+                \[\left| \varphi(x) - p \right| = \left| (\varphi(x) - \varphi(p)) + (\varphi(p) - p)\right| \leq \left| \varphi(x) - \varphi(p) \right| + \left|\varphi(p) - p\right|\]
+                Первое слагаемое, как мы уже доказали, не превышает $\lambda \varepsilon$. Преобразуем второе:
+                \[\left| \varphi(p) - p \right| = \left| y - f(p) + p - p \right| = \left| y - f(p) \right| = \left| y - q\right| \leq (1- \lambda)\varepsilon\]
+                Тогда:
+                \[\left| \varphi(x) - \varphi(p) \right| + \left|\varphi(p) - p\right| \leq \lambda\varepsilon + (1 - \lambda) \varepsilon = \varepsilon\]
+                Значит $\left|\varphi(x) - p\right| \leq \varepsilon$ и $\varphi(x) \in B_\varepsilon(p) \mid x \in B_\varepsilon(p).$
+            \end{proof}
+        \end{theorem*}
 \end{document}
+
+
