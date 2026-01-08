@@ -54,3 +54,85 @@
         \end{enumerate}
     \end{proof}
 \end{theorem*}
+
+\section{Примитивный интеграл, интеграл Лебега}
+\begin{definition*}
+    Отрезки вида $I = {a}, (a,b), [a,b), (a, b], [a,b]$ - примитивные сегменты в $\Real$. Для них на прямой определена примитивная мера, как функция $\mu_1(I) := \abs{b-a}$. \par
+    Элементарный сегмент в $\Real^n$ это $I_1 \times \hdots \times I_n$, где $I_k$ - элементарный сегмент в $\Real$ $\forall k \in {1, \hdots, n}$. Для сегментов большой размерности мера определена в виде $\mu_n(I) = \mu_1(I_1) \cdot \hdots \cdot \mu_n(I_n)$.\par
+    Множество $S$ будем считать примитивным (ступенчатым) множеством, если $S$ - объединение конечного числа сегментов.
+\end{definition*}
+
+\begin{lemma*}[Лемма о дроблении]
+    Для любого примитивного (стуенчатого) множества $A$ $\exists$ дизъюнктный набор сегментов (т.е. набор непересекающихся сегментов) $I_1, \hdots, I_N$ такой, что $A = \bigcup_{n=1}^{N} I_n$.
+
+    \begin{proof}
+        Пусть $A = \bigcup J_k$, $J_k = J_k^1 \times \hdots \times J_k^r$. Пусть $a_0^i < a_1^i < \hdots < a_{N_i}^i$ - концы сегментов $J_1^i, \hdots, J_m^i$. Возьмем ${a_0^i}, {a_0^i, a_1^i}, {a_1^i}, {a_1^i, a_2^i}$ и так далее - это элементарные сегменты на оси $i$-ой координаты. Искомая система дизъюнктных элементов - это декартово произведение этих сегментов по каждой координате.
+    \end{proof}
+\end{lemma*}
+
+\textbf{Свойства ступенчатых множеств:}
+\begin{enumerate}
+    \item Если $A, B$ - ступенчатые множества, то $A \cup B$ - ступенчатое множество.
+    \item Если $A, B$ - ступенчатые множества, то $A \cap B$ - ступенчатое множество.
+    \begin{proof}
+        Есть сегменты, которые в объединении дают $A$ и дают $B$. Возьмем их, раздробим по лемме о дроблении, посчитаем пересечение. 
+    \end{proof}
+    \item $A \backslash B$ - ступенчатое множество.
+\end{enumerate}
+
+\begin{definition*}
+    Ступенчатые функции: \par
+    Пусть $E$ - векторное пространство. Определим функцию $f$ как ступенчатую функцию на множествах $\Real^n$ и $E$ ($f \in Step(\Real^n, E)$), если $\exists$ система сегментов в $\Real^n$ $J_1, \hdots, J_k$ такая, что $f = \sum_{i=1}^{k}C_i \chi_{J_i}$ и $C_1, \hdots, C_k \in E$.
+    Уточнение: $\chi_{J_i}(x)$ - характеристическая функция вида 
+    \[\chi_{J_i}(x) = \begin{cases*}
+        1 \ x \in J_i \\ 0 \ x \notin J_i
+    \end{cases*}\]
+    А $C_i$ - некоторый вектор из $E$.
+\end{definition*}
+
+\begin{statement*}
+    Пусть $f,g \in Step(\Real^n, E)$. Тогда $f+j \in Step(\Real^n, E), \ \lambda \cdot f \in Step(\Real^n, E)$. Если в $E$ можно перемножать веткора ($\forall a, b \in E \ \exists a\cdot b \in E$), то $f\cdot g \in Step(\Real^n, E)$.
+    \begin{proof}
+        Упражнение, надо поковыряться с определением новой функции и (возможно) хар. функциии.
+    \end{proof}
+\end{statement*}
+
+\begin{statement*}
+    $f \in Step(\Real^n, E) \iff \exists$ дизъюнктная система отрезков, на каждом из которых $f = const$.
+\end{statement*}
+
+\begin{definition*}
+    Элементарный интеграл определим как функцию $\int_{\Real^n}: Step(\Real^n, E) \to E$. Функция $f$ должна иметь вид $\sum_{i=1}^{k}C_i\cdot \chi_{J_i}$.
+    Тогда
+    \[f = \sum_{i=1}^{k} C_i \cdot \chi_{J_i} \implies \int_{\Real^n}f := \sum_{i=1}^{k}C_i \mu_n(J_i)\]
+
+    При $n = 1$ набор $J_1, \hdots, J_n$ - это интервалы, полуинтервалы, отрезки и точки. 
+    \[f(x) = \sum C_i \chi_{J_i} \quad \int_{\Real^n} f(x) \diff x = \int_{-\infty}^{\infty}f(x)\diff x \text{ - обычный интеграл не зависит от разбиения}\]    
+\end{definition*}
+
+\begin{theorem*}[Примитивная теорема Фубини]
+    Введем удобные обозначения: $X = \Real^n, Y = \Real^m, \ X \times Y = \Real^{n+m}$.
+    Пусть $f \in Step(X \times Y, E)$. Тогда:
+    \begin{enumerate}
+        \item $\forall x \in X$ функция от $y$, отображающая $y \to f(x,y)$ является ступенчатой на $Y$.
+        \item Функция от $x$, отображающая $x \to \int_{Y} f(x,y)\diff y$ - ступенчатая на $X$.
+        \item $\int_X \left(\int_Y f(x, y) \diff y\right) \diff x = \int_{X \times Y} f(x, y) \diff (x, y)$        
+    \end{enumerate}
+
+    \begin{proof}
+        \begin{enumerate}
+            \item По условию $\exists$ система сегментов $J_1, \hdots, J_k$ в $X \times Y$ и набор констант $C_1, \hdots, C_k$ такой, что
+            \[f(x, y) = \sum_{i=1}^{k} C_i \cdot \chi_{J_i}(x,y)\]
+            Каждый из сегментов $J_i$ - это $\underbrace{J_i^X}_{\text{сегмент из Х}} \times \underbrace{J_i^Y}_{\text{сегмент из Y}}$
+            Тогда 
+            \[\chi_{J_i}(x,y) = \chi_{J_i^X}(x) \cdot \chi_{J_i^Y}(y)\]
+            \[\forall x \ f(x, y) = \sum \underbrace{C_i \cdot \chi_{J_i^X}(x)}_{d_i}\cdot \chi_{J_i^Y}(y) \text{ - это ступенчатая функция на Y}\]
+            Если $x$ - фиксирован, то эта запись определяет ступенчатую функцию на $Y$.
+
+            \item \[\int_Y f(x, y) \diff y = \sum_{i=1}^{m} C_i \cdot \chi_{J_i^X}(x) \cdot \mu_Y (J_i^Y) = \sum_{i=1}^{m}C_i \cdot \mu_Y(J_i^Y)\cdot \chi_{J_i^X}(x) \text{ - ступенчатая функция на X}\]
+            \item \begin{align*}\text{Интеграл от предыдущей функции по } X = \sum_{i=1}^{m}C_i \cdot \mu_Y(J_i^Y) \cdot \mu_X(J_i^X) = \int_{X \times Y}f(x, y) \diff (x,y) \\ \text{ так как } \mu_Y(J_i^Y) \cdot \mu_X(J_i^X) = \mu_{X \times Y}(J_i^X \times J_i^Y) = \mu_{X \times Y}(J_i)
+            \end{align*}
+            
+        \end{enumerate}
+    \end{proof} 
+\end{theorem*}

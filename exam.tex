@@ -69,17 +69,17 @@
         \item \sout{Дифференцируемость функции в точке. }
         \item \sout{Достаточный признак дифференцируемости. }
         \item \sout{Необходимые условия экстремума.}
-        \item Пример разрывной в точке функции, имеющей в ней производную по любому направлению.
+        \item Пример разрывной в точке функции, имеющей в ней производную по любому направлению. \textbf{TODO: в чате группы}   
         \item \sout{Дифференцируемость суммы, произведения, композиции. }
         \item \sout{Градиент вещественной функции.} 
         \item \sout{Векторные поля. }
         \item \sout{Потенциал векторного поля.}
         \item \sout{Многократная дифференцируемость.} 
-        \item Теорема о равенстве смешанных производных, "контрпример". \textbf{TODO: контрпример}
-        \item Высшие дифференциалы.  
+        \item \sout{Теорема о равенстве смешанных производных, "контрпример".}
+        \item Высшие дифференциалы. \textbf{TODO: в тетрадке есть оказывается}
         \item Пример не коммутирующих дифференциальных операторов.  
-        \item Теорема о разложении Тейлора. 
-        \item Гессиан вещественной функции. Достаточные условия экстремума. 
+        \item \sout{Теорема о разложении Тейлора.} 
+        \item Гессиан вещественной функции. Достаточные условия экстремума. \textbf{TODO: гессиан? что тут про него писать, интересно?}
         \item Функции класса $C^k$ на открытом множестве (и на множествах, не  
         обязательно открытых). 
         \item Теорема об открытости отображения вида $f(x) = x +\varphi(x)$, где $\varphi$ — 
@@ -290,15 +290,15 @@
         \end{statement*}
 
     \subsection{Векторные поля.}
-        \begin{definition}
+        \begin{definition*}
             Функция $f:\mathbb{R}^n \to \mathbb{R}^n$ называется векторным полем.
-        \end{definition}
+        \end{definition*}
 
     \subsection{Потенциал векторного поля.}
-        \begin{definition}
+        \begin{definition*}
             Потенциалом векторного поля $F$ (если он есть) называется \textbf{скалярная} функция $U:W \to \mathbb{R}$, 
             такая, что $\nabla U = F$. Если потенциал существует, то F называется потенциальным полем.
-        \end{definition}
+        \end{definition*}
 
     \subsection{Многократная дифференцируемость.}
         \begin{definition*}
@@ -391,4 +391,128 @@
                 то есть $f_{xy}(0) = f_{yx}(0)$.
             \end{proof}
         \end{theorem*}
+
+        \begin{example}
+            \textbf{Контрпример:}\par
+            Возьмем функцию $f = \begin{cases*}
+                \frac{xy(x^2-y^2)}{x^2+y^2} \ (x, y) \neq (0, 0)\\ 0 \ (x, y) = (0,0)
+            \end{cases*}$. 
+            Если $x^2 + y^2 \neq 0$:
+            \[\frac{\partial f}{\partial x}(x, y) = \frac{x^4 y + 4x^2 y^3 - y^5}{(x^2 + y^2)^2} = g(x, y)\]
+            Если $x^2 + y^2 = 0$, то поскольку $f(0, y) = f(x, 0) = 0$:
+            \[\frac{\partial f}{\partial x} = \frac{\partial f}{\partial y} = 0\]
+            \[\frac{\partial}{\partial x}\left[\frac{\partial f}{\partial x}\right](0,0) = \lim_{x \to 0} \frac{\frac{\partial f}{\partial x}(x, 0) - \frac{\partial f}{\partial x}(0,0)}{x} = 0\]
+            \[\frac{\partial}{\partial y}\left[\frac{\partial f}{\partial x}\right](0,0) = \lim_{y \to 0} \frac{\frac{\partial f}{\partial x}(0, y) - \frac{\partial f}{\partial x}(0,0)}{y} = \lim_{y \to 0} \frac{(-y)^4}{(0^2 + y^2)^2} = -1\]
+            В силу симметричности функции (но с минусом) $\frac{\partial f}{\partial y} = - \frac{\partial f}{\partial x} = \frac{-y^4 x - 4y^2 x^3 + x^5}{(x^2+y^2)^2}$.
+            \[f_{yy}(0,0) = 0 \ \frac{\partial}{\partial x}\left[\frac{\partial f}{\partial y}\right](0,0) = 1\]
+            Однако функция $g$ не дифференциируема в $0,0$:
+            \[\frac{\partial g}{\partial x}(0,0) = 0 \ \frac{\partial g}{\partial y}(0,0) = -1\]
+            Если предположить, что да, то будет выполнена дифференицальная формула:
+            \[g(x,y) \underset{(x, y) \to 0}{=} 0\cdot  x - 1\cdot y + o(x, y)\]
+            \[\begin{cases*} y = kt \\ x = t\end{cases*} \quad
+            g(x, y) = \frac{t^5(k+4k^3 - k^5)}{t^4(1+k^2)^2} = \frac{t(k+4k^3 - k^5)}{(1+k^2)^2}\]
+            Если, например, $k=1$, то $g(t, t) = t\cdot 1$, а если $g$ дифференциируема, должно быть $g(t, t) = -t + o(t)$.
+            Значит, предположение не выполняется и $g$ - не дифференциируема.
+        \end{example}
+
+    \subsection{Высшие дифференциалы.}
+
+    \subsection{Пример не коммутирующих дифференциальных операторов.}
+
+    \subsection{Теорема о разложении Тейлора.}
+        \begin{theorem*}[разложение Тейлора]
+            $\exists!$ многочлен $A(x)$ степени $\leq k$ такой, что $f(x) - A(x) \underset{x \to p}{=} o(x-p)^k$    
+            \[A(x) = f(p) + f'(p)(x-p) + \frac{f''(p)}{2!}(x-p)^2 + \hdots + \frac{f^{(k)}(p)}{k!}(x-p)^k\]
+        \end{theorem*}
+
+        \begin{theorem*}[разложение Тейлора для нескольких переменных]
+            Пусть $f: \mathbb{R}^m \to E, \ f \in D^k(p)$, тогда $\exists!$ многочлен $A(x) \ deg(A) \leq k$,
+            такой, что $f(x) - A(x) \underset{x \to p}{=} o(\left| x - p\right|^k)$:
+            \[A(x) = f(p) + \frac{df(p) \langle x-p \rangle}{1!} + \frac{d^f(p)\langle x-p \rangle}{2!} + \hdots + \frac{d^kf(p)\langle x-p \rangle}{k!}\]
+            \begin{proof}
+                \textbf{Единственность:} Пусть есть два таких многочлена $A(x), B(x)$. Введем $C(x) := A(x) - B(x) = o(\left| x - p\right|^k)$. И докажем вспомогательное утверждение:
+                \begin{statement*}
+                    $degC \leq k \ C(x) \underset{x \to p}{=} o(\left|x-p\right|^k)$, тогда $C \equiv 0$.
+                    \begin{proof}
+                        \begin{enumerate}
+                            \item Фиксируем $v \in \mathbb{R}^m$ и рассмотрим $h(t) = C(p+tv)$ - многочлен одной переменной.
+                            По условию $h(t) = o(t^k)$ для одной переменной (доказывали это в первом семестре), т.е. $h(t) \equiv 0$. В частности, при $t = 1 \ h(t) = C(p+v) = 0$.
+                            \item Поскольку 1. выполняется $\forall v$, то $C(p+v) = 0 \  \forall v$.
+                        \end{enumerate}
+                    \end{proof}
+                    Тогда в силу доказанного утверждения получаем единственность.
+                \end{statement*}
+                \par
+                \textbf{Существование:}
+                Введем $g(x) = f(x) - A(x), \ f:\mathbb{R}^m \to E$. $g(p) = 0$ и все производные до порядка $k$
+                включительно равны $0$ в $p$, $g \in D^K(p)$. Необходимо доказать, что из этого следует, что $g(x) = o(\left| x - p\right|^k)$.
+                \\
+                Пусть $\varepsilon > 0$, надо показать, что $\left| g(x) \right| < \varepsilon\cdot \left| x - p\right|^k$ в некоторой $U$ - окрестности точки $p$.
+                Пусть $\varepsilon_{k-1}(x)$ - какая-то производная порядка $k-1$ функции $g$, $\varepsilon_{k-1}$ определена в некотором шаре $V_p$ с центром в $p$.
+                \begin{equation}
+                    \label{eq1}
+                    \varepsilon_{k-1}(p) = 0, \ \frac{\partial \varepsilon_{k-1}}{\partial x_i}(p) = 0 \ \forall i = 1 \hdots m
+                \end{equation}
+                Поэтому имеется маленький шар $U \subset V_p$ в котором выполнено:
+                \begin{equation}
+                    \label{eq2}
+                    \forall x \in U \ \left| \varepsilon_{k-1}\right|(x) \leq \varepsilon\cdot \left| x - p \right|
+                \end{equation}
+                В самом деле, $\varepsilon_{k-1}(x) = \varepsilon_{k-1}(p) + d\varepsilon_{k-1}(p)\langle x - p \rangle + o(\left| x - p \right|)$, причем первое слагаемое равно нулю из того, что "все производные до порядка $k$ включительно равны $0$ в $p$", а второе - из уравнения (\ref{eq}).
+                Значит $\varepsilon_{k-1}(x) = o(\left| x - p\right|) \implies \varepsilon_{k-1}(x) \leq \varepsilon\left| x - p \right|$
+                Итак, ясно, что существует шарик $U$, в котором все производные $k-1$ порядка 
+                имеют оценку (\ref{eq2})
+                Пусть $\varepsilon_{k-2}$ - какая-то производная функции $g$ порядка $k-2$. Все ее первые частные производные по доказанному в шаре $U$ оцениваются в $\varepsilon\cdot \left| x - p\right|$.
+                По лемме о степенной оценке приращения для $\varepsilon_{k-2}$ выполнено в шаре $U$:
+                \[\left| \varepsilon_{k-2}(x)\right| \leq \left| \frac{\varepsilon \left| x - p\right|^2}{2}\right|\]
+                Для $k-3, k-4, \hdots$ аналогично. 
+                \[\left| g(x) \right| = \left| g^{(k-k)}(x) \right| \leq \varepsilon \cdot \frac{\left| x- p \right| ^ k}{k!} \leq \varepsilon\cdot \left| x - p\right|^k
+                \]
+            \end{proof}
+        \end{theorem*}
+
+
+    \subsection{Гессиан вещественной функции. Достаточные условия экстремума.}        
+        \begin{theorem}[Достаточное условие локального экстремума функции многих переменных]    
+            Пусть $f \in D^2(p), \ f:\mathbb{R}^m \to R$ и $df(p) > 0$. Тогда:
+            \begin{enumerate}
+                \item $d^2f(p) > 0$ - строгий локальный минимум
+                \item $d^2f(p) < 0$ - строгий локальный максимум
+                \item Если $d^2f(p)$ знаконеопределен, т.е. $\exists u \in \mathbb{R}^m \ d^2f(p)\langle u \rangle > 0$ и $\exists v \in \mathbb{R}^m \ d^2f(p)\langle v \rangle < 0$, то $p$ - седловая точка.
+            \end{enumerate}
+
+            \begin{proof}
+                
+                Докажем пункт 3:
+                \begin{proof}
+                    Пусть $df(p) = 0$ и существуют вектора $u$ и $v$, такие, что $d^2f(p)\langle u \rangle > 0, \ d^2f(p)\langle v \rangle < 0$.
+                    
+                    Введем функцию $h(t) = f(p + tu)$. Тогда $h'(0) = df(p)\langle u \rangle = 0, \  h''(0) = d^2f(p)\langle u \rangle > 0$. Значит у функции $h$ в точке $0$ строгий минимум 
+                    (по достаточному условию экстремума для одной переменной). Аналогично вдоль $p + tv$ функция имеет строгий максимум, значит $p$ - седловая точка.
+                \end{proof}
+                
+                Докажем пункт 1:
+                \begin{proof}
+                    Пусть $d^2f(p) > 0$, то есть $\forall v \neq 0 \ d^2 f(p)\langle v \rangle > 0$. Сфера $S^{m-1} = \{v \in \mathbb{R}^m \quad \left| v \right| = 1\}$ - компактна (замкнута и ограничена). $d^2f(p):S^{m-1} \to \mathbb{R}$ - однородный многочлен второго порядка.
+                    Так как $d^2f$ - непрерывная функция на компакте, то у нее $\exists \min = C > 0$, т.е.\\ $\forall v \in S^{m-1} \quad d^2f(p)\langle v \rangle \geq C$.
+                    \begin{statement*}
+                        Тогда $\forall v \neq 0 \ d^2f(p)\langle v \rangle \geq C\cdot \left| v \right|^2$
+                        \begin{proof}
+                            \[\forall v \neq 0 \quad d^2f(p)\langle v \rangle = d^f(p)\langle \left| v \right| \cdot \frac{v}{\left| v \right|} \rangle = 
+                            \left| v \right|^2\cdot d^2f(p)\langle \frac{v}{\left| v \right|} \rangle \geq C\cdot \left| v \right|^2\]
+                        \end{proof}
+                    \end{statement*}
+
+                    Значит 
+                    \[
+                        f(x) = f(p) + df(p)\langle x -p \rangle + \frac{d^2f(p)\langle x - p \rangle}{2!} + \alpha(x)\left| x - p\right|^2, \ \alpha(x) \underset{x \to p }{\to} O(1)
+                    \]
+                    \[f(x) \geq f(p) + 0 + \frac{C}{2!}\cdot \left| x - p \right|^2 + \alpha(x)\left| x - p\right|^2\]
+                    Существует окрестность $U$ точки $p$, такая, что $\left| \alpha(x) \right| \leq \frac{C}{3} \ \forall x \in U$. Тогда для $\forall x \in U$:
+                    \[f(x) \geq f(p) + \frac{C}{2!}\left| x - p \right|^2 - \frac{C}{3}\left| x - p \right|^2 = f(p) + \frac{C}{6}\left| x - p\right| ^2\]
+                    То есть $f(x) - f(p) \geq \frac{C}{6}\left| x - p \right|^2 > 0 \implies$ в $U \ f(p) < f(x) \ \forall x \in U$. Пункт 1 доказан. 
+                \end{proof}
+                Пункт 2 доказывается аналогично пункту 1.
+            \end{proof}
+        \end{theorem}
 \end{document}
