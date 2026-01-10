@@ -27,7 +27,7 @@
 \newcommand{\diff}{\mathop{}\!d}
 \newcommand{\abs}[1]{\left| #1 \right|}
 
-\newtheoremstyle{definition}{3pt}{3pt}{\upshape}{}{\bfseries}{.}{.5em}{}
+\newtheoremstyle{definition}{3pt}{3pt}{\upshape}{}{\bfseries}{}{.5em}{}
 \theoremstyle{definition}
 \newtheorem{definition}{Опр.}
 \newtheorem*{definition*}{Опр.}
@@ -83,14 +83,14 @@
         \item \sout{Функции класса $C^k$ на открытом множестве (и на множествах, не  
         обязательно открытых). }
         \item \sout{Теорема об открытости отображения вида $f(x) = x +\varphi(x)$, где $\varphi$ - сжимающее отображение. }
-        \item Теорема о локальной обратимости, "контрпримеры". 
-        \item Лемма о локальном наложении. 
-        \item Теорема о неявной функции. 
-        \item Теорема об обратной функции. 
-        \item Многообразия в $\Real^n$. 
+        \item \sout{Теорема о локальной обратимости, }"контрпримеры". 
+        \item \sout{Лемма о локальном наложении. }
+        \item \sout{Теорема о неявной функции.} 
+        \item \sout{Теорема об обратной функции.} 
+        \item \sout{Многообразия в $\Real^n$.}
         \item Примеры двумерных многообразий: сфера, тор, цилиндр, лист Мёбиуса. 
-        \item Теорема Брауэра об инвариантности области (формулировка). \\ Гомеоморфизмы и $C^r$-изоморфизмы. 
-        \item Многообразия с краем. лемма о крае полупространства.  
+        \item \sout{Теорема Брауэра об инвариантности области (формулировка). \\ Гомеоморфизмы и $C^r$-изоморфизмы. }
+        \item \sout{Многообразия с краем. лемма о крае полупространства.}  
         \item Лемма об изоморфизме многообразий. лемма об открытых частях  
         многообразия. 
         \item Теорема о крае многообразия.  
@@ -176,18 +176,51 @@
         \end{definition*}
 
     \subsection{Дифференцируемость функции в точке.}    
-        Пусть $f:U \in \mathbb{R}^{n} \to \mathbb{R}^{k}$, $p \in U$. 
-        Функция $f$ дифференциируема в $p$, если:
-        \begin{enumerate}
-            \item $p \in Int(U) \quad (\exists \epsilon > 0 \quad B_\epsilon(p) \subset U)$
-            \item $\exists$ дифференциал функции (линейное отображение)
-                $f$ в точке $p$ \quad $df(p): \mathbb{R}^{n} \to \mathbb{R}^{k}$
-                такое, что \[f(x) = f(p) + df(p)<x-p> + \alpha(x) \quad (\alpha(x) \underset{x \to p}{=} o(x-p)) \]
-        \end{enumerate}
+        \begin{definition*}
+            Пусть $f:U \in \mathbb{R}^{n} \to \mathbb{R}^{k}$, $p \in U$. 
+            Функция $f$ дифференциируема в $p$, если:
+            \begin{enumerate}
+                \item $p \in Int(U) \quad (\exists \epsilon > 0 \quad B_\epsilon(p) \subset U)$
+                \item $\exists$ дифференциал функции (линейное отображение)
+                    $f$ в точке $p$ \quad $df(p): \mathbb{R}^{n} \to \mathbb{R}^{k}$
+                    такое, что \[f(x) = f(p) + df(p)<x-p> + \alpha(x) \quad (\alpha(x) \underset{x \to p}{=} o(x-p)) \]
+            \end{enumerate}
+        \end{definition*}
+
+        \begin{definition*}
+            Функция $f(x)$ дифференциируема в точке $p \in U$, если:
+            \begin{enumerate}
+                \item $f$  определена в некоторой окрестности точки $p$ ($p \in Int(U)$)
+                \item $\exists \lim_{\Delta h \to 0} \frac{f(p + \Delta h) - f(p)}{\Delta h} \in \mathbb{R} $ (и этот предел равен $f'(p)$)
+            \end{enumerate}
+        \end{definition*}
     
     \subsection{Достаточный признак дифференциируемости.}
         \begin{theorem*}[Достаточный признак дифференциируемости]
             Если все частные производные непрерырвны в $p$, то $f$ дифференциируема в $p$ ($f \in D(p)$).
+
+            \begin{proof}
+                Мы хотим найти некоторое приближение вида
+                \[f(x) = f(p) + A\Delta x + B \Delta y + o(\abs{(\Delta x,\Delta y)})\]
+                Давайте внимательно взглянем на приращение функции $f$ при сдвиге на $(\Delta x, \Delta y)$ относительно точки $(x, y)$:
+                \begin{align*}
+                    \Delta f = f(x + \Delta x, y + \Delta y) - f(x, y) = \\
+                    = \underbrace{f(x + \Delta x, y + \Delta y) - f(x + \Delta x, y)}_{h} + \\  + \underbrace{f(x+\Delta x, y) - f(x, y)}_{g}
+                \end{align*}
+                По теореме Лагранжа для функций $h, g$ найдутся такие параметры $\alpha_1, \alpha_2 \in [0, 1]$, что:
+                \[\begin{array}{c}
+                    f'_y(x+\Delta x, y + \alpha_1\Delta y)\cdot \Delta y = f(x + \Delta x, y + \Delta y) - f(x + \Delta x, y) = h\\
+                    f'_x(x+\alpha_2\Delta x, y)\cdot \Delta x = f(x+\Delta x, y) - f(x, y) = g
+                \end{array}\]
+                По условию теоремы $f'_x, f'_y$ непрерывны в точке $(x, y)$, то есть
+                \begin{align*}
+                    f'_x(x+\alpha_2\Delta x, y) \underset{\abs{\Delta x, \Delta y} \to 0}{=} f'_x(x, y) + o(\abs{\Delta x, \Delta y}) \\
+                    f'_y(x+\Delta x, y + \alpha_1\Delta y) \underset{\abs{\Delta x, \Delta y} \to 0}{=} f'_y(x, y) + o(\abs{\Delta x, \Delta y})    
+                \end{align*}
+                Это означает, что при малых приращениях $(\Delta x, \Delta y)$ выполнено приближение:
+                \[\Delta f = h+g = f'_x(x, y)\Delta x + o(\abs{\Delta x, \Delta y}) + f'_y(x, y)\Delta y + o(\abs{\Delta x, \Delta y})\]
+                Таким образом, взяв в искомом линейном приближении $A = f'_x(x, y), B = f'_y(x, y)$ мы получим искомое линейное отображение (дифференциал). Поскольку производные в точке $(x,y)$ непрерывны - он существует.
+            \end{proof}
         \end{theorem*}
 
         Пример:
@@ -217,7 +250,7 @@
         Рассмотрим функцию $f = \begin{cases*}
             \frac{x^2 y}{x^4 + y^2} \ (x, y) \neq 0 \\ 0 \ (x,y) = (0,0)
         \end{cases*}$. В (0, 0) у нее есть производная по любому направлению:
-        \[v = (v_1, v_2) \quad \lim_{t \to 0} \frac{t^3 v_1^2 v_1}{t^4 v_1^4 + t^2 v_2^2} = \lim_{t \to 0} \frac{tv_1^2 v_2}{t^2 v_1^4 + v_2^2} = \frac{v_1^2}{v_2}\]
+        \[v = (v_1, v_2) \quad \lim_{t \to 0} \frac{t^3 v_1^2 v_2}{t^5 v_1^4 + t^3 v_2^2} = \lim_{t \to 0} \frac{v_1^2 v_2}{t^2 v_1^4 + v_2^2} = \frac{v_1^2}{v_2}\]
         Если компонента $v_2 = 0$, то производная $= 0$, если же $v_2 \neq 0$, то производная равна $\frac{v_1^2}{v_2}$.
         Рассмотрим направление $\begin{cases*} x(t) = t \\ y(t) = t^2 \end{cases*}$. Если двигаться по нему к точке $(0,0)$ (т.е. $t\to 0$) функция будет стремиться к:
         \[f(t, t^2) = \lim_{t \to 0} \frac{t^4}{t^4 + t^4} = \frac{1}{2}\]
@@ -367,7 +400,7 @@
                     a_{21} + \frac{a_{11} + a_{22}}{2} + \frac{\varepsilon_1(s) + \varepsilon_2(s)}{s^2} = a_{12} + \frac{a_{22} + a_{11}}{2} + \frac{\varepsilon_3(s) + \varepsilon_4(s)}{s^2}
                 \end{equation}
                 При малых $s$:
-                \[\varepsilon_3(s) = \int_{t=0}^{s}\alpha_2(0, t)dt, \quad \varepsilon_3(s) = \int_{t=0}^{s}\alpha_1(t,s)dt\]
+                \[\varepsilon_3(s) = \int_{t=0}^{s}\alpha_2(0, t)dt, \quad \varepsilon_4(s) = \int_{t=0}^{s}\alpha_1(t,s)dt\]
                 Осталось показать, что $\varepsilon_{1,2,3,4} \underset{s \to 0}{=} o(s^2)$.
                 Пусть $\varepsilon > 0$. Вспомним, что 
                 \[\varepsilon_1(s) = \int_{t = 0}^{}\alpha_2(s,t)dt, \quad \alpha_2(x,y) \underset{x,y \to 0}{=} o(x,y)\]
@@ -465,7 +498,7 @@
                     \label{eq2}
                     \forall x \in U \ \left| \varepsilon_{k-1}\right|(x) \leq \varepsilon\cdot \left| x - p \right|
                 \end{equation}
-                В самом деле, $\varepsilon_{k-1}(x) = \varepsilon_{k-1}(p) + d\varepsilon_{k-1}(p)\langle x - p \rangle + o(\left| x - p \right|)$, причем первое слагаемое равно нулю из того, что "все производные до порядка $k$ включительно равны $0$ в $p$", а второе - из уравнения (\ref{eq}).
+                В самом деле, $\varepsilon_{k-1}(x) = \varepsilon_{k-1}(p) + d\varepsilon_{k-1}(p)\langle x - p \rangle + o(\left| x - p \right|)$, причем первое слагаемое равно нулю из того, что "все производные до порядка $k$ включительно равны $0$ в $p$", а второе - из уравнения \eqref{eq}.
                 Значит $\varepsilon_{k-1}(x) = o(\left| x - p\right|) \implies \varepsilon_{k-1}(x) \leq \varepsilon\left| x - p \right|$
                 Итак, ясно, что существует шарик $U$, в котором все производные $k-1$ порядка 
                 имеют оценку (\ref{eq2})
@@ -491,7 +524,7 @@
         \end{definition*}
 
         \begin{theorem*}[Достаточное условие локального экстремума функции многих переменных]    
-            Пусть $f \in D^2(p), \ f:\mathbb{R}^m \to R$ и $df(p) > 0$. Тогда:
+            Пусть $f \in D^2(p), \ f:\mathbb{R}^m \to R$ и $df(p) = 0$. Тогда:
             \begin{enumerate}
                 \item $d^2f(p) > 0$ - строгий локальный минимум
                 \item $d^2f(p) < 0$ - строгий локальный максимум
@@ -533,7 +566,6 @@
             \end{proof}
         \end{theorem*}
 
-
     \subsection{Функции класса $C^k$ на открытом множестве (и на множествах, не обязательно открытых).}
         Символ $\open$ обозначает "открыто в". Контекст:
         \[U \open \mathbb{R}^m, \ f:U \to \mathbb{R}^k, \ f \in C^r(U), \ r \geq 0\]
@@ -572,7 +604,6 @@
                 Ясно, что $g \circ f = \tilde{g} \circ \tilde{f}$ - сужение $\mathrm{dom}(g \circ f)$.
             \end{proof}
         \end{statement*}
-
 
     \subsection{Теорема об открытости отображения вида $f(x) = x +\varphi(x)$, где $\varphi$ - сжимающее отображение.}
         \begin{theorem*}
@@ -635,6 +666,196 @@
                 Значит $\left|\varphi(x) - p\right| \leq \varepsilon$ и $\varphi(x) \in B_\varepsilon(p) \mid x \in B_\varepsilon(p).$
             \end{proof}
         \end{theorem*}
+
+    \subsection{Теорема о локальной обратимости, "контрпримеры".}
+        \begin{theorem*}
+            Пусть $U \open \mathbb{R}^m, \ f:U \to \mathbb{R}^m - C^r$-гладкое отображение, $r \geq 1$.
+            Пусть $p \in U$. Если $df(p): \mathbb{R}^m \to \mathbb{R}^m$ - невырожден, то у точки $p$ имеется окрестность $U_1$ такая, что 
+            $f(U_1) \open \mathbb{R}^m$ и сужение $f|_{U_1}: U_1 \to f(U_1)$ является $C^r$-изоморфизмом (т.е. обратное отображение тоже принадлежит классу $C^r$).
+            \begin{proof}
+                Считаем сначала, что $\forall v \ df(p)\langle v \rangle = v$, т.е. $df(p):\mathbb{R}^m \to \mathbb{R}^m$ - тождественное отображение, $Df(p) = E$.
+                Рассмотрим отображение $h(x) = f(x) - x$:
+                \[dh(x) = df(x) - dx, \text{ при x = p: } dh(p) = dx - dx = 0 (Dh(x) = E - E = 0)\]
+                Все частные производные отображения $h$ в точке $p$ равны 0. Значит, в силу их непрерывности в $p$,
+                у точки $p$ имеется некоторый шарик $U$ с центром в $p$ такой, что $\forall x \in U$ все эти производные ограничены, например, $\frac{1}{2} < 1$.
+                \[\forall x_1, x_2 \in U_1 \ \left|h(x_1) - h(x_2) \right| \leq \frac{1}{2} \cdot \abs{x_1 - x_2} \]
+                По лемме о сжимающем отображении $f(U_1)$ открыто в $\mathbb{R}^m$ и $f|_{U_1} \to f(U_1)$ обратимо, обратное отображение непрерывно.
+                По теореме о классе гладкости обратного отображения оно ($f^{-1}$) имеет нужный класс. Заметим, что в той лемме необходимо, чтобы $\forall x \in U_1 \ \det(Df(x)) \neq 0$, 
+                поэтому когда мы выбираем окрестность $U_1$ надо это тоже потребовать:
+                \[Df(p) = E, \ \det(E) = 1 \neq 0 \text{ и в некоторой окрестности  точки $p$ } \det(Df(x)) = 0\]
+                \newline
+                Мы доказали теорему для $Df(p) = E$. Пусть теперь $Df(p) = A, \ \det(A) \neq 0 \implies$ значит существует обратная матрица $A^{-1}$, тоже невырожденная. Пусть $\tilde{f} = A^{-1}f(x)$ - композиция линейного отображения и отображения $f$.
+                Для $\tilde{f}$ выполнена теорема, ведь $D\tilde{f}(p) = A^{-1}Df(p) = A^{-1}A = E$.
+                Значит $\exists \tilde{U} \ni p \mid \tilde{f}:\tilde{U} \to \tilde{f}(\tilde{U})$ - $C^r$-изоморфизм и $\tilde{f}(\tilde{U}) \open \mathbb{R}^k$.
+                \newline
+                $f(x) = A \tilde{f}(x)$ - композиция двух "хороших" отображений и $f(\tilde{U}) = A\cdot\tilde{f}(\tilde{U})$ - образ открытого множества под действием линейного изоморфизма $A$ - тоже открыт в $\mathbb{R}^k$.
+            \end{proof}
+        \end{theorem*}
+
+    \subsection{Лемма о локальном наложении.}
+    \begin{lemma*}[Лемма о локальном наложении]
+        Пусть $f \in C^r, r > 1, f:U \to \mathbb{R}^k, U \open \mathbb{R}^n$ - регулярна в точке $p$.\newline
+        Тогда $f(p)$ - внутренняя точка множества $f(\Omega) \subset \mathbb{R}^k$. То есть:
+        \[\exists \varepsilon > 0 \mid \varepsilon\text{-шар } \overset{o}{B_\varepsilon}(f(p)) \text{ целиком содержится в }f(\Omega)\]
+        \begin{proof}
+            По лемме о регулярном дополнении $\exists \overline{g}:\Omega \to \mbox{R}^{n-k}$ такое, \\что отображение $\begin{pmatrix}f \\ g\end{pmatrix}: \Omega \to \mathbb{R}^n$ регулярно (и, в частности, локально обратимо в $p$).
+            По теореме о локальной обратимости $\exists$ окрестность $p \in U \open \mathbb{R}^n$ такая, что $\begin{pmatrix} f \\ g \end{pmatrix} \open \mathbb{R}^n$. 
+            \newline
+            Это означает, что образ множества U, т.е. множество точек вида $(f_1(\overline{x}), \hdots, f_k(\overline{x}), g_1(\overline{x}), \hdots, g_{n-k}(\overline{x})) \in \mathbb{R}^n, \overline{x} \in U$ открыт в $\mathbb{R}^n$.
+
+            \par
+            Тогда пользуясь тем, что при проекции образы открытых множеств открыты, получаем, что 
+            \[\text{Множество точек из проекций на первые $k$ координат монжества $\begin{pmatrix} f\\g\end{pmatrix}(U)$: }\begin{pmatrix}
+                f_1(\overline{x}) \\
+                \hdots \\
+                f_k(\overline{x})
+            \end{pmatrix} \open \mathbb{R}^k\]
+            Проверим теперь, что если $A \open X \times Y$, то $\Pi(A) \open X$, $\Pi$ - проекция (собственно, покажем что проекция образа открытого множества открыта). \par 
+            Берем точку $x_0 \in \Pi(A)$. Существует точка $(x_0, y_0) \in A$, значит $\exists$ шарик с центром в $(x_0, y_0)$ целиком лежащий в $A$.
+            Ясно, что проекция этого шарика накрывает $\varepsilon$-шарик в $X$ с центром в $x_0$.
+        \end{proof}
+    \end{lemma*}
+
+    \subsection{Теорема о неявной функции.}
+        \begin{theorem*}[о неявной функции]
+            Пусть $U \open \mathbb{R}^{k+l} = \mathbb{R}^k \times \mathbb{R}^l$ и $f: U \to \mathbb{R}^l$ - $C^r$-отображение, $r \geq 1$.
+
+            Функция $f$ представляет собой набор:
+            \[f = \begin{pmatrix}{}
+                f_1(x_1, \hdots, x_k, y_1, \hdots, y_l) \\
+                \vdots \\
+                f_l(x_1, \hdots, x_k, y_1, \hdots, y_l)
+            \end{pmatrix}\]
+            Пусть некоторая точка $(\overrightarrow{x_0}, \overrightarrow{y_0}) \in U$ и $\det(\frac{\partial f}{\partial y}(\overrightarrow{x_o}, \overrightarrow{y_0})) \neq 0, \ f(\overrightarrow{x_0}, \overrightarrow{y_0}) = 0$.
+            \[\frac{\partial f}{\partial y} = \begin{pmatrix}
+                \frac{\partial f_1}{\partial y_1} & \hdots & \frac{\partial f_1}{\partial y_l} \\
+                \vdots & & \vdots \\
+                \frac{\partial f_l}{\partial y_1} & \hdots & \frac{\partial f_l}{\partial y_l}
+            \end{pmatrix}\]
+            Множество $M = \{(\overrightarrow{x},\overrightarrow{y}) \in \Omega \mid f(\overrightarrow{x}, \overrightarrow{y}) = 0\}$, где $\Omega$ - окрестность точки $(\overrightarrow{x_0}, \overrightarrow{y_0})$.
+            Точка $(\overrightarrow{x_0}, \overrightarrow{y_0}) \in M, \ \det(\frac{\partial f}{\partial y}(\overrightarrow{x_0}, \overrightarrow{y_0})) \neq 0$
+            \newline
+            Тогда у $(\overrightarrow{x_0}, \overrightarrow{y_0})$ имеется такая окрестность $\Omega$, что $\Omega \cap M$ - график некоторой $C^r$-функции $\alpha$, такой, что $\alpha: \Omega_x \to \mathbb{R}^l$ и 
+            \[D\alpha(x) = (\frac{\partial f}{\partial y}(x, \alpha(x)))^{-1} \cdot \frac{\partial f}{\partial x}(x, \alpha(x))\]
+            \newpage
+            \begin{proof}
+                Рассмотрим новое отображение 
+                \[\tilde{f}: (x, y) \to (x, y) \equiv \mathbb{R}^{k+l} \supset \Omega \to \mathbb{R}^{k+l}, \text{ $x, y$ - векторы размера $k$ и $l$ соответственно}\]
+                Определим $\tilde{f}(x, y) = (x, f(x, y))$.
+                В матричном виде:
+                \[\tilde{f}\begin{pmatrix}
+                    x_1 \\ \vdots \\ x_k \\
+                    y_1 \\ \vdots \\ y_l
+                \end{pmatrix} = 
+                \begin{pmatrix}
+                    x_1 \\ \vdots \\ x_k \\
+                    f_1(x_1, \hdots, x_k, y_1, \hdots, y_l) \\
+                    \vdots \\
+                    f_l(x_1, \hdots, x_k, y_1, \hdots, y_l) \\
+                \end{pmatrix}\]
+                Тогда $D\tilde{f}$ - блочная матрица вида:
+                \[D\tilde{f}(x,y) = 
+                \left(\begin{array}{c|c}
+                    \frac{\partial x}{\partial x} & \frac{\partial x}{\partial y} \\
+                    \hline
+                    \frac{\partial f}{\partial y} & \frac{\partial f}{\partial y}
+                \end{array}\right) = 
+                \left(\begin{array}{c|c}
+                    E & 0 \\
+                    \hline
+                    \frac{\partial f}{\partial x} & \frac{\partial f}{\partial y}
+                \end{array}\right)\]
+                Ее определитель в этом случае $1 \cdot \left| \frac{\partial f}{\partial y}\right| \neq 0$.\\
+                По теореме о локальной обратимости у $(x_0, y_0)$ существует окрестность $\Omega \open R^k \times R^l$ такая, 
+                что отображение $\tilde{f} |_\Omega: \Omega \to \tilde{f}(U) \subset \mathbb{R}^{k+l}$ является $C^r$-изоморфизмом.
+                Пусть $g: \tilde{f}(\Omega) \to \Omega$ - обратное отображение.
+                \[\left(\begin{array}{c}
+                    x \\ y
+                \end{array}\right)
+                \overset{f}{\underset{g}{\leftrightarrows}}
+                \left(\begin{array}{c}
+                    x \\
+                    f(x, y)
+                \end{array}
+                \right)\]
+                Функция $g$ задана как $g = \begin{cases}
+                    g_1(x, y) \\
+                    g_2(x, y)
+                \end{cases}$, причем $g_2(x,y) = x$. \\
+                Положим $\alpha(x) = g_2(x, 0)$. Надо проверить, что $f(x, \alpha(x)) = 0$. 
+                \begin{equation*}
+                    (x, f(x, \alpha(x))) = (x, 0) \end{equation*}
+                \[\Updownarrow\]
+                \begin{equation*}
+                    \tilde{f}(x, y) = (x, 0) \implies (x, y) = g(x, 0) \implies (x, y) = (x, g_2(x, 0)) \implies y = g_2(x, 0)
+                \end{equation*}
+                Поскольку $\alpha(x) = g_2(x, 0)$ - все выполнено.
+            \end{proof}
+        \end{theorem*}
+
+    \subsection{Теорема об обратной функции.}
+        \begin{theorem*}[Теорема о классе гладкости обратного отображения]
+            Пусть $U, V \open \mathbb{R}^m$. \\
+            $U \overunderset{f}{g}{\rightleftarrows} V$, $f, g$ - непрерывны и взаимно обратны. Если $f \in C^r(U)$ и $\forall x \in U \ df(x)$ - невырожден: $\det(Df(x)) \neq 0$, то $g \in C^r(U)$.
+            \begin{proof}
+                При $r > 0$  $g$ дифференциируема в $\forall y \in V$ по правилу дифференциирования обратного отображения. В матрицах Якоби:
+                \[Dg(f(x)) = (Df(x))^{-1}, \forall x \in U \text{, причем } f(x) = y, \ x = g(y)\]
+                \[Dg(y) = (Df(g(y)))^{-1}, \quad \text{цепочка преобразований } y \to g(y) \to Df(g(y)) \to (Df(g(y)))^{-1}\]
+                \[Dg(y) = w \circ Df \circ g(y), \ w \text{ - отображение обращения матрицы.}\]
+                \[Dg(y) = w \circ Df \circ g(y), \text{ причем } w - C^{\infty}, Df - C^{r-1}, g(y) - \text{дифференциируема}\]
+                $g$ дифференциируема $\implies Dg$ тоже дифференциируема как композиция $\implies$ все производные $g$ дифференциируемы $\implies Dg \in C^1 \implies g \in C^2 \implies \hdots \implies g \in C^{r-1} \implies Dg \in C^{r-1} \implies g \in C^r$.
+            \end{proof} 
+        \end{theorem*}
+
+    \subsection{Многообразия в $\Real^n$.}
+        \begin{definition*}
+            Пусть $M$ - метрическое пространство (необязательно подмножество в $\mathbb{R}^n$). $M$ является $k$-мерным многообразием без края,
+            если $\forall p \in M$ у точки $p \ \exists $ окрестность $U_p \open M$ гомеоморфная открытому шару в $\mathbb{R}^k$.
+        \end{definition*}
+
+        \begin{definition*}
+            Гомеоморфизм - непрерывное отображение, обратное к которому тоже непрерывно.
+        \end{definition*}
+
+    \subsection{Примеры двумерных многообразий: сфера, тор, цилиндр, лист Мёбиуса.}
+
+    \subsection{Теорема Брауэра об инвариантности области (формулировка). \\ Гомеоморфизмы и $C^r$-изоморфизмы. }
+        \begin{theorem*}[Брауэра об инвариантности области (без док-ва).]
+            \par Пусть $U \open \mathbb{R}^k$ и $f:U \to \mathbb{R}^k$ - непрерывна и инъективна. \newline
+            Тогда $f(U) \open \mathbb{R}^k$ и $f^{-1}: f(U) \to U$ - тоже непрерывна.
+        \end{theorem*}
+
+    \subsection{Многообразия с краем. лемма о крае полупространства.}
+        \begin{definition*}
+            $M$ - многобразие (с краем, а может и без), если $\forall p \in M \ \exists U \open M \ C^r$-изоморфно 
+            \begin{enumerate}
+                \item $\tilde{U} \open \mathbb{R}^k$
+                \item $\mathbb{R}^k_+ = \{x_1, \hdots, x_k \mid x_1 \geq 0\}$ 
+            \end{enumerate}
+        \end{definition*}
+
+        \begin{definition*}
+            Точка $p \in \partial M$ (принадлежит краю), если у точки $p$ $\nexists$ окрестности первого типа.
+        \end{definition*}
+
+        \begin{definition*}
+            Значит, $M$ - многообразие с краем, если $M$ и многообразие и $\exists p \in M \mid p \nexists$ окрестности, гомеоморфной открытому подмножеству в $\Real^k$.
+        \end{definition*}
+
+        \begin{lemma*}[о крае полупространства]
+            $\mathbb{R}^k_+$ - многообразие с краем, $\partial \mathbb{R}^k_+ = \{(x_1, \hdots, x_k) \mid x_1 = 0 \ x_{2\hdots k} \ge 0\}$. При этом $\mathbb{R}^k_+$ называется полупространством.
+            \begin{proof}
+                $\mathbb{R}^k_+$ является многобразием по определению, ведь любая ее точка гарантированно имеет окрестность, открытую в $\mathbb{R}^k_+$, например, в качестве такой окрестности можно взять само $\mathbb{R}^k_+$.
+                \par
+                Пусть $x_1 > 0$, тогда очевидно, что множество $\mathbb{R}^k_+ \cap \{(x_1, \hdots, x_k) \mid x_1 > 0\}$ открытое в $\mathbb{R}^k_+$ является окрестностью точки $p$ и поэтому $p \in M \backslash \partial M$
+                \par
+                Пусть $x_1 = 0$. Ясно, что никакая окрестность точки $p$ в $\mathbb{R}^k_+$ не является открытым множеством в $\mathbb{R}^k_+$.
+                Однако, нам было необходимо более сложное утверждение, а именно - нужно было показать, что $U$ не может быть $C^r$-изоморфно открытому подмножеству $\Omega \in \mathbb{R}^k_+$. 
+                Пусть $r > 0$ в $C^r$, по теореме о локальной обратимости если $\Omega \open \mathbb{R}^k$ и $\psi: \Omega \to \psi(\Omega) \subset \mathbb{R}^k$ $C^r$-изоморфизм, то $\psi(\Omega) \open \mbox{R}^k$.
+                \par
+                И наконец, $r \neq 0$ по теореме Брауэра об инвариантности области.
+            \end{proof}
+        \end{lemma*}
 \end{document}
 
 
