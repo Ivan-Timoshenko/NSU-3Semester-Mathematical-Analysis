@@ -66,7 +66,7 @@
     Для любого примитивного (стуенчатого) множества $A$ $\exists$ дизъюнктный набор сегментов (т.е. набор непересекающихся сегментов) $I_1, \hdots, I_N$ такой, что $A = \bigcup_{n=1}^{N} I_n$.
 
     \begin{proof}
-        Пусть $A = \bigcup J_k$, $J_k = J_k^1 \times \hdots \times J_k^r$. Пусть $a_0^i < a_1^i < \hdots < a_{N_i}^i$ - концы сегментов $J_1^i, \hdots, J_m^i$. Возьмем ${a_0^i}, {a_0^i, a_1^i}, {a_1^i}, {a_1^i, a_2^i}$ и так далее - это элементарные сегменты на оси $i$-ой координаты. Искомая система дизъюнктных элементов - это декартово произведение этих сегментов по каждой координате.
+        Пусть $A = \bigcup J_k$, $J_k = J_k^1 \times \hdots \times J_k^r$. Пусть $a_0^i < a_1^i < \hdots < a_{N_i}^i$ - концы сегментов $J_1^i, \hdots, J_m^i$. Возьмем $\{a_0^i\}, \{a_0^i, a_1^i\}, \{a_1^i\}, \{a_1^i, a_2^i\}$ и так далее - это элементарные сегменты на оси $i$-ой координаты. Искомая система дизъюнктных элементов - это декартово произведение этих сегментов по каждой координате.
     \end{proof}
 \end{lemma*}
 
@@ -135,4 +135,39 @@
             
         \end{enumerate}
     \end{proof} 
+
+    \begin{lemma*}[Лемма о счетном покрытии отрезка]
+        Пусть $I = \bigcup_{n=1}^\infty J_n$. При этом $I, J_n$ - сегменты в $\Real$, и система $\{J_n\}$ - дизъюнктная (отрезки не пересекаются). Тогда $\mu_1(I) = \sum_{n=1}^{\infty} \mu_1(J_n)$.
+        \begin{proof}
+            Поскольку $\forall k \sum_{n=1}^{k} \le \sum_{n=1}^{\infty}$, то $\mu_1(I) \ge \sum_{n=1}^{\infty} \mu_1(J_n)$. \\ Но почему $\mu_1(I) \le \sum_{n=1}^{\infty} \mu_1(J_n)$?
+            Будем считать, что $I$ - замкнутый отрезок (если мы добавим концы, то ничего в рассуждениях не изменится). 
+            \par
+            Пусть $\varepsilon > 0$, покажем, что $\mu_1(I) \le \sum_{n=1}^{\infty} \mu_1(J_n) + \varepsilon$. Каждый сегмент $J_n = \langle a_n, b_n \rangle$ удлиним на $\frac{\varepsilon}{2^n}$, положив $\tilde{J}_n = (a_n - \frac{\varepsilon}{2^{n+1}}, b_n + \frac{\varepsilon}{2^{n+1}})$, очевидно, $J_n \subseteq \tilde{J}_n$, а значит $\mu_1(\tilde{J}_n) = \mu_1(J_n) + \frac{\varepsilon}{2^n}$.
+            Получим покрытие отрезка $I$ открытыми множествами $\tilde{J}_n$. 
+            \par
+            В силу компактности $I$ существует конечное подпокрытие $J_{n_1}, \hdots, J_{n_m}$:
+            \[I \subset \underbrace{J_{n_1} \cup \hdots \cup J_{n_m}}_{\text{конечная система}} \subset \bigcup_{n_1}^{n_m}\tilde{J}_n\]
+            \[\mu_1(I) \le \sum_{n_1}^{n_m}\tilde{J}_n \le \sum_{n=1}^{\infty}\left[ \mu_1(J_n) + \frac{\varepsilon}{2^n} \right] = \sum_{n=1}^{\infty} \mu_1(J_n) + \varepsilon\]
+            Поскольку это неравенство выполнено $\forall \varepsilon > 0$, то верно, что $\mu_1(I) \le \sum_{n=1}^{\infty} \mu_1(J_n)$.
+        \end{proof}
+        Что интересно, в $\mathbb{Q}$ лемма неверна, поскольку там любой сегмент это счетное объединение точек.
+    \end{lemma*}
 \end{theorem*}
+
+\begin{definition*}
+    Интегральная оценка:
+    \par
+    Пусть $f:\Real^k \to E$ - произвольная функция. Число $C \in [0, \infty)$ называется интегральной оценкой функции $f$, если существует возрастающая последовательность ступенчатых функций $\Real^k \to \Real$, $\varphi_1 \le \varphi_2 \le \hdots \forall x$ такая, что 
+    \begin{enumerate}
+        \item $\forall x \in \Real^k \ \lim_{n\to \infty} \varphi_n(x) \ge \abs{f(x)}$
+        \item $\forall n$ элементарный $\int_{\Real^k} \varphi_n \le C$.
+    \end{enumerate}
+\end{definition*}
+
+\begin{definition*}
+    Интегральная норма
+    \[\abs{\abs{f}}_{L_1}:=\inf \text{множества всех интегральных оценок}, \ f \in [0, \infty)\]
+\end{definition*}
+
+$f: \Real^k \to E$ любая интегрируема по Лебегу, если существует последовательность ступенчатых функций $f_1, \hdots, f_n, \hdots : \Real^k \to E$ таких, что $\abs{\abs{f - f_n}}_{L_1} \underset{n \to \infty}{\to} 0$
+\[\int_{\Real} f\diff x := \lim_{n \to \infty} \int_{\Real} f_n \diff x\]
