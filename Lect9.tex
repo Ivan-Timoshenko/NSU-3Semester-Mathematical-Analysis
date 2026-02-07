@@ -58,7 +58,7 @@
 \section{Примитивный интеграл, интеграл Лебега}
 \begin{definition*}
     Отрезки вида $I = {a}, (a,b), [a,b), (a, b], [a,b]$ - примитивные сегменты в $\Real$. Для них на прямой определена примитивная мера, как функция $\mu_1(I) := \abs{b-a}$. \par
-    Элементарный сегмент в $\Real^n$ это $I_1 \times \hdots \times I_n$, где $I_k$ - элементарный сегмент в $\Real$ $\forall k \in {1, \hdots, n}$. Для сегментов большой размерности мера определена в виде $\mu_n(I) = \mu_1(I_1) \cdot \hdots \cdot \mu_n(I_n)$.\par
+    Элементарный сегмент в $\Real^n$ это $I_1 \times \hdots \times I_n$, где $I_k$ - элементарный сегмент в $\Real$ $\forall k \in {1, \hdots, n}$. Для сегментов большой размерности мера определена в виде $\mu_n(I) = \mu_1(I_1) \cdot \hdots \cdot \mu_1(I_n)$.\par
     Множество $S$ будем считать примитивным (ступенчатым) множеством, если $S$ - объединение конечного числа сегментов.
 \end{definition*}
 
@@ -102,7 +102,7 @@
 \end{statement*}
 
 \begin{definition*}
-    Элементарный интеграл определим как функцию $\int_{\Real^n}: Step(\Real^n, E) \to E$. Функция $f$ должна иметь вид $\sum_{i=1}^{k}C_i\cdot \chi_{J_i}$.
+    Элементарный (примитивный) интеграл определим как функцию $\int_{\Real^n}: Step(\Real^n, E) \to E$. Функция $f$ должна иметь вид $\sum_{i=1}^{k}C_i\cdot \chi_{J_i}$.
     Тогда
     \[f = \sum_{i=1}^{k} C_i \cdot \chi_{J_i} \implies \int_{\Real^n}f := \sum_{i=1}^{k}C_i \mu_n(J_i)\]
 
@@ -114,7 +114,7 @@
     Введем удобные обозначения: $X = \Real^n, Y = \Real^m, \ X \times Y = \Real^{n+m}$.
     Пусть $f \in Step(X \times Y, E)$. Тогда:
     \begin{enumerate}
-        \item $\forall x \in X$ функция от $y$, отображающая $y \to f(x,y)$ является ступенчатой на $Y$.
+        \item $\forall x \in X$ функция $f(x, y)$ от $y$ (выбрали $\forall x \in X$, зафиксировали, аргументом стал только $y$), отображающая $y \to f(x,y)$ является ступенчатой на $Y$.
         \item Функция от $x$, отображающая $x \to \int_{Y} f(x,y)\diff y$ - ступенчатая на $X$.
         \item $\int_X \left(\int_Y f(x, y) \diff y\right) \diff x = \int_{X \times Y} f(x, y) \diff (x, y)$        
     \end{enumerate}
@@ -165,9 +165,26 @@
 \end{definition*}
 
 \begin{definition*}
+    Пусть $M \subset \Real^n$. Будем говорить, что $M$ - пренебрежимое множество в $\Real^n$(множество меры нуль), если $\forall \varepsilon > 0 \ M$ можно покрыть счетным набором сегментов, сумма мер которых $\le \varepsilon$.
+\end{definition*}
+
+\begin{definition*}
     Интегральная норма
     \[\abs{\abs{f}}_{L_1}:=\inf \text{множества всех интегральных оценок}, \ f \in [0, \infty)\]
 \end{definition*}
 
-$f: \Real^k \to E$ любая интегрируема по Лебегу, если существует последовательность ступенчатых функций $f_1, \hdots, f_n, \hdots : \Real^k \to E$ таких, что $\abs{\abs{f - f_n}}_{L_1} \underset{n \to \infty}{\to} 0$
-\[\int_{\Real} f\diff x := \lim_{n \to \infty} \int_{\Real} f_n \diff x\]
+\begin{definition*}
+    $f: \Real^k \to E$ любая интегрируема по Лебегу, если существует последовательность ступенчатых функций $f_1, \hdots, f_n, \hdots : \Real^k \to E$ таких, что $\abs{\abs{f - f_n}}_{L_1} \underset{n \to \infty}{\to} 0$
+    Интеграл от $f$ в этом случае:
+    \[\int_{\Real} f\diff x := \lim_{n \to \infty} \int_{\Real} f_n \diff x\]
+\end{definition*}
+
+\begin{statement*}[Принцип исчерпывания для элементарных множеств]
+    Пусть $S_k$ для $k = 1, 2, \hdots$ и $S$ - элементарные множества. Если $S \subset \bigcup_{k=1}^{\infty} S_k$, то $\mu(S) \le \sum_{k=1}^{\infty} \mu(S_k)$.
+
+    На самом деле это кусок из доказательства леммы о счетном покрытии отрезка.
+\end{statement*}
+
+\begin{statement*}[Следствие 1]
+    Если $S_k$ - дизъюнктны ($S_k \cap S_l \neq \varnothing$ если $k \neq l$) и $S = \bigcup_{k=1}^{\infty}S_k$, то $\mu(S) = \sum_{k=1}^{\infty}\mu(S_k)$.
+\end{statement*}
