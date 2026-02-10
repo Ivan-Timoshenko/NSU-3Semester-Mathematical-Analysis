@@ -185,6 +185,96 @@
     На самом деле это кусок из доказательства леммы о счетном покрытии отрезка.
 \end{statement*}
 
-\begin{statement*}[Следствие 1]
+\begin{statement*}[Следствие]
     Если $S_k$ - дизъюнктны ($S_k \cap S_l \neq \varnothing$ если $k \neq l$) и $S = \bigcup_{k=1}^{\infty}S_k$, то $\mu(S) = \sum_{k=1}^{\infty}\mu(S_k)$.
 \end{statement*}
+
+\begin{lemma*}[Принцип исчерпывания для вложенных множеств]
+    Пусть множество $U$ и последовательность $U_1 \subset U_2 \subset \hdots$ $\in Step$, причем $U = \bigcup_{k = 1}^{\infty} U_k$, тогда $\lim_{i \to \infty} \mu(U_i) \ge \mu(U)$.
+    \begin{proof}
+        Пусть $\tilde{U}_1 := U_1, \tilde{U}_2 := U_2 \backslash U_1, \hdots, \tilde{U}_n := U_n \backslash U_{n-1}$ и так далее. Поскольку $U_n = \tilde{U}_1 \cup \hdots \cup \tilde{U}_n$, то $\bigcup \tilde{U}_n = \bigcup U_n$. Тогда по классическому принципу исчерпывания:
+        \[\sum_{n=1}^{\infty} \mu(\tilde{U}_n) \ge \mu(\tilde{U})\]
+        Сумма слева - классическая сумма ряда, т.е. предел последовательности частичных сумм, с учетом, что $\sum_{n=1}^{k} \mu(\tilde{U}_n) = \mu(\bigcup_{n=1}^{k} \tilde{U}_n)$:
+        \[\sum_{n=1}^{\infty} \mu(\tilde{U}_n) = \lim_{k \to \infty} \sum_{n=1}^{k} \mu(\tilde{U}_n) = \lim_{k \to \infty} \mu(\bigcup_{n=1}^{k} \tilde{U}_n) = \mu(U_n)\]
+    \end{proof}
+\end{lemma*}
+
+\begin{statement*}[Интеграл элементарной функции как мера подграфика]
+    Пусть ступенчатая функция $f: \Real^n \to \Real$ и $f \ge 0 (\forall x \ f(x) \ge 0)$. Пусть $U_f = \{ (x, y) \mid x \in \Real^n, \ 0 \le y \le f(x) \}$. Тогда:
+    \[\int_{\Real^n} f(x) \diff x = \mu_{n+1}(U_f)\]
+    Т.е. интеграл $n$-мерной ступенчатой функции является мерой размерности $n+1$ для ее подграфика.
+    \begin{proof}
+        Представим $f = \sum_{k=1}^{m} \lambda_k \chi(S_k)$, где $S_k$ - дизъюнктные сегменты в $\Real^n$. Тогда из того, что $f(x) \ge 0$ следует, что $\lambda_k \ge 0$. По определению:
+        \[\int_{\Real^n}f = \sum_{k=1}^{m}\lambda_k \cdot \mu_n(S_k)\]
+        Заметим, что $\lambda_k \cdot \mu_n(S_k) = \mu_{n+1}(S_k \times [0, \lambda_k])$, ведь $S_k \times [0, \lambda_k]$ - сегмент размерности $n+1$, это буквально $U_f$ по определению.
+        А сумма $\sum_{k=1}^{m} \mu_{n+1}(S_k \times [0, \lambda_k]) = \sum_{k=1}^{m}\mu_{n+1}(U_f)$.
+    \end{proof}
+\end{statement*}
+
+\begin{statement*}[Принцип исчерпывания для последовательности элементарных функций]
+    Пусть даны $\varphi_1 \le \varphi_2 \le \hdots$ и $\varphi$ - ступенчатые функции. Если $\forall x \ \lim_{k \to \infty} \varphi_k (x) \ge \varphi(x) (\star)$, то \[\lim_{k \to \infty} \int_{\Real^n} \varphi_k \ge \int_{\Real^n} \varphi\]
+
+    \begin{proof}
+        Предположим что $\varphi_1 \ge 0$ и $\varphi \ge 0$. Тогда $\forall k \ \varphi_k \ge 0$ в силу возрастания последовательности. Заметим, что из условия $(\star)$ следует, что $\bigcup_{k=1}U_{\varphi_k} \supset U_{\varphi}$. 
+        В самом деле, если $(x, y) \in U_\varphi$ (точка принадлежит подграфику), то $0 \le y < \varphi(x)$ и $\exists K \mid 0 \le y < \varphi_K(x)$, т.е. $(x, y) \in U_{\varphi_k}$.
+        Заметим также, что из $\varphi_1 \le \varphi_2 \le \hdots$ следует, что $U_{\varphi_1} \subset U_{\varphi_2} \subset \hdots$. Теперь используя интеграл как меру подграфика:
+        \[\int_{\Real^n}\varphi_k = \mu_{n+1}(U_{\varphi_k}), \ \int_{\Real^n}\varphi = \mu_{n+1}(U_{\varphi})\]
+        Осталось воспользоваться принципом исчерпывания для вложенных множеств. 
+\newline
+        А теперь рассмотрим общий случай, когда $\varphi_1, \varphi$ могут быть и меньше нуля. Прибавим ко всем $\varphi_i$ и $\varphi$ функцию $\psi \in Step$, так, чтобы стало $\begin{cases*}
+            \varphi_1 + \psi \ge 0 \\ \varphi + \psi \ge 0
+        \end{cases*}$ В качестве $\psi(x)$ можно взять $\psi = \max(-\varphi_1, -\varphi_1)$ - а это ступенчатая функция.
+        Рассмотрим теперь $\begin{cases*}
+            \tilde{\varphi}_n := \varphi_n + \psi \ge 0 \\ 
+            \tilde{\varphi} := \varphi + \psi \ge 0
+        \end{cases*}$, тогда по первой части доказательства получаем, что 
+        $\lim_{n \to \infty} \int_{\Real^n} \tilde{\varphi}_n \ge \int_{\Real^n} \tilde{\varphi}$
+        Заметим, что 
+        \[\int \tilde{\varphi}_n = \int \varphi_n + \int \psi, \ \int \tilde{\varphi} = \int \varphi + \int \psi\]
+        В обеих частях есть $\int \psi$, который еще и не зависит от $n$. Избавившись от него получаем необходимое утверждение.
+    \end{proof}
+\end{statement*}
+
+\begin{statement*}[Свойства интегральной нормы]
+    Перечислим свойства интегральной нормы:
+    \begin{enumerate} 
+        \item $\abs{\abs{f}} = \abs{\abs{ \ \abs{f} \ }}$
+        \item $\forall f \ \abs{\abs{f}} \ge 0$
+        \item $\abs{\abs{\lambda f(x)}} = \abs{\lambda}\cdot \abs{\abs{f}}$
+        \item Неравенство бесконечноугольника:\\
+        Если сумма $\sum_{k=1}^{f_k}$ существует $\forall x$, то
+        \[\abs{\abs{\sum_{k=1}^{\infty} f_k}} \le \sum_{k=1}^{\infty}\abs{\abs{f}}\]
+        \begin{proof}
+            Докажем четвертое свойство. Можно считать, что $\forall k \ f_k < \infty$, иначе справа в нашем утверждении будет $\infty$ и нечего там доказывать.\\
+            Пусть $\varepsilon > 0$, у нас существует каскад $\sigma_{11} \le \sigma_{12} \le \hdots$ для $f_1$ такой, что $\lim_{k \to \infty} \sigma_{1k}(x) \ge \abs{\abs{f_1(x)}}$, но при этом $\forall k$ выполнено $\int_{\Real^n} \sigma_{1k}(x) \le \abs{\abs{f(x)}} + \frac{\varepsilon}{2^1}$. \\
+            Для $f_2$ существует каскад $\sigma_{21} \le \sigma_{22} \le \hdots$, такой, что $\lim_{k \to \infty} \sigma_{2k}(x) \ge \abs{\abs{f_2(x)}}$, но $\forall k \ \int_{\Real^n} \sigma_{2k} \le \abs{\abs{f_2}} + \frac{\varepsilon}{2^2}$ и так далее для всех $f_i$.\\
+            Построим каскад для функции $g:= \sum_{k=1}^{\infty}f_k$. Пусть $\rho_1 := \sigma_{11},\  \rho_2 := \sigma_{21} + \sigma_{22}, \ \hdots, \rho_k = \sum_{i=1}^{k}\sigma_{ik}$.
+            Помним, что все $\rho$ и $\sigma$ - ступенчатые функции. А еще отметим, что $\rho_i$ образуют возрастающую последовательность
+            $\rho_1 \le \rho_2 \le \hdots$.
+            \par
+            Покажем, что $\lim_{k \to \infty} \rho_k(x) \ge \abs{\abs{g(x)}}$. 
+            Для этого сначала установим, что \\ $\forall m \ \lim_{k \to \infty} \rho_k(x) \ge \abs{\abs{ \sum_{k=1}^{m} f_k(x)}} (\star)$.
+
+            \[\forall k \ge m \ \rho_k(x) \ge \sigma_{1k}(x) + \hdots +\sigma_{mk}(x)\]
+            Поэтому $\lim_{k \to \infty} \rho_k(x) \ge \lim_{k \to \infty} \left[ \sigma_{1k}(x) + \hdots + \sigma_{mk}(x) \right] = \underbrace{\lim_{k \to \infty} \sigma_{1k}(x)}_{\le \abs{\abs{f_1}}} + \hdots + \underbrace{\lim_{k \to \infty} \sigma_{mk}(x)}_{\abs{\abs{f_m}}} \ge \abs{\abs{f_1 + \hdots + f_m}}$ 
+            В искомом неравенстве $(\star)$ теперь перейдем к пределу по $m \to \infty$ и по неравенству пределов получим, что 
+            \[\lim_{k \to \infty} \rho_k(x) \ge \abs{\abs{\sum_{k=1}^{\infty}f_k(x)}}\]
+            Это нам и нужно было. 
+            \par
+            Поскольку для $f_i$ мы вводили $\sigma_{ik}$ с условием, что $\forall k \ \int_{\Real^n} \sigma_{ik} \le \abs{\abs{f_i}} + \frac{\varepsilon}{2^i}$, то:
+            \begin{equation}
+                \label{infiangle}
+                \int_{\Real^n} \rho_k(x) = \underbrace{\int_{\Real^n} \sigma_{1k}}_{\le \abs{\abs{f_1}} + \frac{\varepsilon}{2}} + \underbrace{\int_{\Real^n} \sigma_{2k}}_{\le \abs{\abs{f_2}} + \frac{\varepsilon}{2^2}} + \hdots + \underbrace{\int_{\Real^n} \sigma_{kk}}_{\le \abs{\abs{f_k}}+ \frac{\varepsilon}{2^k}} \le \abs{\abs{f_1}} + \hdots \le \abs{\abs{f_k}} + \varepsilon 
+            \end{equation}
+            Итак, нашелся каскад $\rho_k$, дающий интегральную оценку вида \eqref{infiangle} для функции $g = \sum_{k=1}^{\infty}f_k$.
+            То есть:
+            \[\forall \varepsilon \ \abs{\abs{\sum_{k=1}^{\infty} f_k}} \le \sum_{k=1}^{\infty} \abs{\abs{f_k}} +\varepsilon\]
+            В силу общности выбора $\varepsilon$ получаем искомое.
+        \end{proof}
+    \end{enumerate}
+\end{statement*}
+
+\begin{definition*}
+    Функция $f:\Real^n \to E$ интегрируема по Лебегу ($f\in L_1(\Real^n, E)$), если $\exists$ последовательность $\varphi_n \in Step(\Real^n, E)$ (т.е. $\abs{\abs{f - \varphi_n}} \underset{n \to\infty}{\to} 0$). В это случае:
+    \[\int_{\Real^n} f := \lim_{k \to \infty} \int_{\Real^n} \varphi_k\]
+\end{definition*}
