@@ -1,0 +1,72 @@
+\subsection{Пренебрежимые множества}
+
+\begin{definition*}
+    Функция $f:X \to E$ пренебрежима, если $\norm{f} = 0$. 
+\end{definition*}
+
+\begin{definition*}
+    Множество $U \subset X$ пренебрежимо, если функция $\chi(U)$ пренебрежима.
+\end{definition*}
+
+\begin{statement*}[Свойства:]
+    \begin{enumerate}
+        \item Пусть $\norm{f} \le \norm{g}$, $g$ - пренебрежима, тогда $f$ - пренебрежима.
+        \item Пусть $A \subset B$ и $B$ - пренебрежима, тогда $A$ - пренебрежима.
+        \item Пусть $f_1, f_2, \hdots$ - пренебрежимы, тогда $\sum_{k=1}^{\infty} f_n$ - пренебрежима.
+        \begin{proof}
+            \[\norm{\sum_{k=1}^{\infty}f_k} \underset{\text{нер-во бесконечноугольника}}{\le} \sum_{k=1}^{\infty}\norm{f_k} = 0 + \hdots + 0 = 0\]
+        \end{proof}
+    \end{enumerate}
+\end{statement*}
+
+\begin{definition*}["Почти всюду"]
+    Определим понятие "почти всюду". Будем говорить, что условие $Y(x)$ выполнено \textbf{почти всюду} в $X$ ($Y(x) \mid \vee x \in X$), если $\exists$ пренебрежимое $A$ такое, что $Y(x)$ выполнено $\forall x \in X\backslash A$.
+    \par
+        Или $U \subset X$, $Y(x)$ выполнено $\vee x \in U$, если $\exists$ пренебрежимое $A \subset X$, такое, что $Y(x)$ выполнено $\forall x \in U \backslash A$.
+\end{definition*}
+
+\begin{theorem*}[Геометрический признак пренебрежимости множества]
+    Если $\forall \varepsilon$ множество $A$ можно покрыть счетным набором сегментов $S_n$ таких, что $\sum_{n=1}^{\infty} \mu(S_n) < \varepsilon$, то $A$ - пренебрежимо.
+    \begin{proof}
+        Пусть $S_n$ - необходимые сегменты. Тогда $\forall x \in A \ \exists n \mid x \in S_n \implies \chi(A) \le \sum_{k=1}^{\infty} \chi(S_k)$. Тогда по нер-ву бесконечноугольника $\norm{\chi(A)} \le \sum_{n=1}^{\infty} \norm{\chi(S_n)}$. 
+        Но $\norm{\chi(S_n)} = \int \abs{\chi(S_n)}$ - а это уже мера сегмента $S_n$, которая по условию меньше $\varepsilon$.
+    \end{proof}
+        Теорема на самом деле критерий, обратное тоже верно:
+        \[A \text{ - пренебрежимо} \implies \forall \varepsilon \ \exists \{S_n\} \ A \subset \bigcup S_n \text{ и } \sum_{n=1}^{\infty} \mu(S_n) < \varepsilon\]
+    \begin{proof}
+        Рассмотреть возрастающий каскад $\varphi_n$ для $\chi(A)$ и \newline рассмотреть $S_n = \{x \mid \abs{\varphi_n(x)} \ge \frac{1}{2}\}$.
+    \end{proof}
+\end{theorem*}
+
+\begin{theorem*}[Критерий пренебрежимости функции]
+    Функция $f$ пренебрежима $\iff \vee x \ f(x) = 0$.
+    \begin{proof}
+        \begin{itemize}
+            \item $\impliedby:$ Пусть $A = \{x \mid f(x) = 0\}$. Заметим, что 
+            \[\chi(A) + \chi(A) + \hdots = \begin{cases*}
+                0 \ x \notin A \ (f(x) \neq 0) \\
+                1 \ x \in A \ (f(x) = 0)
+            \end{cases*}\] 
+
+            \[\norm{f} \le \norm{\chi(A) + \chi(A) + \hdots} \le \sum \norm{\chi(A)}\]
+            Если $A$ - пренебрежимо, то $\norm{f} \le 0 + 0 + \hdots = 0$.
+            \item $\implies$ Пусть $f$ пренебрежима. 
+            \[\abs{\chi\left[A\right](x)} \le (\abs{f} + \hdots + \abs{f} + \hdots)(x) \implies \norm{\chi(A)} \le \sum \norm{f}\]
+        \end{itemize}
+    \end{proof}
+\end{theorem*}
+
+\begin{lemma*}[Лемма о бесконечных значениях]
+    Пусть $f:X \to \overline{\Real} = \Real \cup \{\infty\} \cup \{-\infty\}$. Если $\norm{f} < \infty$, то $\vee x \in X \ f(x) < \infty$.
+    
+    \begin{proof}
+        
+        Надо показать, что множество $A = \{ x \mid \abs{f(x)} = \infty\}$. 
+        \[\chi\left[A\right](x) = \begin{cases*}
+            0 \ \abs{f(x)} < \infty \\
+            1 \ \abs{f(x)} = \infty
+        \end{cases*}\]
+        \[\forall n \ \chi\left[A\right](x) \le \frac{1}{n}\abs{f(x)}\]
+        \[\forall n \ \norm{\chi(A)} \le \frac{1}{n}\underbrace{\norm{f}}_{< \infty} \underset{n \to \infty}{\to} 0 \text{ и } \norm{\chi(A)} = 0\]
+    \end{proof}
+\end{lemma*}

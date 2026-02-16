@@ -56,6 +56,7 @@
 \end{theorem*}
 
 \section{Примитивный интеграл, интеграл Лебега}
+\subsection{Ступенчатые множества}
 \begin{definition*}
     Отрезки вида $I = {a}, (a,b), [a,b), (a, b], [a,b]$ - примитивные сегменты в $\Real$. Для них на прямой определена примитивная мера, как функция $\mu_1(I) := \abs{b-a}$. \par
     Элементарный сегмент в $\Real^n$ это $I_1 \times \hdots \times I_n$, где $I_k$ - элементарный сегмент в $\Real$ $\forall k \in {1, \hdots, n}$. Для сегментов большой размерности мера определена в виде $\mu_n(I) = \mu_1(I_1) \cdot \hdots \cdot \mu_1(I_n)$.\par
@@ -277,4 +278,73 @@
 \begin{definition*}
     Функция $f:\Real^n \to E$ интегрируема по Лебегу ($f\in L_1(\Real^n, E)$), если $\exists$ последовательность $\varphi_n \in Step(\Real^n, E)$ (т.е. $\abs{\abs{f - \varphi_n}} \underset{n \to\infty}{\to} 0$). В это случае:
     \[\int_{\Real^n} f := \lim_{k \to \infty} \int_{\Real^n} \varphi_k\]
+
+    Докажем корректность определения:
+    \begin{proof}
+        \begin{enumerate}
+            \item Предел существует.
+            \par
+            \[\abs{\abs{\varphi_n - \varphi_m}}_{L_1} = \abs{\abs{\varphi_n - f + f - \varphi_m}}_{L_1} \ge \abs{\abs{\varphi_n - f}}_{L_1} + \abs{\abs{f - \varphi_m}}_{L_1} \underset{n, m \to \infty}{\to} 0\]
+            Но для ступенчатой функции $\alpha$ выполнено равенство (доказано следующим утверждением)
+            \[\abs{\abs{\alpha}}_{L_1} = \int_{\Real^n} \abs{\alpha}\]
+            Тогда:
+            \[\abs{\int_{\Real^n}\varphi_n - \int_{\Real^n}\varphi_m} = \abs{\int_{\Real^n} (\varphi_n - \varphi_m)} \le \int \abs{\varphi_n - \varphi_m} = \abs{\abs{\varphi_n - \varphi_m}} \underset{n, m \to \infty}{\to} 0\]
+            Итак, последовательность $\int \varphi_n \in E$ - фундаментальная, а значит имеет предел в силу свойств пространства ($\Real^n$ на самом деле Банахово, а значит в нем любая фундаментальная последовательность имеет предел).
+
+            \item Предел не зависит от выбора $\varphi_n$.
+            Пусть $\psi_n$ - другая последовательность ступенчатых функций, $\abs{\abs{\psi_n - f}}_{L_1} \underset{n \to \infty}{\to} 0$. Рассмотрим последовательность $\xi_m = \{\varphi_1, \psi_1, \varphi_2, \psi_2, \hdots\}$. Очевидно, $\abs{\abs{\xi_m - f}} \to 0$, а по предыдущему пункту это означает, что $\exists \lim \int \xi_m$.
+            Поэтому подпоследовательности $\int \varphi_n$ и $\int \psi_n$ имеют одинаковые пределы (иначе не сойдется $\lim \int \xi_m$).
+        \end{enumerate}
+    \end{proof}
 \end{definition*}
+
+\begin{statement*}
+    Если $\alpha \in Step$, то $\abs{\abs{\alpha}} = \int_{\Real^n}\abs{\alpha}$.
+    \begin{proof}
+        Последовательность $\abs{\alpha}, \abs{\alpha}, \abs{\alpha}, \hdots$ - каскад, подходящий для функции $\alpha$. Поэтому $\int \alpha$ - интегральная оценка для $\alpha$. Если имеется какой-то каскад $0 \le \varphi_1 \le \varphi_2 \le \hdots$, такой, что $\forall x \ \lim_{n \to \infty} \varphi_n(x) \ge \abs{\alpha(x)}$,
+        то $\lim_{n \to \infty} \int \varphi_n \ge \int \abs{\alpha}$, и значит $\int \abs{\alpha}$ - наименьшая интегральная оценка, поэтому $\int \abs{\alpha} = \abs{\abs{\alpha}}$.
+    \end{proof}
+\end{statement*}
+
+Далее нижний индекс $_{L_1}$ у нормы будет опускаться, поскольку в этом разделе мы пользуемся только интегральной нормой и модулем числовой величины. 
+
+\begin{definition*}
+    Пусть $U \subset X$, $f$ интегрируема на $U$, если $f\cdot \chi(U)$ интегрируема на $X$. 
+    \[f \in L_1(U, E) \text{ если функция} \begin{cases*}
+    f(x) \ x \in U \\ 0 \ x \in U
+    \end{cases*} \in L_1(X, E)\]
+\end{definition*}
+
+\begin{statement*}[Свойства интегрирования по Лебегу]
+    \begin{enumerate}
+        \item Линейность:
+        \[f, g \in L_1(U, E) \implies \alpha\cdot f, f+g \in L_1(U, E)\]
+        \begin{proof}
+            \[\begin{cases*}
+                \abs{\abs{\varphi_n - f}} \underset{n}{\to} 0 \\
+                \abs{\abs{\psi_n - g}} \underset{n}{\to} 0
+            \end{cases*} \implies \abs{\abs{\varphi_n + \psi_n - (f+g)}} \underset{n}{\to} 0\]
+        \end{proof}
+
+        \item Ограниченность:
+        \[f \in L_1(U, E) \implies \abs{f} \in L_1(U, \overline{\Real}) \text{ и } \abs{\int f} \le \int \abs{f}\]
+        \begin{proof}
+            \[\varphi_n \in Step, \abs{\abs{\varphi_n - f}} \underset{n}{\to} 0\]
+            Покажем, что $\abs{\abs{\ \abs{\varphi_n} - \abs{f} \ }} \underset{n}{\to} 0$.
+            \[\abs{\abs{\varphi_n - f}} = \abs{\abs{ \ \abs{\varphi_n - f} \ }} \underset{\text{по нер-ву }\triangle \text{-ка}}{\ge} \abs{\abs{\ \abs{\varphi_n} - \abs{f} \ }} \implies \abs{\abs{ \ \abs{\varphi_n} - \abs{f}\ }} \underset{n}{\to} 0\]
+            Итак, $\abs{\abs{ \ \abs{\varphi_n} - \abs{f} \ }}\underset{n \to \infty}{\to} 0$, значит $f \in L_1$.
+            \[\int \abs{f} := \lim_{n \to \infty} \int \abs{\varphi_n} \ge \lim_{n\to \infty} \abs{\int \varphi_n} = \abs{\lim \int \varphi_n} = \abs{\int f}\]
+            Итого $\int \abs f \ge \abs \int f$.
+        \end{proof}
+    \end{enumerate}
+\end{statement*}
+
+\begin{lemma*}[о сходимости по норме]
+    Пусть $f_n$ интегрируемы и $\norm{f_n - f} \underset{n \to \infty}{\to} 0$, тогда $f$ тоже интегрируема и $\int f = \lim_{n \to \infty} \int f_n$.
+    \begin{proof}
+        Рассмотрим $\forall n$ такую последовательность $\varphi_n \in Step$, что $\norm{\varphi_n - f} \le \frac{1}{2^n}$.
+        Тогда $\norm{\varphi_n - f} \to 0$, потому что:
+        \[\norm{\varphi_n -f} = \norm{\varphi_n - f_n + f_n - f} \le \norm{\varphi_n - f_n} + \norm{f_n - f} \to 0 + 0\]
+        Утверждение об интеграле осталось как упражнение.
+    \end{proof}
+\end{lemma*}
