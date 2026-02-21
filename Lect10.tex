@@ -70,3 +70,68 @@
         \[\forall n \ \norm{\chi(A)} \le \frac{1}{n}\underbrace{\norm{f}}_{< \infty} \underset{n \to \infty}{\to} 0 \text{ и } \norm{\chi(A)} = 0\]
     \end{proof}
 \end{lemma*}
+
+\begin{lemma*}[Лемма о пренебрежимых изменениях]
+    Пусть $U \subset X$ и $\vee x \in U \ f(x) = g(x)$. Если $f$ - интегрируема на $U$, то и $g$ - тоже интегрируема и их интегралы равны.
+    \begin{proof}
+        Пусть $U = X$. Функция $f-g$ почти всюду равна 0, а значит пренебрежима и ее норма $\norm{f-g} = 0$. Используем лемму о сходимости по норме и получаем равенство интегралов. 
+        А если $U \subset X$, то это упражнение.
+    \end{proof}
+\end{lemma*}
+
+\begin{lemma*}[Лемма о нормальных рядах]
+    Пусть $\sum \norm{g_n} < \infty$. Тогда $\sum g_n(x)$ сходится абсолютным образом $\vee x \in X$.
+    В частности $\vee x \ g_n(x) \underset{n \to \infty}{\to} 0$.
+    \begin{proof}
+        Рассмотрим функцию $a(x) = \sum_{n=1}^{\infty} \abs{g_n(x)}$. Тогда $\forall x \ a \le \infty$.
+        Значит $\norm{a} \le \sum_{n=1}^{\infty} \norm{g_n} < \infty$.По лемме о бесконечных значениях $\vee x \ a(x) < \infty$. В частности для этих $x$ $g_n(x) \to \infty$ из необходимого условия сходимости ряда.
+    \end{proof}
+\end{lemma*}
+
+\begin{theorem*}[Теорема о нормальных рядах]
+    Пусть функции $g_n$ интегрируемы на $X$ и ряд \par $\sum_{n=1}^{\infty} \int \abs{g_n} < C < \infty$. Тогда $g(x) := \sum_{n=1}^{\infty} g_n(x)$ определена почти всюду на $X$ и интегрируемая:
+    \[\int_X g(x) = \sum_{n=1}^{\infty} \int_X g_n(x)\]
+    \begin{proof}
+        Мы знаем, что $\int_X \abs{g_n} = \norm{g_n}$. По лемме о нормальных рядах ряд $\sum g_n(x)$ сходится почти всюду, а значит $\vee x \ g(x)$ определена. Имеем, что функции из последовательности $f_n = g_1 + \hdots + g_n$ интегрируемы:
+        \[\int_X f_n = \sum_{k=1}^{\infty}g_k\]
+        \[\norm{g-f_n} = \norm{g_{n+1} + g_{n+2} + \hdots } \le \norm{g_{n+1}} + \norm{g_{n+2}} + \hdots \underset{n \to \infty}{0}\]
+        По лемме о сходимости по норме $g$ интегрируема и 
+        \[\int_X g(x) = \lim_{n\to \infty} \int_X f_n(x) = \lim_{n\to \infty} \sum_{k=1}^{n} \int g_k(x) = \sum_{k=1}^{n} \int g_k(x)\]
+    \end{proof}
+\end{theorem*}
+
+\begin{theorem*}[Теорема Беппо Леви]
+    Пусть последовательность функций $f_n$ монотонна (например, $f_1 \le f_2 \le  \hdots$). Если все $f_n$ интегриуемы на $X$ и интегралы ограничены в совокупонсти ($\forall n \mid \abs{\int f_n } \le C < \infty$). 
+    Тогда функция $f(x) := \lim_{n \to \infty} f_n(x)$ тоже интегрируема и $\int_X f = \lim_{n\to \infty} \int_X f_n$.
+    \begin{proof}
+        Положим $g_1 = f_1, g_2 = f_2 - f_1, \hdots, g_n = f_n - f_{n-1}$. Тогда $\forall n \ g_n \ge 0$ и $\abs{\int g_n} < 2C$. По теореме о нормальных рядах $\sum_{n=1}^{\infty} g_n$ интегрируема и $\int \sum_{n=1}^{\infty}g_n = \sum_{n=1}^{\infty}g_n$. Но $\sum_{n=1}^{\infty} g_n = \lim_{k \to \infty} \sum_{n=1}^{k}g_n$. Остальное - упражнение. 
+    \end{proof}
+\end{theorem*}
+
+\begin{lemma*}[Лемма о верхней огибающей]
+    Пусть дана последовательность интегрируемых функций $f_n$ и их счетное количество. Если $\forall n \ \abs{\int_{X} f_n \le } \le C < \infty$, то $f(x):=\underset{n}{\sup}(f_n(x))$ тоже интегрируема и $\abs{\int_X f(x)} \le C$.
+    \begin{proof}
+        Положим $g_1 = f_1, g_2 = max(g_1, f_2), \hdots, g_n = max(g_{n-1}, f_n)$. \\ Тогда $f = \lim_{n\to \infty} g_n \ \forall x \in X$.
+        Все функции $g_i$ интегрируемы и $g_1 \le g_2 \le \hdots$. По теореме Беппо Леви получаем требуемое.
+    \end{proof}
+\end{lemma*}
+
+\begin{theorem*}[Теорема Лебега о мажорируемой сходимости]
+    Пусть $U \subset X$. Функции $f_n: U \to E$ (или в $\Real$ интегрируемые. Пусть $\vee x \in U \ f_n(x)$) сходятся к $f(x)$ при $n \to \infty$. Если существует интегрируемая мажоранта, т.е. $\exists $ интегрируемая функция $h: U \to \overline{\Real}$ такая, что $\vee x \in U \norm{f_n(x)} \le h(x)$, то $f$ интегриуема на $U$ и $\int_U f = \lim_{n \to \infty} \int_U f_n $
+    \begin{proof}
+        Сначала предположим, что $U = X$ и что все знаки $"\vee"$(почти всюду) на самом деле $"\forall"$(для всех). Поскольку $f_n(x)$ сходится в нашем пространстве $E$, то из полноты пространства $E$ это означает, что последовательность $f_n(x)$ фундаментальна. \\ А значит $\abs{f_n(x) - f_k(x)}_E \underset{n,k \to \infty}{\to} 0$.
+        Введем функцю $\sigma_n(x):= \underset{k_1, k_2 > n}{\sup}\abs{f_{k_1}(x) = f_{k_2}(x)}$ - счетная огибающая семейства функций $\abs{f_{k_1} - f_{k_2}}$ при $k_1, k_2 = n, \hdots, \infty$.
+        Все эти функци $\abs{f_{k_1} - f_{k_2}}$ интегриуемы и их интегралы не превосходят числа $2\int_X h < \infty$. 
+        \par
+        $\forall n \ \sigma_n$ интегрируема и $\abs{\int_X \sigma_n} \le 2\int_X h$. Заметим, что $\sigma_1 \ge \sigma_2 \ge \hdots$ и при этом $\forall x \sigma_n(x) \underset{n \to \infty}{\to} 0$ в силу $\abs{f_n(x) - f_k(x)} \underset{n,k \to \infty}{\to} 0$. В самом деле, пусть $\varepsilon > 0$, тогда
+        \[\exists n \mid \forall k_1, k_2 \ge n \ \abs{f_{k_1}(x) - f_{k_2}(x)} \le \varepsilon\]
+        Поэтому $\sigma_n \underset{n \to \infty}{\to} 0$ по определению предела. 
+        \par
+        Зафиксируем $n$ и рассмотрим разность 
+        \[f(x) - f_n(x) = (\lim_{k\to\infty} f_k(x)) - f_n(x) = \lim_{k \to \infty,\ k \ge n} f_k(x) - f_n(x) = \lim_{k \to \infty, \ k \ge n}(f_k(x) - f_n(x))\]
+        $\forall k \ge n \ \abs{f_k(x) - f_n(x)} \le \sigma_n(x)$, поэтому $\abs{\lim (f_k(x) - f_n(x))} \le \sigma_n(x)$.
+        Тогда $\norm{f - f_n} \le \norm{\sigma_n} = \int_X \abs{\sigma_n} \underset{n \to \infty}{\to} 0$ по теореме Беппо Леви. В силу леммы о сходимости по норме $f$ - интегрируема и $\int_X f = \lim_{n\to \infty}\int_X f_n$.
+        \par
+        Пусть теперь все знаки $"\forall"$ это $"\vee"$. Пусть $A_n \subset X$ такое множество в $X$, на котором $f_n(x) \not\le h(x)$. Множества $B \subset X$ такие, что $x \in B \iff f_n(x) \underset{n \to \infty}{\not\to} f(x)$. Положим $C = B \cup (\bigcup_{n=1}^\infty A_n)$ - пренебрежимо. Тогда $\forall x \in C$ все функци доопределим нулем там, где надо, созранив ступенчатость. После этого получим, что $\forall x$ выполнена теорема Лебега по первой части доказательства.
+    \end{proof}
+\end{theorem*}
