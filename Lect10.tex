@@ -116,7 +116,7 @@
     \end{proof}
 \end{lemma*}
 
-\begin{theorem*}[Теорема Лебега о мажорируемой сходимости]
+\begin{theorem*}[Теорема Лебега о мажорирующей сходимости]
     Пусть $U \subset X$. Функции $f_n: U \to E$ (или в $\Real$ интегрируемые. Пусть $\vee x \in U \ f_n(x)$) сходятся к $f(x)$ при $n \to \infty$. Если существует интегрируемая мажоранта, т.е. $\exists $ интегрируемая функция $h: U \to \overline{\Real}$ такая, что $\vee x \in U \norm{f_n(x)} \le h(x)$, то $f$ интегриуема на $U$ и $\int_U f = \lim_{n \to \infty} \int_U f_n $
     \begin{proof}
         Сначала предположим, что $U = X$ и что все знаки $"\vee"$(почти всюду) на самом деле $"\forall"$(для всех). Поскольку $f_n(x)$ сходится в нашем пространстве $E$, то из полноты пространства $E$ это означает, что последовательность $f_n(x)$ фундаментальна. \\ А значит $\abs{f_n(x) - f_k(x)}_E \underset{n,k \to \infty}{\to} 0$.
@@ -135,3 +135,184 @@
         Пусть теперь все знаки $"\forall"$ это $"\vee"$. Пусть $A_n \subset X$ такое множество в $X$, на котором $f_n(x) \not\le h(x)$. Множества $B \subset X$ такие, что $x \in B \iff f_n(x) \underset{n \to \infty}{\not\to} f(x)$. Положим $C = B \cup (\bigcup_{n=1}^\infty A_n)$ - пренебрежимо. Тогда $\forall x \in C$ все функци доопределим нулем там, где надо, созранив ступенчатость. После этого получим, что $\forall x$ выполнена теорема Лебега по первой части доказательства.
     \end{proof}
 \end{theorem*}
+
+\begin{theorem*}[Теорема Рисса-Фишера]
+    Пространство $L_1(U, E)$ c нормой $\norm{ \ }_{L_1}$ является полным.
+    \begin{proof}
+        Пусть $f_n \in L_1(U, E)$ - фундаментальная последовательность (т.е. $\forall \varepsilon > 0 \ \exists N(\varepsilon) \in \Nat$ такое, что $\forall m, n \ge N(\varepsilon) \ \norm{f_n - f_m}_{L_1} \le \varepsilon$). В ней существует подпоследовательность конечной длины $f_{n_1}, f_{n_2}, \hdots, f_{n_k}$, в силу конечной длины выполнено
+        \[\norm{f_{n_2} - f_{n_1}} + \norm{f_{n_3} - f_{n_2}} + \hdots + \norm{f_{n_k} - f_{n_{k-1}}} < \infty\]
+        Положим $g_k:= f_{n_k} - f_{n_{k-1}}$, тогда $g_k$ интегрируемы и $\sum \norm{g_k} < \infty$. По теореме о нормальных рядах
+        сумма ряда $\sum_{k=1}^{\infty} g_k$ интегрируема:
+        \[\sum_{k=1}^{\infty} g_k = \lim_{i \to \infty} \sum_{k=1}^{i}g_k = \lim_{i \to \infty} f_{n_i} - f_{n_1}\]
+        Положим $f:= \lim_{i \to \infty} f_{n_i}, \ f \in L_1$ и поймем, что $\norm{f_n - f} \to 0$.
+        \par
+        Пусть $\varepsilon > 0$, тогда $\exists N \mid \forall m, n \ge N \ \norm{f_m - f_n} \le \frac{\varepsilon}{2}$ (из фундаментальности). В частности, $\forall n_k \ge N \ \forall n \ge N \ \norm{f_{n_k} - f_n} \le \frac{\varepsilon}{2}$. При достаточно больших $k$ выполнено $\norm{f - f_{n_k}} \le \frac{\varepsilon}{2}$.
+        Имеем $\norm{f - f_n} \le \norm{f - f_{n_k}} + \norm{f_{n_k} - f_n} \le \frac{\varepsilon}{2} + \frac{\varepsilon}{2} \ \forall n \ge N$. Это и значит, что $\norm{f - f_n} \to 0$.
+    \end{proof}
+\end{theorem*}
+
+\section{Повторный интеграл}
+\begin{lemma*}[Лемма о повторной норме]
+    Пусть $X = \Real^k, Y = \Real^l$. Функция $f(x, y):X \times Y \to E$. Тогда 
+    \[\norm{(\norm{f(x, y)}_Y)}_X \le \norm{f(x, y)}_{X \times Y}\]
+    Здесь $X \to \norm{f(x,y)}_Y$ - функция от $x$ и $\norm{(\hdots)}_X$ - ее интегрирующая норма.
+    \begin{proof}
+        Если $\norm{\ }_{X \times Y} = \infty$, то все доказано. 
+        \par
+        Предполагаем, что $\norm{f(x,y)}_{X \times Y} = C < \infty$. \\
+        Пусть $\varepsilon > 0, C + \varepsilon$ является интегральной оценкой для $f(x, y)$ на $X \times Y$. Интегральная оценка = существует каскад $\rho_n(x,y)$ - ступенчатые, 
+        такие, что $\rho_n \le \rho_{n+1} \le \hdots$, $\int_{X \times Y} \rho_n(x,y) \diff (x,y) \le C + \varepsilon$ и $\forall x \forall y$ выполнено $\lim_{n \to \infty} \rho_n(x,y) \ge \abs{f(x,y)}$.
+        \par
+        Фиксируем $x \in X$, тогда последовательность $\rho_n(x,y)$ по переменной $y$ - ступенчатая на $Y$ по примитивной теореме Фубини, причем она возрастает по $n$ и $\lim_{n \to \infty} \rho_n(x,y) \ge \abs{f(x, y)}$.\\
+        Тогда по определению интегриральной нормы на $Y$:
+        \[\lim_{n\to \infty} \int_Y \rho_n(x,y) \diff y > \norm{f(x,y)}_Y\]
+        Далее, по примитивной теореме Фубини функция $\varphi(x):x \to \int_Y \rho_n(x,y) \diff y$ является ступенчатой и 
+        \[\int_X \left(\int_Y \rho_n(x,y) \diff y\right) \diff x = \int_{X \times Y} \rho_n(x,y) \diff (x,y)\]
+        На самом деле функция $\varphi(x)$ - каскад для функции $x \to \norm{f(x, y)}_Y$. Снова по определению интегральной оценки имеем:
+        \[\lim_{n \to \infty}\int_X \varphi_n(x) \diff x \ge \norm{\left( \norm{f(x,y)}_Y \right)}_X\]
+        \[\lim_{n \to \infty}\int_X \varphi_n(x) \diff x = \lim_{n\to\infty} \int_X \left( \int_Y \rho_n(x, y) \diff y\right) \diff x \underset{\text{по ПТФ}}{=} \lim_{n\to\infty} \int_{X \times Y} \rho_n(x,y)\diff(x, y) = C + \varepsilon\]
+        Итак, $C + \varepsilon \ge \norm{\left( \norm{ \ }_Y \right)}_X$. Из общности $\varepsilon$ получаем $C \ge \norm{\left( \norm{f(x,y)}_Y \right)}_X$
+    \end{proof}
+\end{lemma*}
+
+\begin{theorem*}[Теорема Фубини]
+    Пусть $f$ интегрируема на $X \times Y$. Тогда:
+    \begin{enumerate}
+        \item $\vee x \in X $ функция $f(x,y)$ от переменной $y$ интегрируема на $Y$.
+        \item функция $g(x):X \to \int_Y f(x,y) \diff y$ интегриуема на $X$.
+        \item $\int_X \int_Y f(x,y) \diff y \diff x = \int_{X \times Y} f(x,y) \diff (x,y)$.
+        \begin{proof}
+            По условию существует последовательность ступенчатых на $X \times Y$ функций $\rho_n(x,y)$ таких, что $\norm{f(x,y) - \rho_n(x,y)}_{X \times Y} \le \left( \frac{1}{2} \right)^n$. По лемме о повторной норме:
+            \[\norm{\left( \underbrace{\norm{f(x,y) - \rho_n(x,y)}_Y}_{\star} \right)}_X \le \norm{f(x,y) - \rho_n(x,y)}_{X \times Y} \le \left( \frac{1}{2} \right)^n\]
+            По лемме о нормальных рядах:
+            \[\sum \norm{\star_n}_X \le \frac{1}{2} + \frac{1}{4} + \dots \le 1 < \infty\]
+            Это означает, что $\vee x \in X$ - последовательность значений $\star_n(x) \underset{n \to \infty}{\to} 0$, то есть $\norm{f(x,y) - \rho_n(x,y)}_Y \to Y$ ступенчатая на $Y$ по примитивной теореме Фубини.
+            Поэтому для таких $x$ функция $f(x,y)$ интегрируема по $Y$. Пункт 1 доказан.
+            \par
+            Положим $\varphi_n(x):=\int_Y \varphi_n(x,y) \diff y, g(x) = \int_Y f(x,y) \diff y$, $g$ задана $\vee x \in X$.
+            \begin{align*}
+                \norm{\varphi_n(x) - g(x)}_X 
+                &= \norm{\int_Y \varphi_n(x, y) \diff y - \int_Y f(x,y) \diff y}_X = \\ 
+                &= \norm{\int_Y \varphi_n(x,y) - f(x,y) \diff y}_X \le\\
+                &\le \norm{\left( \norm{\varphi_n(x,y) - f(x,y)}_Y \right)}_X \text{по лемме о повторной норме}\\
+                &\le \norm{\varphi_n(x, y) - f(x,y)}_{X \times Y} \to 0, \\
+                &\text{-- по определению интегрируемости $f$ на $X \times Y$}.
+            \end{align*}
+            Значит $\norm{\varphi_n - g(x)}_{X \times Y} \to 0$, это означает $g$ интегрируема на $X$. При этом 
+            \[\int_X g(x) \diff x = \lim_{n\to \infty} \int_X \varphi_n(x)\]
+            При этом
+            \[\int_X \varphi_n(x) = \int_X \left( \int_Y \varphi_n(x,y) \diff y \right) \diff x \underset{\text{ПТФ}}{=} \int_{X \times Y} \varphi_n\]
+        \end{proof}
+    \end{enumerate}
+\end{theorem*}
+
+\subsection{Измеримые функции}
+
+\begin{theorem*}[Необходимое условие интегрируемости]
+    Если $f: X \to E$ интегрируема, то $\exists$ последовательность ступенчатых функций $\varphi_n: X \to E$ такая, что $\vee x \in X \varphi_n(x) \to f(x)$ ($\varphi_n \to f$ почти всюду )
+    \begin{proof}
+        $\exists \varphi_n \in Step: \ \norm{\varphi_n - f} \le \frac{1}{2^n}$. \par
+        По лемме о нормальных рядах $\vee x \ \abs{\varphi_n(x) - f(x)} \underset{n \to \infty}{\to} 0$. 
+    \end{proof}
+\end{theorem*}
+
+\begin{definition*}
+    Функция $f: X \to E$ измерима, если $\exists$ последовательность ступенчатых функций сходящаяся к $f$ почти всюду.
+\end{definition*}
+
+\begin{statement*}[Свойства измеримых функций]
+    \begin{enumerate}
+        \item Если $f, g$ измеримы, то $f+g$ - тоже.
+        \item $\abs{f}$ - измерим.
+        \item $max, min$ двух функций измерим.
+    \end{enumerate}
+\end{statement*}
+
+\begin{theorem*}[Координатный критерий измеримости]
+    $f:\Real^n \to \Real^n, f = \left(\begin{array}{c} f_1 \\ \vdots \\ f_n \end{array} \right)$. Функция $f$ измерима $\iff \ \forall i f_i$ - измерима.
+    \begin{proof}
+        $\implies$:\newline
+        Пусть $\varphi_k \in Step(X, \Real^n)$ и почти всюду $ \varphi_k \underset{k \to \infty}{\to} f$. 
+        \[\varphi_k = \begin{pmatrix}
+            \varphi_k^1 \\ \varphi_k^2 \\ \vdots \\ \varphi_k^n
+        \end{pmatrix}, \ \varphi_k^i \in Step(X, \Real), \ \varphi_k^i (x) \underset{\vee x \in X}{\to} f\]
+        $\impliedby$:\newline
+        $\begin{pmatrix}
+            \exists \varphi_k^1 \to f_1 \forall x \in X\backslash Z_1 \\
+            \vdots \\
+            \exists \varphi_k^n \to f_n \forall x \in X\backslash Z_n 
+        \end{pmatrix}$, где $Z_i$ - пренебрежимое. Тогда пусть $Z = Z_1 \cup \hdots \cup Z_n$ тоже пренебрежимо и 
+        \[\forall x \in X \backslash Z \ \varphi_k = \begin{pmatrix}
+            \varphi_k^1 \\ \vdots \\ \varphi_k^n
+        \end{pmatrix}(x) \underset{k \to \infty}{\to} \begin{pmatrix}
+            f_1(x) \\ \vdots \\ f_n(x)
+        \end{pmatrix}\]
+    \end{proof}
+\end{theorem*}
+
+\begin{definition*}[Срезка]
+    Пусть $h \in \Real,  0 \le h \le \infty$, число $v \in E$. \newline Определим операцию $cut(h, v) = \begin{cases*}
+        v \ \abs{v} \le h \\
+        v\cdot \frac{h}{\abs{v}} \ \abs{v} \ge h
+    \end{cases*}$. Если $v = 0$ или $h = 0$, то $cut(h, v) = 0$.
+\end{definition*}
+
+\begin{lemma*}[Лемма о непрерывной срезке]
+    Пусть $h_n \underset{n \to \infty}{\to} h, v_n \underset{n \to \infty}{\to} v$, тогда $cut(h_n, v_n) \underset{n \to \infty}{\to}cut(h, v)$.
+    \begin{proof}
+        Заметим, что $\abs{cut(h, v)}$ $le \abs{h}$ и $\le \abs{v}$. Поэтому если $h_n \to 0$ или $v_n \to 0$, то все хорошо. Иначе запишем срезку так ($\abs{v} \neq 0$): $cut(h, v) = v \cdot \min(\frac{h}{\abs{v}}, 1)$. И это будет непрерывной функцией как функция от $h$ и $v$.
+    \end{proof}
+\end{lemma*}
+
+\begin{theorem*}[Теорема о срезке]
+    Пусть $h: X \to \overline{\Real}, h \ge 0$ и $f$ - какая-то функция $X \to E$. Определим $cut(h, f)[x] := cut(h(x), f(x))$. Тогда
+    \begin{enumerate}
+        \item Если $h, f$ - измеримы, то $cut(h, f)$ - измерима.
+        \item Если обе функции $h, f$ измеримы и хотя бы одна интегрируема, то $cut(h,f)$ - интегрируема.
+    \end{enumerate}
+
+    \begin{proof}
+        \begin{enumerate}
+            \item Пусть $h_n, f_n$ - ступенчатые и $\vee x h_n \to h, f_n \to f$. \newline
+            Тогда $\vee x$ выполнены одновременно оба условия теоремы. По лемме о непрерывной срезке $cut(h_n(x) f_n(x)) \to cut(h(x), f(x))$, но функции $cut(h_n(x), f_n(x))$ тоже являются ступенчатыми при условии $h_n, f_n$ - ступенчатые. Пункт 1 доказан.
+            
+            \item Сначала покажем, что если $h$ - ступенчатая и $f$ - интегрируема, то $cut(h,f)$ - интегрируема. Подтвердим это:
+            \par В самом деле: $f$ - интегрируема, значит по необходимому условию интегрируемости $\exists$ последовательность ступенчатых $f_n$, таких, что $\vee x \in X \ f_n(x) \to f(x)$. Тогда $cut(h, f_n )[x] \underset{n \to \infty}{\to} cut(h, f)[x] \vee x \in X$. Подтвердили.
+            \par
+            Функции $cut(h, f_n)[x]$ интегрируемы (следует хотя бы из их ступенчатости). 
+            \[\vee x \in X cut(h, f_n) \underset{n \to \infty}{\to} cut(h, f)\]
+            С другой стороны:
+            \[\forall x \abs{cut(h,f_n)[x]} \le \abs{h} \text{ - интегрируема}\]
+            По теореме Лебега о мажорирующей сходимости $cut(h,f)$ интегрируема. 
+            \par
+            Пусть теперь $h$ - измерима, $f$ - измерима и интегрируема. 
+            \newline
+            Поскольку $h$ - измерима, то $\exists$ последовательность $h_n \ge 0$ - ступенчатые, такие, что $\vee x \ h_n(x) \to h(x)$.
+            Тогда $cut(h_n, f)[x] \to cut(h, f)[x] \ \vee x \in X$.
+            \par
+            Функции $cut(h_n, f)$ интегрируемы по первой части второго пункта доказательства. А еще они поточечно почти всюду сходятся к $cut(h, f)$ и имеют
+            интегрируемую мажоранту $\abs{f}$, следовательно, $cut(h,f)$ интегрируема по теореме Лебега. 
+            \par
+            Если $f$ - измерима, а $h$ - интегрируема и измерима, то доказательство аналогично. 
+        \end{enumerate}
+    \end{proof}
+\end{theorem*}
+
+\begin{theorem*}[Признак интегрируемости Лебега]
+    Пусть $f:X \to E$ измерима и $\exists$ интегрируемая функция $h \ge 0$ такая, что $\vee x \ \abs{f(x)} \le h(x)$. Тогда $f$ интегрируема.
+    \begin{proof}
+        \[\vee x \in X \ f \equiv \underbrace{cut(h,f)}_{\text{интегриуема}} \implies \int f = \int cut(h,f)\]
+    \end{proof}
+\end{theorem*}
+
+\begin{statement*}
+    Если $f$ измерима и $\norm{f}_{L_1} \le \infty$, то $f$ - интегрируема.
+    \begin{proof}
+        $\norm{f} + 1 \ge \norm{f} \implies$ число $\norm{f}+1$ является интегральной оценкой функции $f$. Тогда $\exists$ каскад ступенчатых функций $h_n: X \to \Real, \ 0 \le h_1 \le h_2 \le \hdots$ и $\forall n \int_X h_n \le \norm{f}+1$.
+        \begin{equation}
+            \label{star}
+            \forall x \ \lim_{n \to \infty} h_n(x) \ge \abs{f(x)}
+        \end{equation}
+        Все $h_n$ интегриуемы, последовательность их интегралов ограничена и монотонна, а значит по теореме Беппо Леви $\lim_{n \to \infty} h_n(x)$ - интегрируемая функция. Это - мажоранта исходной функции $f$ в силу \eqref{star}, согласно признаку Лебега $f$ интегрируема.
+    \end{proof}
+\end{statement*}
