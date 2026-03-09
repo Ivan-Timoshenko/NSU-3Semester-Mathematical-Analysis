@@ -121,7 +121,7 @@
     \begin{proof}
         Сначала предположим, что $U = X$ и что все знаки $"\vee"$(почти всюду) на самом деле $"\forall"$(для всех). Поскольку $f_n(x)$ сходится в нашем пространстве $E$, то из полноты пространства $E$ это означает, что последовательность $f_n(x)$ фундаментальна. \\ А значит $\abs{f_n(x) - f_k(x)}_E \underset{n,k \to \infty}{\to} 0$.
         Введем функцю $\sigma_n(x):= \underset{k_1, k_2 > n}{\sup}\abs{f_{k_1}(x) = f_{k_2}(x)}$ - счетная огибающая семейства функций $\abs{f_{k_1} - f_{k_2}}$ при $k_1, k_2 = n, \hdots, \infty$.
-        Все эти функци $\abs{f_{k_1} - f_{k_2}}$ интегриуемы и их интегралы не превосходят числа $2\int_X h < \infty$. 
+        Все эти функции $\abs{f_{k_1} - f_{k_2}}$ интегриуемы и их интегралы не превосходят числа $2\int_X h < \infty$. 
         \par
         $\forall n \ \sigma_n$ интегрируема и $\abs{\int_X \sigma_n} \le 2\int_X h$. Заметим, что $\sigma_1 \ge \sigma_2 \ge \hdots$ и при этом $\forall x \sigma_n(x) \underset{n \to \infty}{\to} 0$ в силу $\abs{f_n(x) - f_k(x)} \underset{n,k \to \infty}{\to} 0$. В самом деле, пусть $\varepsilon > 0$, тогда
         \[\exists n \mid \forall k_1, k_2 \ge n \ \abs{f_{k_1}(x) - f_{k_2}(x)} \le \varepsilon\]
@@ -132,7 +132,7 @@
         $\forall k \ge n \ \abs{f_k(x) - f_n(x)} \le \sigma_n(x)$, поэтому $\abs{\lim (f_k(x) - f_n(x))} \le \sigma_n(x)$.
         Тогда $\norm{f - f_n} \le \norm{\sigma_n} = \int_X \abs{\sigma_n} \underset{n \to \infty}{\to} 0$ по теореме Беппо Леви. В силу леммы о сходимости по норме $f$ - интегрируема и $\int_X f = \lim_{n\to \infty}\int_X f_n$.
         \par
-        Пусть теперь все знаки $"\forall"$ это $"\vee"$. Пусть $A_n \subset X$ такое множество в $X$, на котором $f_n(x) \not\le h(x)$. Множества $B \subset X$ такие, что $x \in B \iff f_n(x) \underset{n \to \infty}{\not\to} f(x)$. Положим $C = B \cup (\bigcup_{n=1}^\infty A_n)$ - пренебрежимо. Тогда $\forall x \in C$ все функци доопределим нулем там, где надо, созранив ступенчатость. После этого получим, что $\forall x$ выполнена теорема Лебега по первой части доказательства.
+        Пусть теперь все знаки $"\forall"$ это $"\vee"$. Пусть $A_n \subset X$ такое множество в $X$, на котором $f_n(x) \not\le h(x)$. Множества $B \subset X$ такие, что $x \in B \iff f_n(x) \underset{n \to \infty}{\not\to} f(x)$. Положим $C = B \cup (\bigcup_{n=1}^\infty A_n)$ - пренебрежимо. Тогда $\forall x \in C$ все функции доопределим нулем там, где надо, созранив ступенчатость. После этого получим, что $\forall x$ выполнена теорема Лебега по первой части доказательства.
     \end{proof}
 \end{theorem*}
 
@@ -315,4 +315,102 @@
         \end{equation}
         Все $h_n$ интегриуемы, последовательность их интегралов ограничена и монотонна, а значит по теореме Беппо Леви $\lim_{n \to \infty} h_n(x)$ - интегрируемая функция. Это - мажоранта исходной функции $f$ в силу \eqref{star}, согласно признаку Лебега $f$ интегрируема.
     \end{proof}
+\end{statement*}
+
+\begin{theorem*}[Теорема об измеримости поточечного предела]
+    Пусть $f_n$ - измеримы, $\vee x \in X \ f_n(x) \to f(x)$. Тогда $f$ - измерима.
+    \begin{proof}
+        Пусть $h_n \ge 0$ - последовательность ступенчатых функций, таких, что \newline $\forall x \ h_n(x) \underset{n \to \infty}{\to} \infty$.
+        
+        Строго для примера, если $x \in \Real$, то можно взять такую функцию (это не применяется в доказательстве):
+        \[h(x) = \begin{cases*}
+            n \ \abs{x} \le n \\
+            0 \ \abs{x} > n
+        \end{cases*}\]
+        
+        Положим $\tilde{f_n}:= cut(h_n, f_n)$. По лемме о непрерывности срезки $\tilde{f_n} \underset{n \to \infty}{\to} cut(\infty, f) = f \ \vee x \in X$ и $\tilde{f_n}$ интегрируемы по теореме о срезке. 
+        А значит $\exists \psi_n \in Step$ такие, что $\norm{\tilde{f_n} - \psi_n} \le \frac{1}{2^n}$. По лемме о нормальных рядах $\vee x \in X \ \norm{\tilde{f_n}(x) - \psi_n(x)} \underset{n \to \infty}{\to} 0$, тогда $\vee x \in X \ \psi_n(x) \underset{n \to \infty}{\to} f(x)$.
+        \[\abs{\psi_n(x) - f(x)} = \underbrace{\abs{\psi_n(x) - \tilde{f_n}(x)}}_{\to 0 \ \forall x} + \underbrace{\abs{\tilde{f_n}(x) - f(x)}}_{\to 0 \ \forall x} \to 0 \]
+        Таким образом $\psi_n$ - искомая последовательность сходится к $f$.
+    \end{proof}
+\end{theorem*}
+
+\subsection{Почти непрерывные функции и их измеримость}
+
+\begin{definition*}
+    $f:\Real \to E$ почти непрерывна, если $\exists Z \in \Real$ такое пренебрежимое множество, что $f\mid_{R\backslash Z}:\Real\backslash Z \to E$ - непрерывна.
+\end{definition*}
+
+\begin{statement*}
+    Почти непрерывные функции измеримы.
+    \begin{proof}
+        Пусть $f$ - почти непрерывная и $Z$ соответствует условию. Тогда если $Z$ - пренебрежимое, то $\left[ a, b \right]\backslash Z$ плотно в $\left[ a, b\right]$.
+        \par
+        $\forall n$ придумаем $A_n \subset X \backslash Z (X = \left[ a, b\right])$ так, чтобы в каждом из интервалов \newline $\left( a, a+\frac{1}{n} \right), \left( a+ \frac{1}{n}, a+ \frac{2}{n} \right), \hdots$ было по одной точке множества $A_n$. 
+        Значит функция $f\mid_{X \backslash Z}$ непрерывна во всех точках множества $A_n$. 
+        \par
+        Положим $\psi_n$ - ступенчатая функция, $\psi_n$ на промежутке $\left[ a + \frac{m}{n}, a + \frac{m+1}{n} \right]$ равна $f$ в точке $p_n^m$ ($p_n^m$ - та самая хитрая точка множества $A_n$ из отрезка $\left[ a + \frac{m}{n}, a + \frac{m+1}{n} \right]$). Пусть $x \in \left[a, b\right]\backslash Z$ покажем, что $\psi_n(x) \to f(x)$.
+        \par
+        $f\mid_{\left[ a, b \right]\backslash Z}$ непрерывна в $X \implies:$
+        \[\forall \varepsilon > 0 \ \exists \delta > 0 \mid \text{если } \tilde{x} \notin Z \text{ и } \abs{x - \tilde{x}} \le \delta \text{, то } \abs{f(x) - f(\tilde{x})} \le \varepsilon\]
+        Пусть $\varepsilon > 0, \exists n \mid \frac{1}{n} \le \delta$. Выберем в $A_n$ точку $\frac{1}{n}$-близкую к этой точке $x$ (из того же отрезка $\left[a + \frac{m}{n}, a + \frac{m+1}{n}\right]$, в котором лежит $x$). Пусть выбранная точка это $q_m$, тогда $\abs{f(x) - f(q_m)} \le \varepsilon$, но $\psi_n(x) = \psi_n(q_m)$ и получаем $\abs{f(x) - \psi_n(x)}\le \varepsilon$.
+        Это же верно $\forall \tilde{n} \ge n$. Итак, $\psi_n(x) \to f(x), \forall x \in \left[ a, b \right]\backslash Z$.
+        \par
+    \end{proof}
+\end{statement*}
+Перейдем от отрезка $\left[a, b\right]$ к $\Real$. 
+
+\begin{statement*}
+    Если $f:\Real \to E$ измерима на каждом отрезке, то $f$ измерима на $\Real$. 
+    \begin{proof}
+        Пусть $f_n(x) = \begin{cases*}
+            f(x) \ x \in \left[-n, n\right] \\
+            0 \ x \notin \left[-n, n\right]
+        \end{cases*}$. Все $f_n$ - измеримые, $\forall x \ f_n(x) \underset{n \to \infty}{\to} f(x)$, по теореме об измеримости пределов $f$ измерима на $\Real$.
+    \end{proof}
+\end{statement*}
+
+\begin{definition*}
+    Пусть $f \le 0, f:X \to \overline{\Real}$ - измерима. Положим $\int_X f:= \infty$, если $f$ - не интегрируема.
+\end{definition*}
+
+\begin{theorem*}[Теорема Фату]
+    Пусть $f_n:X \to \overline{\Real}$ и $f_n \le 0$ измеримы и $\vee x \in X \ f_n(x) \to f(x)$. Тогда 
+    \[\int_X f \le \lim_{n \to \infty} \inf \int_X f_n\]
+
+    \begin{proof}
+        $f \le 0$ измерима (по теореме об измеримости пределов), то есть $\int_X f \le \infty$. Положим $\tilde{f_n}(x) = \inf(f_n(x), f_{n+1}(x), \hdots)$. $\forall x \in X \ \tilde{f_n}(x) \to f(x)$.
+        
+        \begin{lemma*}
+            Возьмем $0 \le \tilde{f_1} \le \tilde{f_2} \le \hdots$, тогда $f_n$ - измеримы.
+            \begin{proof}
+                Например $n = 7$.
+                \[\inf\{f_7, f_8, \hdots\} = \lim_{n \to \infty, n \le 7} h_n\]
+                \[\text{Тогда } h_7 = f_7, h_8 = \min(h_7, f_8), \hdots, h_n = \min(h_{n-1}, f_n)\]
+                Все $h_n$ измеримы, а значит $\lim h_n$ - тоже.
+            \end{proof}
+        \end{lemma*}
+        Таким образом, по теореме Беппо Леви легко видеть, что последовательность $\int_X \tilde{f_n} \to \int_X f$.
+        \par
+        Для этого рассмотрим два случая:
+        \begin{enumerate}
+            \item Последовательность интегралов ограничена - применяем теорему Беппо Леви
+            \item Если последовательность интегралов $\to \infty$, то $f$ не интегрируема и $\int_X f = \infty$ и $\int_X f_n = \infty$ и все хорошо.
+        \end{enumerate}
+
+        \par
+        Итак, $\tilde{f_n} \le f_n$. Осталось доказать, что $L:= \lim \inf(\int_X f_n) \ge \int_X f$. Введем $a_n = \int_X f_n$. Пусть $a_{n_k} \to L$. Тогда $a_{n_k} = \int_X f_{n_k} \ge \int_X \tilde{f_{n_k}} \to \int_X f$.
+        \par
+        По неравенству пределов $L = \lim_{k \to \infty} a_{n_k} \ge \int_X f$.
+    \end{proof}
+\end{theorem*}
+
+\begin{statement*}
+    \begin{enumerate}
+        \item Если в условии теоремы Фату все $f_n \le f$, то $\exists \lim_{n \to \infty} \int_X f_n = \int_X f$.
+        \item Теорема Фату равносильна следующему:
+        \par
+        Пусть $f_n$ - измерима и $\ge 0$, тогда 
+        \[\int_X \left( \lim_{n \to \infty} \inf f_n \right) \le \lim_{n \to \infty} \inf \int_X f_n\]
+    \end{enumerate}
 \end{statement*}
